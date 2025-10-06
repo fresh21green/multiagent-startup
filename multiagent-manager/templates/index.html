@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>multiagent-manager — Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="container">
+    <h1>🤖 MultiAgent Manager</h1>
+    <nav>
+      <a class="btn" href="/create_agent">Создать сотрудника</a>
+      <a class="btn" href="/">Обновить</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <section class="panel">
+    <h2>Список сотрудников</h2>
+    {% if agents and agents|length > 0 %}
+      <div class="grid">
+        {% for a in agents %}
+          <div class="card">
+            <div class="card-header">
+              <strong>{{ a.name }}</strong>
+              <span class="muted">slug: {{ a.slug }}</span>
+            </div>
+            <div class="card-body">
+              <p class="small">Создано: {{ a.created_at }}</p>
+              <p>Статус: <b>{{ a.status }}</b></p>
+              {% if a.deploy_url %}
+                <p>URL: <a href="{{ a.deploy_url }}" target="_blank">{{ a.deploy_url }}</a></p>
+              {% endif %}
+              <p>
+                <a class="small-link" href="{{ a.zip }}">Download ZIP</a>
+              </p>
+
+              <form method="post" action="/api/set_worker_url" class="inline-form">
+                <input type="hidden" name="slug" value="{{ a.slug }}">
+                <label>Paste deploy URL</label>
+                <input class="input" name="deploy_url" placeholder="https://worker-...onrender.com" value="{{ a.deploy_url or '' }}">
+                <label>Test chat id (optional)</label>
+                <input class="input" name="test_chat_id" placeholder="123456789" value="{{ a.test_chat_id or '' }}">
+                <button class="btn small" type="submit">Save URL</button>
+              </form>
+
+              <form method="post" action="/api/delete_agent" onsubmit="return confirm('Удалить сотрудника {{ a.name }} ?');">
+                <input type="hidden" name="slug" value="{{ a.slug }}">
+                <button class="btn danger" type="submit">Удалить сотрудника</button>
+              </form>
+
+              <form method="post" action="/api/assign_task" class="inline-form">
+                <input type="hidden" name="slug" value="{{ a.slug }}">
+                <label>Назначить задачу</label>
+                <input class="input" name="task" placeholder="Опишите задачу для этого сотрудника">
+                <button class="btn" type="submit">Send</button>
+              </form>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="muted">Пока нет сотрудников — создайте сначала сотрудника.</p>
+    {% endif %}
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p class="muted">multiagent-manager · управление AI сотрудниками</p>
+  </div>
+</footer>
+</body>
+</html>
