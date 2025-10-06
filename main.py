@@ -6,6 +6,8 @@ from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
 from pathlib import Path
 from bot_template import BOT_TEMPLATE
+from pathlib import Path
+Path("agents").mkdir(exist_ok=True)
 
 load_dotenv()
 
@@ -23,13 +25,12 @@ async def index(request: Request):
     agents = [f.stem for f in AGENTS_DIR.glob("*.py")]
     return templates.TemplateResponse("index.html", {"request": request, "agents": agents})
 
-
 @app.post("/create_agent")
 async def create_agent(name: str = Form(...), prompt: str = Form(...), telegram_token: str = Form("")):
     bot_code = BOT_TEMPLATE.format(prompt=prompt, telegram_token=telegram_token)
-    bot_path = AGENTS_DIR / f"{name}.py"
-    bot_path.write_text(bot_code, encoding="utf-8")
-    return RedirectResponse("/", status_code=303)
+    agent_path = Path("agents") / f"{name}.py"
+    agent_path.write_text(bot_code)
+    return {"status": "ok", "message": f"✅ Агент {name} создан"}
 
 
 @app.post("/delete_agent")
