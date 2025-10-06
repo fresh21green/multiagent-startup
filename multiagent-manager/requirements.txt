@@ -1,8 +1,0 @@
-fastapi
-uvicorn[standard]
-jinja2
-python-dotenv
-requests
-langchain-amvera
-python-multipart
-python-telegram-bot==13.15
