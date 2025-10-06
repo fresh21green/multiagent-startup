@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+requests
+python-dotenv
+langchain-amvera
+python-multipart
+python-telegram-bot==13.15

@@ -1,0 +1,8 @@
+{
+  "name": "MultiAgent Manager",
+  "short_name": "Agents",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "description": "AI Multi-Agent Management Interface"
+}
