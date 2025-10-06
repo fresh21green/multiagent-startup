@@ -2,7 +2,6 @@ fastapi
 uvicorn
 jinja2
 python-dotenv
+langchain-amvera
 requests
-langchain_amvera
-python-multipart
-python-telegram-bot==20.6
+python-telegram-bot
