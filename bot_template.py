@@ -4,7 +4,6 @@ import re
 import base64
 from fastapi import FastAPI, Request
 from telegram import Update
-
 from langchain_amvera import AmveraLLM
 from dotenv import load_dotenv
 
@@ -14,7 +13,7 @@ AMVERA_API_KEY = os.getenv("AMVERA_API_KEY")
 AMVERA_MODEL = "gpt-4.1"
 
 TELEGRAM_TOKEN = "{telegram_token}"
-TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
+TELEGRAM_API_URL = f"https://api.telegram.org/bot{telegram_token}"
 PROMT = """{prompt}"""
 
 llm = AmveraLLM(model=AMVERA_MODEL, api_token=AMVERA_API_KEY)
