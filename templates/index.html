@@ -1,34 +1,72 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>AI Manager Dashboard</title>
-  <link rel="stylesheet" href="/static/style.css" />
+    <title>Multiagent Startup</title>
 </head>
 <body>
-  <div class="container">
-    <h1>🤖 AI Менеджер</h1>
-
-    <form method="post" action="/create_agent" class="form">
-      <h2>Создать сотрудника</h2>
-      <input name="name" placeholder="Название сотрудника" required>
-      <textarea name="prompt" placeholder="Промт-инструкция" required></textarea>
-      <input name="telegram_token" placeholder="Телеграм токен (опционально)">
-      <button type="submit">Создать</button>
+    <h1>Создать сотрудника</h1>
+    <form method="post" action="/add_employee">
+        <input type="text" name="name" placeholder="Имя сотрудника" required>
+        <input type="text" name="prompt" placeholder="Prompt сотрудника" required>
+        <input type="text" name="telegram_token" placeholder="Telegram токен" required>
+        <button type="submit">Добавить</button>
     </form>
 
-    <h2>Список сотрудников</h2>
-    <ul>
-      {% for agent in agents %}
-      <li>
-        {{ agent }}
-        <form method="post" action="/delete_agent" style="display:inline;">
-          <input type="hidden" name="name" value="{{ agent }}">
-          <button type="submit" class="delete">Удалить</button>
-        </form>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
+    {% if employees %}
+        <h2>Сотрудники:</h2>
+        <ul id="employees">
+            {% for emp in employees %}
+                <li id="emp-{{ emp.name }}">{{ emp.name }} — <span class="status ready">Готов</span></li>
+            {% endfor %}
+        </ul>
+
+        <h2>Отправить задачу всем сотрудникам</h2>
+        <input type="text" id="task" placeholder="Введите задачу">
+        <button onclick="sendTask()">Отправить задачу</button>
+
+        <h2>Результаты:</h2>
+        <ul id="results"></ul>
+    {% endif %}
+
+    <style>
+    .status { font-weight: bold; margin-left: 5px; }
+    .ready { color: green; }
+    .working { color: orange; }
+    .working::after { content: ' •'; animation: blink 1s infinite; }
+    @keyframes blink { 0% { opacity: 0; } 50% { opacity: 1; } 100% { opacity: 0; } }
+    </style>
+
+    <script>
+    const ws = new WebSocket(`ws://${location.host}/ws`);
+    ws.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        const empLi = document.getElementById(`emp-${data.name}`);
+        if(empLi) {
+            const statusSpan = empLi.querySelector(".status");
+            if(data.status === "В работе") {
+                statusSpan.textContent = "В работе";
+                statusSpan.className = "status working";
+            } else if(data.status === "Готов") {
+                statusSpan.textContent = "Готово";
+                statusSpan.className = "status ready";
+            }
+        }
+
+        if(data.result) {
+            const resultsUl = document.getElementById("results");
+            const li = document.createElement("li");
+            li.textContent = `${data.name}: ${data.result}`;
+            resultsUl.appendChild(li);
+        }
+    };
+
+    function sendTask() {
+        const taskInput = document.getElementById("task");
+        const task = taskInput.value;
+        if(task.trim() === "") return;
+        ws.send(JSON.stringify({task: task}));
+        document.getElementById("results").innerHTML = "";
+    }
+    </script>
 </body>
 </html>
