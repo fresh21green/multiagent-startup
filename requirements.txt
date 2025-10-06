@@ -1,0 +1,7 @@
+fastapi
+uvicorn
+jinja2
+python-dotenv
+requests
+langchain_amvera
+python-telegram-bot==20.6

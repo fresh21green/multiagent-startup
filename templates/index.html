@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Manager Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 AI Менеджер</h1>
+
+    <form method="post" action="/create_agent" class="form">
+      <h2>Создать сотрудника</h2>
+      <input name="name" placeholder="Название сотрудника" required>
+      <textarea name="prompt" placeholder="Промт-инструкция" required></textarea>
+      <input name="telegram_token" placeholder="Телеграм токен (опционально)">
+      <button type="submit">Создать</button>
+    </form>
+
+    <h2>Список сотрудников</h2>
+    <ul>
+      {% for agent in agents %}
+      <li>
+        {{ agent }}
+        <form method="post" action="/delete_agent" style="display:inline;">
+          <input type="hidden" name="name" value="{{ agent }}">
+          <button type="submit" class="delete">Удалить</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>
