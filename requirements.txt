@@ -2,8 +2,13 @@ fastapi
 uvicorn[standard]
 jinja2
 python-dotenv
+<<<<<<< HEAD
 requests
 pathlib
+=======
+requests==2.31.0
+urllib3==1.26.16
+>>>>>>> 245d1e5da7fb130a24fa23ac9f4d5bd6b8f41c63
 langchain-amvera
 python-telegram-bot==20.5
 python-multipart

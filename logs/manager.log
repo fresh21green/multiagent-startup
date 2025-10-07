@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2025-10-07 17:10:06,487 - manager - INFO - Creating agent '________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\________
 2025-10-07 17:10:06,489 - manager - INFO - Wrote bot.py for agent ________
 2025-10-07 17:10:06,506 - manager - INFO - Agent ________ created and metadata updated
@@ -422,3 +423,137 @@ ModuleNotFoundError: No module named 'imghdr'
 2025-10-07 23:39:51,541 - manager - INFO -  → Отправляем задачу агенту ____
 2025-10-07 23:39:51,814 - manager - INFO - Calling local handle_task for ____
 2025-10-07 23:39:56,116 - manager - INFO - Все сотрудники завершили выполнение задачи.
+=======
+2025-10-07 13:33:47,310 - manager - INFO - Creating agent 'coder1' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\coder1
+2025-10-07 13:33:47,312 - manager - INFO - Wrote bot.py for agent coder1
+2025-10-07 13:33:47,316 - manager - INFO - Agent coder1 created and metadata updated
+2025-10-07 13:37:14,228 - manager - INFO - Assign task 'Подведи краткий итог новости: "Компания OpenAI выпустила GPT-5"' to coder1
+2025-10-07 13:37:14,473 - manager - ERROR - Error calling local agent: No module named 'urllib3.contrib.appengine'
+Traceback (most recent call last):
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\utils\request.py", line 36, in <module>
+    import telegram.vendor.ptb_urllib3.urllib3 as urllib3
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\vendor\ptb_urllib3\urllib3\__init__.py", line 7, in <module>
+    from .connectionpool import (
+    ...<3 lines>...
+    )
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\vendor\ptb_urllib3\urllib3\connectionpool.py", line 11, in <module>
+    from .exceptions import (
+    ...<14 lines>...
+    )
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\vendor\ptb_urllib3\urllib3\exceptions.py", line 2, in <module>
+    from .packages.six.moves.http_client import (
+        IncompleteRead as httplib_IncompleteRead
+    )
+ModuleNotFoundError: No module named 'telegram.vendor.ptb_urllib3.urllib3.packages.six.moves'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 138, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\coder1\bot.py", line 7, in <module>
+    from telegram import Update
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\__init__.py", line 187, in <module>
+    from .bot import Bot
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\bot.py", line 107, in <module>
+    from telegram.utils.request import Request
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\utils\request.py", line 44, in <module>
+    import urllib3.contrib.appengine as appengine  # type: ignore[no-redef]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'urllib3.contrib.appengine'
+2025-10-07 13:40:50,723 - manager - INFO - Assign task 'Подведи краткий итог новости: "Компания OpenAI выпустила GPT-5"' to coder1
+2025-10-07 13:40:50,851 - manager - ERROR - Error calling local agent: No module named 'urllib3.contrib.appengine'
+Traceback (most recent call last):
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\utils\request.py", line 36, in <module>
+    import telegram.vendor.ptb_urllib3.urllib3 as urllib3
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\vendor\ptb_urllib3\urllib3\__init__.py", line 7, in <module>
+    from .connectionpool import (
+    ...<3 lines>...
+    )
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\vendor\ptb_urllib3\urllib3\connectionpool.py", line 11, in <module>
+    from .exceptions import (
+    ...<14 lines>...
+    )
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\vendor\ptb_urllib3\urllib3\exceptions.py", line 2, in <module>
+    from .packages.six.moves.http_client import (
+        IncompleteRead as httplib_IncompleteRead
+    )
+ModuleNotFoundError: No module named 'telegram.vendor.ptb_urllib3.urllib3.packages.six.moves'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 138, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\coder1\bot.py", line 7, in <module>
+    from telegram import Update
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\__init__.py", line 187, in <module>
+    from .bot import Bot
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\bot.py", line 107, in <module>
+    from telegram.utils.request import Request
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\utils\request.py", line 44, in <module>
+    import urllib3.contrib.appengine as appengine  # type: ignore[no-redef]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'urllib3.contrib.appengine'
+2025-10-07 13:42:57,846 - manager - INFO - Assign task 'Подведи краткий итог новости: "Компания OpenAI выпустила GPT-5"' to coder1
+2025-10-07 13:43:02,431 - manager - ERROR - Error calling local agent: 1 validation error for AmveraLLM
+  Value error, API токен Amvera не найден. Установите переменную окружения AMVERA_API_TOKEN или передайте api_token при инициализации. [type=value_error, input_value={'model': 'gpt-4.1', 'api_token': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 138, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\coder1\bot.py", line 32, in <module>
+    llm = AmveraLLM(model=AMVERA_MODEL, api_token=AMVERA_API_KEY)
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\langchain_amvera\amvera.py", line 118, in __init__
+    super().__init__(**kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\langchain_core\load\serializable.py", line 115, in __init__
+    super().__init__(*args, **kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for AmveraLLM
+  Value error, API токен Amvera не найден. Установите переменную окружения AMVERA_API_TOKEN или передайте api_token при инициализации. [type=value_error, input_value={'model': 'gpt-4.1', 'api_token': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-10-07 13:49:37,703 - manager - INFO - Assign task 'Подведи краткий итог новости: "Компания OpenAI выпустила GPT-5"' to coder1
+2025-10-07 13:49:38,062 - manager - INFO - Calling local handle_task for coder1
+>>>>>>> 245d1e5da7fb130a24fa23ac9f4d5bd6b8f41c63
+2025-10-07 23:53:07,269 - manager - INFO - Creating agent '__________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\__________
+2025-10-07 23:53:07,272 - manager - INFO - Wrote bot.py for agent __________
+2025-10-07 23:53:07,275 - manager - ERROR - Failed to load metadata: Expecting property name enclosed in double quotes: line 3 column 1 (char 6)
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 43, in load_meta
+    return json.loads(META_FILE.read_text(encoding='utf-8'))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 361, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ~~~~~~~~~~~~~~^^^^^^^^
+json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 3 column 1 (char 6)
+2025-10-07 23:53:07,279 - manager - INFO - Agent __________ created and metadata updated
+2025-10-07 23:53:34,870 - manager - INFO - Creating agent '________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\________
+2025-10-07 23:53:34,872 - manager - INFO - Wrote bot.py for agent ________
+2025-10-07 23:53:34,875 - manager - INFO - Agent ________ created and metadata updated
+2025-10-07 23:53:56,223 - manager - INFO - Поручаем задачу всем сотрудникам: Опиши осеннюю одежду
+2025-10-07 23:53:56,224 - manager - INFO -  → Отправляем задачу агенту __________
+2025-10-07 23:53:56,993 - manager - INFO - Calling local handle_task for __________
+2025-10-07 23:54:10,544 - manager - INFO -  → Отправляем задачу агенту ________
+2025-10-07 23:54:10,825 - manager - INFO - Calling local handle_task for ________
+2025-10-07 23:54:31,730 - manager - INFO - Все сотрудники завершили выполнение задачи.
+2025-10-07 23:55:14,349 - manager - INFO - Assign task 'Напиши короткий рассказ о море' to __________
+2025-10-07 23:55:14,616 - manager - INFO - Calling local handle_task for __________
+2025-10-07 23:55:26,258 - manager - INFO - Task completed for __________
