@@ -75,3 +75,28 @@ Traceback (most recent call last):
     import urllib3.contrib.appengine as appengine  # type: ignore[no-redef]
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ModuleNotFoundError: No module named 'urllib3.contrib.appengine'
+2025-10-07 13:42:57,846 - manager - INFO - Assign task 'Подведи краткий итог новости: "Компания OpenAI выпустила GPT-5"' to coder1
+2025-10-07 13:43:02,431 - manager - ERROR - Error calling local agent: 1 validation error for AmveraLLM
+  Value error, API токен Amvera не найден. Установите переменную окружения AMVERA_API_TOKEN или передайте api_token при инициализации. [type=value_error, input_value={'model': 'gpt-4.1', 'api_token': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 138, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\coder1\bot.py", line 32, in <module>
+    llm = AmveraLLM(model=AMVERA_MODEL, api_token=AMVERA_API_KEY)
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\langchain_amvera\amvera.py", line 118, in __init__
+    super().__init__(**kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\langchain_core\load\serializable.py", line 115, in __init__
+    super().__init__(*args, **kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for AmveraLLM
+  Value error, API токен Amvera не найден. Установите переменную окружения AMVERA_API_TOKEN или передайте api_token при инициализации. [type=value_error, input_value={'model': 'gpt-4.1', 'api_token': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-10-07 13:49:37,703 - manager - INFO - Assign task 'Подведи краткий итог новости: "Компания OpenAI выпустила GPT-5"' to coder1
+2025-10-07 13:49:38,062 - manager - INFO - Calling local handle_task for coder1
