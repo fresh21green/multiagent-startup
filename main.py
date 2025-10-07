@@ -1,194 +1,207 @@
 import os
 import json
-import shutil
-import subprocess
 import logging
-import importlib.util
+import subprocess
 from pathlib import Path
-from fastapi import FastAPI, Form, Request, HTTPException
-from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse, JSONResponse
+from fastapi import FastAPI, Request, Form
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
-from dotenv import load_dotenv
+from jinja2 import Template
+import requests
 
-load_dotenv()
+# === Настройки ===
+BASE_DIR = Path(__file__).resolve().parent
+AGENTS_DIR = BASE_DIR / "agents"
+AGENTS_FILE = BASE_DIR / "agents.json"
 
-BASE = Path(__file__).parent
-AGENTS_DIR = BASE / "agents"
-LOGS_DIR = BASE / "logs"
-AGENTS_DIR.mkdir(exist_ok=True)
-LOGS_DIR.mkdir(exist_ok=True)
-
-META_FILE = AGENTS_DIR / "workers.json"
-if not META_FILE.exists():
-    META_FILE.write_text("[]", encoding="utf-8")
-
-# logging
-logger = logging.getLogger("manager")
-logger.setLevel(logging.DEBUG)
-fh = logging.FileHandler(LOGS_DIR / "manager.log", encoding="utf-8")
-fh.setLevel(logging.DEBUG)
-ch = logging.StreamHandler()
-ch.setLevel(logging.INFO)
-fmt = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-fh.setFormatter(fmt)
-ch.setFormatter(fmt)
-logger.addHandler(fh)
-logger.addHandler(ch)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
 app = FastAPI()
-app.mount('/static', StaticFiles(directory=str(BASE / "static")), name='static')
-templates = Jinja2Templates(directory=str(BASE / "templates"))
+app.mount("/static", StaticFiles(directory=str(BASE_DIR / "static")), name="static")
 
-def load_meta():
-    try:
-        return json.loads(META_FILE.read_text(encoding='utf-8'))
-    except Exception as e:
-        logger.exception("Failed to load metadata: %s", e)
-        return []
+# === Шаблон бота ===
+BOT_TEMPLATE = """import os, re, base64, requests
+from fastapi import FastAPI, Request
+from telegram import Update
+from langchain_amvera import AmveraLLM
+from dotenv import load_dotenv
+load_dotenv()
 
-def save_meta(meta):
-    try:
-        META_FILE.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding='utf-8')
-    except Exception as e:
-        logger.exception("Failed to save metadata: %s", e)
+AMVERA_API_KEY = os.getenv("AMVERA_API_KEY") or os.getenv("AMVERA_API_TOKEN")
+TELEGRAM_TOKEN = "{telegram_token}"
+PROMT = \"\"\"{prompt}\"\"\"
 
-def slugify(name: str):
-    import re
-    return re.sub(r"[^a-zA-Z0-9_-]", "_", name.strip()).lower()
+llm = AmveraLLM(model="gpt-4.1", api_token=AMVERA_API_KEY)
+app = FastAPI()
 
-@app.get('/', response_class=HTMLResponse)
-async def index(request: Request):
-    meta = load_meta()
-    return templates.TemplateResponse('index.html', {'request': request, 'agents': meta})
+@app.post("/task")
+async def task_endpoint(request: Request):
+    data = await request.json()
+    user_task = data.get("task")
+    result = llm.invoke(f"{PROMT}\\n\\nЗадача: {user_task}")
+    return {{"agent": "{name}", "response": str(result)}}
+"""
 
-@app.post('/create_agent')
-async def create_agent(request: Request, name: str = Form(...), prompt: str = Form(''), telegram_token: str = Form('')):
-    name = name.strip()
-    if not name:
-        raise HTTPException(status_code=400, detail='Name required')
-    slug = slugify(name)
-    dest = AGENTS_DIR / slug
-    logger.info("Creating agent '%s' at %s", slug, dest)
-    if dest.exists():
-        import datetime
-        slug = f"{slug}_{datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S')}"
-        dest = AGENTS_DIR / slug
-    try:
-        dest.mkdir(parents=True, exist_ok=False)
-    except Exception as e:
-        logger.exception("Failed to create directory for agent: %s", e)
-        raise HTTPException(status_code=500, detail=str(e))
+# === Хранилище сотрудников ===
+if not AGENTS_DIR.exists():
+    AGENTS_DIR.mkdir()
+if not AGENTS_FILE.exists():
+    AGENTS_FILE.write_text(json.dumps([]))
 
-    # create bot.py from template
-    template = (BASE / 'bot_template.py').read_text(encoding='utf-8')
-    safe_prompt = prompt.replace('"""', '\"\"\"')
-    worker_code = template.replace('__PROMPT_PLACEHOLDER__', f'"""{safe_prompt}"""')
-    if telegram_token and telegram_token.strip():
-        worker_code = worker_code.replace('__TELEGRAM_TOKEN_PLACEHOLDER__', f'TELEGRAM_TOKEN = "{telegram_token.strip()}"')
+
+def load_agents():
+    return json.loads(AGENTS_FILE.read_text())
+
+
+def save_agents(agents):
+    AGENTS_FILE.write_text(json.dumps(agents, indent=2))
+
+
+@app.get("/", response_class=HTMLResponse)
+async def index():
+    agents = load_agents()
+    has_agents = len(agents) > 0
+
+    html = f"""
+    <html>
+    <head>
+        <title>🧠 Multiagent Manager</title>
+        <style>
+            body {{
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f9;
+                padding: 40px;
+                color: #333;
+            }}
+            h1 {{ color: #222; }}
+            input, textarea {{
+                padding: 10px;
+                margin: 5px;
+                width: 300px;
+                border-radius: 8px;
+                border: 1px solid #ccc;
+            }}
+            button {{
+                background: #4CAF50;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 8px;
+                cursor: pointer;
+            }}
+            button:hover {{ background: #45a049; }}
+            .agent {{
+                background: white;
+                padding: 15px;
+                border-radius: 10px;
+                margin-top: 10px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }}
+            .task-area {{
+                background: #fff;
+                padding: 15px;
+                border-radius: 10px;
+                margin-top: 30px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }}
+        </style>
+    </head>
+    <body>
+        <h1>🧠 Multiagent Manager</h1>
+
+        <h2>Создать нового сотрудника</h2>
+        <form action="/create_agent" method="post">
+            <input name="name" placeholder="Название" required><br>
+            <textarea name="prompt" placeholder="Промт-инструкция" required></textarea><br>
+            <input name="telegram_token" placeholder="Telegram Token (опционально)"><br>
+            <button type="submit">Создать сотрудника</button>
+        </form>
+
+        <h2>Список сотрудников</h2>
+    """
+
+    if has_agents:
+        html += '<ul>'
+        for a in agents:
+            html += f"""
+            <div class="agent">
+                <b>{a['name']}</b><br>
+                <small>{a['prompt'][:100]}...</small><br>
+                <form action="/delete_agent" method="post" style="display:inline;">
+                    <input type="hidden" name="name" value="{a['name']}">
+                    <button style="background:red;">Удалить</button>
+                </form>
+            </div>
+            """
+        html += "</ul>"
+
+        html += """
+        <div class="task-area">
+            <h3>🧩 Поручить задачу сотрудникам</h3>
+            <form action="/assign_task" method="post">
+                <textarea name="task" placeholder="Введите задачу..." required></textarea><br>
+                <button type="submit">Поручить задачу сотрудникам</button>
+            </form>
+        </div>
+        """
     else:
-        worker_code = worker_code.replace('__TELEGRAM_TOKEN_PLACEHOLDER__', 'TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")')
-    try:
-        (dest / 'bot.py').write_text(worker_code, encoding='utf-8')
-        logger.info("Wrote bot.py for agent %s", slug)
-    except Exception as e:
-        logger.exception("Failed to write bot.py: %s", e)
-        raise HTTPException(status_code=500, detail=str(e))
+        html += "<p><i>Создайте хотя бы одного сотрудника, чтобы поручить задачу.</i></p>"
 
-    # support files
-    for fn in ['requirements.txt', '.env.example', 'README_worker.md']:
-        src = BASE / 'agents' / fn
-        if src.exists():
-            try:
-                shutil.copy(src, dest / fn)
-            except Exception:
-                logger.exception("Failed to copy support file %s", fn)
+    html += "</body></html>"
+    return HTMLResponse(html)
 
-    # update meta
-    meta = load_meta()
-    entry = {'name': name, 'slug': slug, 'created_at': __import__('datetime').datetime.utcnow().isoformat()+'Z', 'path': str(dest), 'deploy_url':'', 'status':'created'}
-    meta.append(entry)
-    save_meta(meta)
-    logger.info("Agent %s created and metadata updated", slug)
-    return RedirectResponse('/', status_code=303)
 
-@app.post('/delete_agent')
-async def delete_agent(slug: str = Form(...)):
-    meta = load_meta()
-    entry = next((e for e in meta if e['slug']==slug), None)
-    if not entry:
-        raise HTTPException(status_code=404, detail='Not found')
-    # delete files
-    try:
-        p = Path(entry['path'])
-        if p.exists():
-            shutil.rmtree(p)
-            logger.info("Deleted agent directory %s", p)
-    except Exception as e:
-        logger.exception("Error deleting agent files: %s", e)
-    meta = [e for e in meta if e['slug']!=slug]
-    save_meta(meta)
-    return RedirectResponse('/', status_code=303)
+@app.post("/create_agent")
+async def create_agent(name: str = Form(...), prompt: str = Form(...), telegram_token: str = Form("")):
+    agents = load_agents()
+    agent_path = AGENTS_DIR / f"{name}_bot.py"
 
-async def call_agent_local(path: Path, task: str):
-    # try to import module and call handle_task if exists
-    try:
-        spec = importlib.util.spec_from_file_location(f"agent_{path.name}", str(path / 'bot.py'))
-        mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
-        if hasattr(mod, 'handle_task'):
-            logger.info("Calling local handle_task for %s", path.name)
-            res = mod.handle_task(task)
-            return {'ok': True, 'source': 'local', 'result': res}
-        else:
-            logger.warning("Local module has no handle_task: %s", path)
-            return {'ok': False, 'error': 'no_handle_task'}
-    except Exception as e:
-        logger.exception("Error calling local agent: %s", e)
-        return {'ok': False, 'error': str(e)}
+    if agent_path.exists():
+        return HTMLResponse(f"<h3>⚠️ Агент '{name}' уже существует!</h3>")
 
-async def call_agent_remote(url: str, task: str):
-    import requests
-    try:
-        payload = {'message': {'message_id':1, 'from':{'id':1111,'is_bot':False,'first_name':'Manager'}, 'chat':{'id':123456,'type':'private'}, 'date': int(__import__('time').time()), 'text': task}}
-        r = requests.post(url.rstrip('/') + '/webhook', json=payload, timeout=20)
-        logger.info("Remote agent %s responded with status %s", url, r.status_code)
-        return {'ok': True, 'source': 'remote', 'status': r.status_code, 'text': r.text}
-    except Exception as e:
-        logger.exception("Error calling remote agent: %s", e)
-        return {'ok': False, 'error': str(e)}
+    code = BOT_TEMPLATE.format(name=name, prompt=prompt, telegram_token=telegram_token)
+    agent_path.write_text(code)
+    agents.append({"name": name, "prompt": prompt, "telegram_token": telegram_token})
+    save_agents(agents)
 
-@app.post('/assign_task')
-async def assign_task(slug: str = Form(...), task: str = Form(...)):
-    logger.info("Assign task '%s' to %s", task, slug)
-    meta = load_meta()
-    entry = next((e for e in meta if e['slug']==slug), None)
-    if not entry:
-        raise HTTPException(status_code=404, detail='Worker not found')
-    # prefer remote URL
-    if entry.get('deploy_url'):
-        res = await call_agent_remote(entry['deploy_url'], task)
-    else:
-        path = Path(entry.get('path') or '') 
-        if path.exists():
-            res = await call_agent_local(path, task)
-        else:
-            res = {'ok': False, 'error': 'no_path_or_url'}
-    # attach log to meta
-    entry.setdefault('last_task', {}) 
-    entry['last_task'] = {'task': task, 'result': res}
-    save_meta(meta)
-    return JSONResponse(res)
+    logging.info(f"✅ Создан новый агент: {name}")
+    return RedirectResponse("/", status_code=303)
 
-@app.get('/download/{name}')
-async def download(name: str):
-    p = AGENTS_DIR / f"{name}.zip"
-    if p.exists():
-        return FileResponse(p, filename=p.name)
-    raise HTTPException(status_code=404, detail='Not found')
 
-if __name__ == '__main__':
-    import uvicorn, os
-    port = int(os.getenv('PORT', 8000))
-    logger.info("Starting manager on port %s", port)
-    uvicorn.run('main:app', host='0.0.0.0', port=port)
+@app.post("/delete_agent")
+async def delete_agent(name: str = Form(...)):
+    agents = load_agents()
+    agents = [a for a in agents if a["name"] != name]
+    save_agents(agents)
+
+    path = AGENTS_DIR / f"{name}_bot.py"
+    if path.exists():
+        path.unlink()
+    logging.info(f"🗑 Удален агент: {name}")
+    return RedirectResponse("/", status_code=303)
+
+
+@app.post("/assign_task", response_class=HTMLResponse)
+async def assign_task(task: str = Form(...)):
+    agents = load_agents()
+    results = []
+
+    for a in agents:
+        try:
+            url = f"https://{a['name'].lower()}.onrender.com/task"
+            logging.info(f"📤 Отправка задачи агенту {a['name']} по адресу {url}")
+            resp = requests.post(url, json={"task": task}, timeout=30)
+            if resp.ok:
+                results.append(resp.json())
+            else:
+                results.append({"agent": a["name"], "response": f"Ошибка {resp.status_code}: {resp.text}"})
+        except Exception as e:
+            logging.error(f"❌ Ошибка при обращении к агенту {a['name']}: {e}")
+            results.append({"agent": a["name"], "response": f"Ошибка: {e}"})
+
+    result_html = "<h2>📋 Результаты выполнения:</h2><ul>"
+    for r in results:
+        result_html += f"<li><b>{r['agent']}</b>: {r['response']}</li>"
+    result_html += "</ul><a href='/'>Назад</a>"
+
+    return HTMLResponse(result_html)
