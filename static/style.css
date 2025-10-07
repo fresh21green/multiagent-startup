@@ -5,6 +5,32 @@ body {
   color: #222;
 }
 
+h2{
+
+}
+
+.manager-fields input, .manager-fields textarea{
+  margin: 0 0 20px;
+}
+
+ul {
+  list-style: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+    margin: 0 0 20px;
+    background: linear-gradient(45deg, #2563eb, #b6edb8);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    border: 1px solid #ccc;
+}
+
 .container{
   max-width: 900px;
   margin: 0 auto;
@@ -16,6 +42,23 @@ body {
 
 h1{ text-align:center }
 form{ margin-bottom:12px }
-input, textarea { width:100%; padding:8px; margin-top:6px; border-radius:6px; border:1px solid #ddd }
+textarea,input { width: 100%; padding:8px; margin-top:6px; border-radius:6px; border:1px solid #ddd; box-sizing: border-box; } 
 button{ margin-top:8px; padding:8px 12px; border-radius:6px; background:#2563eb; color:#fff; border:none }
-.last-task{ margin-top:8px; padding:8px; background:#f3f4f6; border-radius:6px }
+.last-task {
+    margin-top: 8px;
+    padding: 20px;
+    background: #f3f4f6;
+    border-radius: 6px;
+    line-height: 25px;
+}
+
+
+.section { 
+    margin-bottom: 20px;
+}
+.task-header {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

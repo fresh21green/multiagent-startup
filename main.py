@@ -1,6 +1,19 @@
+# import os
+# import logging
+# import asyncio
+# import requests
+# from pathlib import Path
+# from fastapi import FastAPI, Request, Form, HTTPException
+# from fastapi.responses import HTMLResponse, JSONResponse
+# from fastapi.staticfiles import StaticFiles
+# from fastapi.templating import Jinja2Templates
+
+
+
 import os
 import json
 import shutil
+import asyncio
 import subprocess
 import logging
 import importlib.util
@@ -9,6 +22,7 @@ from fastapi import FastAPI, Form, Request, HTTPException
 from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from utils import load_meta, save_meta, call_agent_local, call_agent_remote
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -40,18 +54,7 @@ app = FastAPI()
 app.mount('/static', StaticFiles(directory=str(BASE / "static")), name='static')
 templates = Jinja2Templates(directory=str(BASE / "templates"))
 
-def load_meta():
-    try:
-        return json.loads(META_FILE.read_text(encoding='utf-8'))
-    except Exception as e:
-        logger.exception("Failed to load metadata: %s", e)
-        return []
 
-def save_meta(meta):
-    try:
-        META_FILE.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding='utf-8')
-    except Exception as e:
-        logger.exception("Failed to save metadata: %s", e)
 
 def slugify(name: str):
     import re
@@ -158,26 +161,79 @@ async def call_agent_remote(url: str, task: str):
         logger.exception("Error calling remote agent: %s", e)
         return {'ok': False, 'error': str(e)}
 
-@app.post('/assign_task')
+# @app.post('/assign_task')
+# async def assign_task(slug: str = Form(...), task: str = Form(...)):
+#     logger.info("Assign task '%s' to %s", task, slug)
+#     meta = load_meta()
+#     entry = next((e for e in meta if e['slug']==slug), None)
+#     if not entry:
+#         raise HTTPException(status_code=404, detail='Worker not found')
+#     # prefer remote URL
+#     if entry.get('deploy_url'):
+#         res = await call_agent_remote(entry['deploy_url'], task)
+#     else:
+#         path = Path(entry.get('path') or '') 
+#         if path.exists():
+#             res = await call_agent_local(path, task)
+#         else:
+#             res = {'ok': False, 'error': 'no_path_or_url'}
+#     # attach log to meta
+#     entry.setdefault('last_task', {}) 
+#     entry['last_task'] = {'task': task, 'result': res}
+#     save_meta(meta)
+#     return JSONResponse(res)
+@app.post("/assign_task_all")
+async def assign_task_all(task: str = Form(...)):
+    """Отправить одну задачу всем сотрудникам"""
+    logger.info("Поручаем задачу всем сотрудникам: %s", task)
+    meta = load_meta() 
+    if not meta:
+        logger.warning("Нет сотрудников для поручения задачи.")
+        return {"ok": False, "error": "no_agents"}
+
+    results = []
+
+    async def handle(entry):
+        slug = entry["slug"]
+        logger.info(f" → Отправляем задачу агенту {slug}")
+        try:
+            if entry.get("deploy_url"):
+                res = await call_agent_remote(entry["deploy_url"], task)
+            else:
+                path = Path(entry.get("path") or "")
+                res = await call_agent_local(path, task) if path.exists() else {"ok": False, "error": "no_path"}
+            entry["last_task"] = {"task": task, "result": res}
+            results.append({"agent": slug, "result": res})
+        except Exception as e:
+            logger.exception(f"Ошибка при поручении агенту {slug}: {e}")
+            results.append({"agent": slug, "result": {"ok": False, "error": str(e)}})
+
+    await asyncio.gather(*[handle(e) for e in meta])
+    save_meta(meta)
+    logger.info("Все сотрудники завершили выполнение задачи.")
+    return {"ok": True, "results": results}
+
+@app.post("/assign_task")
 async def assign_task(slug: str = Form(...), task: str = Form(...)):
+    """Отправка индивидуальной задачи сотруднику"""
     logger.info("Assign task '%s' to %s", task, slug)
     meta = load_meta()
-    entry = next((e for e in meta if e['slug']==slug), None)
+    entry = next((e for e in meta if e["slug"] == slug), None)
     if not entry:
-        raise HTTPException(status_code=404, detail='Worker not found')
-    # prefer remote URL
-    if entry.get('deploy_url'):
-        res = await call_agent_remote(entry['deploy_url'], task)
+        raise HTTPException(status_code=404, detail="Worker not found")
+
+    if entry.get("deploy_url"):
+        res = await call_agent_remote(entry["deploy_url"], task)
     else:
-        path = Path(entry.get('path') or '') 
+        path = Path(entry.get("path") or "")
         if path.exists():
             res = await call_agent_local(path, task)
         else:
-            res = {'ok': False, 'error': 'no_path_or_url'}
-    # attach log to meta
-    entry.setdefault('last_task', {}) 
-    entry['last_task'] = {'task': task, 'result': res}
+            res = {"ok": False, "error": "no_path_or_url"}
+
+    entry["last_task"] = {"task": task, "result": res}
     save_meta(meta)
+    logger.info("Task completed for %s", slug)
     return JSONResponse(res)
 
 @app.get('/download/{name}')

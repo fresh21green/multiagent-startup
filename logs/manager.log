@@ -1,0 +1,424 @@
+2025-10-07 17:10:06,487 - manager - INFO - Creating agent '________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\________
+2025-10-07 17:10:06,489 - manager - INFO - Wrote bot.py for agent ________
+2025-10-07 17:10:06,506 - manager - INFO - Agent ________ created and metadata updated
+2025-10-07 17:10:48,488 - manager - INFO - Creating agent '___________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-07 17:10:48,492 - manager - INFO - Wrote bot.py for agent ___________
+2025-10-07 17:10:48,498 - manager - INFO - Agent ___________ created and metadata updated
+2025-10-07 17:28:00,032 - manager - INFO - Assign task 'Сделай картинку с лисой осенью' to ________
+2025-10-07 17:28:05,708 - manager - ERROR - Error calling local agent: 1 validation error for AmveraLLM
+  Value error, API токен Amvera не найден. Установите переменную окружения AMVERA_API_TOKEN или передайте api_token при инициализации. [type=value_error, input_value={'model': 'gpt-4.1', 'api_token': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 138, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\________\bot.py", line 32, in <module>
+    llm = AmveraLLM(model=AMVERA_MODEL, api_token=AMVERA_API_KEY)
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\langchain_amvera\amvera.py", line 118, in __init__
+    super().__init__(**kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\langchain_core\load\serializable.py", line 115, in __init__
+    super().__init__(*args, **kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for AmveraLLM
+  Value error, API токен Amvera не найден. Установите переменную окружения AMVERA_API_TOKEN или передайте api_token при инициализации. [type=value_error, input_value={'model': 'gpt-4.1', 'api_token': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-10-07 17:29:13,085 - manager - INFO - Assign task 'Напиши цикл' to ___________
+2025-10-07 17:29:13,094 - manager - ERROR - Error calling local agent: 1 validation error for AmveraLLM
+  Value error, API токен Amvera не найден. Установите переменную окружения AMVERA_API_TOKEN или передайте api_token при инициализации. [type=value_error, input_value={'model': 'gpt-4.1', 'api_token': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 138, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________\bot.py", line 32, in <module>
+    llm = AmveraLLM(model=AMVERA_MODEL, api_token=AMVERA_API_KEY)
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\langchain_amvera\amvera.py", line 118, in __init__
+    super().__init__(**kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\langchain_core\load\serializable.py", line 115, in __init__
+    super().__init__(*args, **kwargs)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\pydantic\main.py", line 253, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for AmveraLLM
+  Value error, API токен Amvera не найден. Установите переменную окружения AMVERA_API_TOKEN или передайте api_token при инициализации. [type=value_error, input_value={'model': 'gpt-4.1', 'api_token': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.11/v/value_error
+2025-10-07 17:30:47,071 - manager - INFO - Assign task 'Сделай картинку с лисой осенью' to ________
+2025-10-07 17:30:47,800 - manager - INFO - Calling local handle_task for ________
+2025-10-07 19:08:37,490 - manager - INFO - Assigning common task to all employees: что такое зима
+2025-10-07 19:08:37,491 - manager - INFO - → Sending task to agent: Дизайнер (________)
+2025-10-07 19:08:43,237 - manager - INFO - Calling local handle_task for ________
+2025-10-07 19:09:02,030 - manager - INFO - → Sending task to agent: Программист (___________)
+2025-10-07 19:09:02,306 - manager - INFO - Calling local handle_task for ___________
+2025-10-07 19:09:25,048 - manager - INFO - ✅ Task assigned to 2 employees
+2025-10-07 19:13:47,352 - manager - INFO - Assigning common task to all employees: Как сделать дизайн комнаты дешево в стиле лофт
+2025-10-07 19:13:47,353 - manager - INFO - → Sending task to agent: Дизайнер (________)
+2025-10-07 19:13:47,605 - manager - INFO - Calling local handle_task for ________
+2025-10-07 19:14:04,528 - manager - INFO - → Sending task to agent: Программист (___________)
+2025-10-07 19:14:04,798 - manager - INFO - Calling local handle_task for ___________
+2025-10-07 19:14:40,218 - manager - INFO - ✅ Task assigned to 2 employees
+2025-10-07 19:44:52,596 - manager - ERROR - Failed to load metadata: name 'json' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 36, in load_meta
+    return json.loads(META_FILE.read_text(encoding='utf-8'))
+           ^^^^
+NameError: name 'json' is not defined. Did you forget to import 'json'?
+2025-10-07 19:44:57,076 - manager - ERROR - Failed to load metadata: name 'json' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 36, in load_meta
+    return json.loads(META_FILE.read_text(encoding='utf-8'))
+           ^^^^
+NameError: name 'json' is not defined. Did you forget to import 'json'?
+2025-10-07 19:46:34,345 - manager - INFO - Creating agent '________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\________
+2025-10-07 19:46:34,347 - manager - INFO - Wrote bot.py for agent _________20251007164634
+2025-10-07 19:46:34,349 - manager - ERROR - Failed to load metadata: name 'json' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 36, in load_meta
+    return json.loads(META_FILE.read_text(encoding='utf-8'))
+           ^^^^
+NameError: name 'json' is not defined. Did you forget to import 'json'?
+2025-10-07 19:46:34,350 - manager - ERROR - Failed to save metadata: name 'META_FILE' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 43, in save_meta
+    META_FILE.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding='utf-8')
+    ^^^^^^^^^
+NameError: name 'META_FILE' is not defined
+2025-10-07 19:46:34,351 - manager - INFO - Agent _________20251007164634 created and metadata updated
+2025-10-07 19:46:34,353 - manager - ERROR - Failed to load metadata: name 'json' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 36, in load_meta
+    return json.loads(META_FILE.read_text(encoding='utf-8'))
+           ^^^^
+NameError: name 'json' is not defined. Did you forget to import 'json'?
+2025-10-07 19:46:35,864 - manager - ERROR - Failed to load metadata: name 'json' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 36, in load_meta
+    return json.loads(META_FILE.read_text(encoding='utf-8'))
+           ^^^^
+NameError: name 'json' is not defined. Did you forget to import 'json'?
+2025-10-07 19:46:43,926 - manager - ERROR - Failed to load metadata: name 'json' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 36, in load_meta
+    return json.loads(META_FILE.read_text(encoding='utf-8'))
+           ^^^^
+NameError: name 'json' is not defined. Did you forget to import 'json'?
+2025-10-07 19:46:46,204 - manager - ERROR - Failed to load metadata: name 'json' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 36, in load_meta
+    return json.loads(META_FILE.read_text(encoding='utf-8'))
+           ^^^^
+NameError: name 'json' is not defined. Did you forget to import 'json'?
+2025-10-07 19:54:25,124 - manager - INFO - Assign task 'Предложи дизайн одежды в стиле постапокалипсис' to ________
+2025-10-07 19:54:28,976 - manager - INFO - Calling local handle_task for ________
+2025-10-07 19:54:52,310 - manager - INFO - Task completed for ________
+2025-10-07 19:55:23,643 - manager - INFO - Поручаем задачу всем сотрудникам: Чем заняться вечером
+2025-10-07 19:55:23,643 - manager - INFO -  → Отправляем задачу агенту ________
+2025-10-07 19:55:23,894 - manager - INFO - Calling local handle_task for ________
+2025-10-07 19:55:30,444 - manager - INFO -  → Отправляем задачу агенту ___________
+2025-10-07 19:55:30,720 - manager - INFO - Calling local handle_task for ___________
+2025-10-07 19:55:52,306 - manager - INFO - Все сотрудники завершили выполнение задачи.
+2025-10-07 20:23:14,241 - manager - INFO - Starting manager on port 8000
+2025-10-07 21:08:26,802 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-07 21:08:26,805 - manager - INFO - Wrote bot.py for agent ____
+2025-10-07 21:08:26,808 - manager - INFO - Agent ____ created and metadata updated
+2025-10-07 21:14:07,881 - manager - INFO - Assign task 'Чем заняться вечером' to ____
+2025-10-07 21:14:08,046 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\____\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 21:14:08,050 - manager - INFO - Task completed for ____
+2025-10-07 21:19:05,299 - manager - INFO - Assign task 'Чем заняться вечером' to ____
+2025-10-07 21:19:05,302 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\____\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 21:19:05,305 - manager - INFO - Task completed for ____
+2025-10-07 21:35:10,522 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-07 21:35:52,829 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-07 21:35:52,831 - manager - INFO - Wrote bot.py for agent ____
+2025-10-07 21:35:52,834 - manager - INFO - Agent ____ created and metadata updated
+2025-10-07 21:36:05,362 - manager - INFO - Assign task 'Чем заняться вечером' to ____
+2025-10-07 21:36:05,461 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\____\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 21:36:05,465 - manager - INFO - Task completed for ____
+2025-10-07 21:52:05,117 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-07 21:52:05,119 - manager - INFO - Wrote bot.py for agent _____20251007185205
+2025-10-07 21:52:05,121 - manager - INFO - Agent _____20251007185205 created and metadata updated
+2025-10-07 21:52:15,469 - manager - INFO - Assign task 'Чем заняться вечером' to _____20251007185205
+2025-10-07 21:52:15,567 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\_____20251007185205\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 21:52:15,571 - manager - INFO - Task completed for _____20251007185205
+2025-10-07 21:53:42,108 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\_____20251007185205
+2025-10-07 21:53:46,327 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-07 21:53:49,833 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\________
+2025-10-07 21:54:20,637 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-07 21:54:20,639 - manager - INFO - Wrote bot.py for agent ____
+2025-10-07 21:54:20,642 - manager - INFO - Agent ____ created and metadata updated
+2025-10-07 21:54:32,238 - manager - INFO - Assign task 'Чем заняться вечером' to ____
+2025-10-07 21:54:32,335 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\____\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 21:54:32,338 - manager - INFO - Task completed for ____
+2025-10-07 21:54:48,091 - manager - INFO - Assign task 'Как воспитывать детей' to ___________
+2025-10-07 21:54:48,094 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 21:54:48,097 - manager - INFO - Task completed for ___________
+2025-10-07 21:55:52,325 - manager - INFO - Assign task 'Чем заняться вечером' to ____
+2025-10-07 21:55:52,418 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\____\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 21:55:52,423 - manager - INFO - Task completed for ____
+2025-10-07 21:56:17,362 - manager - INFO - Assign task 'Чем заняться вечером' to ____
+2025-10-07 21:56:17,452 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\____\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 21:56:17,456 - manager - INFO - Task completed for ____
+2025-10-07 21:56:35,291 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-07 21:56:58,712 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-07 21:56:58,714 - manager - INFO - Wrote bot.py for agent ____
+2025-10-07 21:56:58,717 - manager - INFO - Agent ____ created and metadata updated
+2025-10-07 21:57:08,015 - manager - INFO - Assign task 'Чем заняться вечером' to ____
+2025-10-07 21:57:08,112 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\____\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 21:57:08,116 - manager - INFO - Task completed for ____
+2025-10-07 21:58:07,472 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-07 21:58:22,602 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-07 21:58:22,603 - manager - INFO - Wrote bot.py for agent ____
+2025-10-07 21:58:22,606 - manager - INFO - Agent ____ created and metadata updated
+2025-10-07 21:58:29,594 - manager - INFO - Assign task 'Чем заняться вечером' to ____
+2025-10-07 21:58:29,704 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\____\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 21:58:29,707 - manager - INFO - Task completed for ____
+2025-10-07 22:03:06,405 - manager - INFO - Assign task 'Чем заняться вечером' to ____
+2025-10-07 22:03:06,497 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\____\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 22:03:06,501 - manager - INFO - Task completed for ____
+2025-10-07 22:03:12,245 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-07 22:04:05,103 - manager - INFO - Поручаем задачу всем сотрудникам: Сделай обзор на последние фильмы
+
+2025-10-07 22:04:05,104 - manager - INFO -  → Отправляем задачу агенту ___________
+2025-10-07 22:04:05,201 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 22:04:05,205 - manager - INFO - Все сотрудники завершили выполнение задачи.
+2025-10-07 22:04:29,100 - manager - INFO - Поручаем задачу всем сотрудникам: Сделай обзор на последние фильмы
+
+2025-10-07 22:04:29,101 - manager - INFO -  → Отправляем задачу агенту ___________
+2025-10-07 22:04:29,103 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 22:04:29,105 - manager - INFO - Все сотрудники завершили выполнение задачи.
+2025-10-07 23:25:22,851 - manager - INFO - Assign task 'Обьясни понятие цикл' to ___________
+2025-10-07 23:25:23,008 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 23:25:23,013 - manager - INFO - Task completed for ___________
+2025-10-07 23:28:28,280 - manager - INFO - Assign task 'Обьясни понятие цикл' to ___________
+2025-10-07 23:28:28,372 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 151, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 23:28:28,376 - manager - INFO - Task completed for ___________
+2025-10-07 23:31:47,543 - manager - INFO - Assign task 'Обьясни понятие цикл' to ___________
+2025-10-07 23:31:47,633 - manager - ERROR - Error calling local agent: No module named 'imghdr'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 141, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1027, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________\bot.py", line 7, in <module>
+    from telegram import Update
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\__init__.py", line 69, in <module>
+    from .files.inputfile import InputFile
+  File "c:\Users\Work\.venv\Lib\site-packages\telegram\files\inputfile.py", line 22, in <module>
+    import imghdr
+ModuleNotFoundError: No module named 'imghdr'
+2025-10-07 23:31:47,637 - manager - INFO - Task completed for ___________
+2025-10-07 23:37:29,349 - manager - INFO - Assign task 'Обьясни понятие цикл' to ___________
+2025-10-07 23:37:30,241 - manager - INFO - Calling local handle_task for ___________
+2025-10-07 23:37:53,232 - manager - INFO - Task completed for ___________
+2025-10-07 23:39:17,563 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-07 23:39:17,566 - manager - INFO - Wrote bot.py for agent ____
+2025-10-07 23:39:17,569 - manager - INFO - Agent ____ created and metadata updated
+2025-10-07 23:39:33,087 - manager - INFO - Поручаем задачу всем сотрудникам: Что такое цикл
+2025-10-07 23:39:33,088 - manager - INFO -  → Отправляем задачу агенту ___________
+2025-10-07 23:39:33,840 - manager - INFO - Calling local handle_task for ___________
+2025-10-07 23:39:51,541 - manager - INFO -  → Отправляем задачу агенту ____
+2025-10-07 23:39:51,814 - manager - INFO - Calling local handle_task for ____
+2025-10-07 23:39:56,116 - manager - INFO - Все сотрудники завершили выполнение задачи.

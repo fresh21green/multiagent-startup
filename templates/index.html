@@ -10,19 +10,27 @@
     <h1>🤖 AI Менеджер</h1>
 
     <h2>Создать сотрудника</h2>
-    <form action="/create_agent" method="post">
+    <form action="/create_agent" method="post" class="manager-fields">
       <input type="text" name="name" placeholder="Имя сотрудника" required>
       <textarea name="prompt" placeholder="Промт-инструкция" required></textarea>
       <input type="text" name="telegram_token" placeholder="Telegram токен (опционально)">
       <button type="submit">Создать</button>
     </form>
 
+    {% if agents %}
+    <h2>Поручить задачу сотрудникам</h2>
+    <form action="/assign_task_all" method="post">
+        <textarea name="task" placeholder="Введите общую задачу..." required></textarea>
+        <button type="submit">Поручить задачу сотрудникам</button>
+    </form>
+    {% endif %}
+
     <h2>Сотрудники</h2>
     {% if agents and agents|length > 0 %}
       <ul>
         {% for a in agents %}
         <li>
-          <strong>{{ a.name or a.slug }}</strong>
+          <h2>{{ a.name or a.slug }}</h2>
           <form action="/assign_task" method="post" style="display:inline;">
             <input type="hidden" name="slug" value="{{ a.slug }}">
             <input name="task" placeholder="Задача для этого сотрудника" required>
@@ -30,10 +38,22 @@
           </form>
           <form action="/delete_agent" method="post" style="display:inline;">
             <input type="hidden" name="slug" value="{{ a.slug }}">
-            <button type="submit">Удалить</button>
+            <button type="submit">Удалить сотрудника</button>
           </form>
           {% if a.last_task %}
-            <div class="last-task"><b>Последняя задача:</b> {{ a.last_task.task }}<br/><b>Результат:</b> {{ a.last_task.result }}</div>
+            <div class="last-task">
+
+              <div class="section">
+                <div class="task-header">Последняя задача:</div>
+                {{ a.last_task.task }}
+              </div>
+
+              <div class="section">
+                <div class="task-header">Результат:</div> 
+                <div class="result">{{ a.last_task.result.result }}</div>
+              </div>
+
+            </div>
           {% endif %}
         </li>
         {% endfor %}
