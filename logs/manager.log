@@ -1,0 +1,77 @@
+2025-10-07 13:33:47,310 - manager - INFO - Creating agent 'coder1' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\coder1
+2025-10-07 13:33:47,312 - manager - INFO - Wrote bot.py for agent coder1
+2025-10-07 13:33:47,316 - manager - INFO - Agent coder1 created and metadata updated
+2025-10-07 13:37:14,228 - manager - INFO - Assign task 'Подведи краткий итог новости: "Компания OpenAI выпустила GPT-5"' to coder1
+2025-10-07 13:37:14,473 - manager - ERROR - Error calling local agent: No module named 'urllib3.contrib.appengine'
+Traceback (most recent call last):
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\utils\request.py", line 36, in <module>
+    import telegram.vendor.ptb_urllib3.urllib3 as urllib3
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\vendor\ptb_urllib3\urllib3\__init__.py", line 7, in <module>
+    from .connectionpool import (
+    ...<3 lines>...
+    )
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\vendor\ptb_urllib3\urllib3\connectionpool.py", line 11, in <module>
+    from .exceptions import (
+    ...<14 lines>...
+    )
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\vendor\ptb_urllib3\urllib3\exceptions.py", line 2, in <module>
+    from .packages.six.moves.http_client import (
+        IncompleteRead as httplib_IncompleteRead
+    )
+ModuleNotFoundError: No module named 'telegram.vendor.ptb_urllib3.urllib3.packages.six.moves'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 138, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\coder1\bot.py", line 7, in <module>
+    from telegram import Update
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\__init__.py", line 187, in <module>
+    from .bot import Bot
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\bot.py", line 107, in <module>
+    from telegram.utils.request import Request
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\utils\request.py", line 44, in <module>
+    import urllib3.contrib.appengine as appengine  # type: ignore[no-redef]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'urllib3.contrib.appengine'
+2025-10-07 13:40:50,723 - manager - INFO - Assign task 'Подведи краткий итог новости: "Компания OpenAI выпустила GPT-5"' to coder1
+2025-10-07 13:40:50,851 - manager - ERROR - Error calling local agent: No module named 'urllib3.contrib.appengine'
+Traceback (most recent call last):
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\utils\request.py", line 36, in <module>
+    import telegram.vendor.ptb_urllib3.urllib3 as urllib3
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\vendor\ptb_urllib3\urllib3\__init__.py", line 7, in <module>
+    from .connectionpool import (
+    ...<3 lines>...
+    )
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\vendor\ptb_urllib3\urllib3\connectionpool.py", line 11, in <module>
+    from .exceptions import (
+    ...<14 lines>...
+    )
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\vendor\ptb_urllib3\urllib3\exceptions.py", line 2, in <module>
+    from .packages.six.moves.http_client import (
+        IncompleteRead as httplib_IncompleteRead
+    )
+ModuleNotFoundError: No module named 'telegram.vendor.ptb_urllib3.urllib3.packages.six.moves'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 138, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\coder1\bot.py", line 7, in <module>
+    from telegram import Update
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\__init__.py", line 187, in <module>
+    from .bot import Bot
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\bot.py", line 107, in <module>
+    from telegram.utils.request import Request
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\site-packages\telegram\utils\request.py", line 44, in <module>
+    import urllib3.contrib.appengine as appengine  # type: ignore[no-redef]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named 'urllib3.contrib.appengine'

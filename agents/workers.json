@@ -1,0 +1,17 @@
+[
+  {
+    "name": "coder1",
+    "slug": "coder1",
+    "created_at": "2025-10-07T10:33:47.315371Z",
+    "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\coder1",
+    "deploy_url": "",
+    "status": "created",
+    "last_task": {
+      "task": "Подведи краткий итог новости: \"Компания OpenAI выпустила GPT-5\"",
+      "result": {
+        "ok": false,
+        "error": "1 validation error for AmveraLLM\n  Value error, API токен Amvera не найден. Установите переменную окружения AMVERA_API_TOKEN или передайте api_token при инициализации. [type=value_error, input_value={'model': 'gpt-4.1', 'api_token': None}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.11/v/value_error"
+      }
+    }
+  }
+]
