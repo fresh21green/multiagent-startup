@@ -737,3 +737,8 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 2025-10-09 20:51:11,872 - manager - INFO - Calling local handle_task for python________
 2025-10-09 20:58:29,409 - manager - INFO - Assign task 'Обьясни что такое солнце' to python________
 2025-10-09 20:58:30,668 - manager - INFO - Calling local handle_task for python________
+2025-10-09 21:07:50,089 - manager - INFO - Assign task 'Обьясни цикл' to python________
+2025-10-09 21:07:51,261 - manager - INFO - Calling local handle_task for python________
+2025-10-09 21:14:23,739 - manager - INFO - Creating agent 'test' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\test
+2025-10-09 21:14:23,742 - manager - INFO - Wrote bot.py for agent test
+2025-10-09 21:14:23,748 - manager - INFO - Agent test created and metadata updated

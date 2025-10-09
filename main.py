@@ -60,10 +60,19 @@ def slugify(name: str):
     import re
     return re.sub(r"[^a-zA-Z0-9_-]", "_", name.strip()).lower()
 
-@app.get('/', response_class=HTMLResponse)
+
+@app.get("/")
 async def index(request: Request):
     meta = load_meta()
-    return templates.TemplateResponse('index.html', {'request': request, 'agents': meta})
+
+    # добавляем каждому агенту URL
+    for agent in meta:
+        agent["url"] = f"/agent/{agent['slug']}"
+
+    return templates.TemplateResponse(
+        "index.html",
+        {"request": request, "agents": meta}
+    )
 
 @app.post('/create_agent')
 async def create_agent(request: Request, name: str = Form(...), prompt: str = Form(''), telegram_token: str = Form('')):

@@ -74,6 +74,18 @@ ul {
   display: block;
 }
 
+.agent-link {
+  display: inline-block;
+  margin-bottom: 6px;
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.agent-link:hover {
+  text-decoration: underline;
+}
+
 h1{ text-align:center }
 form{ margin-bottom:12px }
 textarea,input { width: 100%; padding:8px; margin-top:6px; border-radius:6px; border:1px solid #ddd; box-sizing: border-box; } 
