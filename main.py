@@ -236,7 +236,7 @@ async def assign_task(slug: str = Form(...), task: str = Form(...)):
     save_meta(meta)
     logger.info("Task completed for %s", slug,res)
     # return JSONResponse(res)
-    return JSONResponse({"ok": True, "result": res})
+    return JSONResponse({"ok": True, "agent": slug, "result": res})
 
 @app.get('/download/{name}')
 async def download(name: str):

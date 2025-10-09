@@ -57,7 +57,7 @@ async function assignTask(slug) {
   if(data.result){
     statusBox.innerHTML = "Статус: Выполнено";
     resultBox.classList.add("is-result");
-    resultBox.innerHTML = data.result.result;
+    resultBox.innerHTML = data.result.result; ;
   }
   else{
     statusBox.innerHTML = "Статус: Ошибка";
@@ -66,3 +66,5 @@ async function assignTask(slug) {
   }
   
 }
+
+

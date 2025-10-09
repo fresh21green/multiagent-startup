@@ -678,3 +678,62 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 2025-10-09 15:23:45,404 - manager - INFO -  → Отправляем задачу агенту _________________
 2025-10-09 15:23:45,671 - manager - INFO - Calling local handle_task for _________________
 2025-10-09 15:23:51,610 - manager - INFO - Все сотрудники завершили выполнение задачи.
+2025-10-09 18:05:10,173 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\_____20251009120255
+2025-10-09 18:05:12,837 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\________
+2025-10-09 18:05:15,162 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\_________________
+2025-10-09 18:16:24,268 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-09 18:16:24,272 - manager - INFO - Wrote bot.py for agent _____20251009151624
+2025-10-09 18:16:24,277 - manager - INFO - Agent _____20251009151624 created and metadata updated
+2025-10-09 18:17:38,245 - manager - INFO - Creating agent '_________________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\_________________
+2025-10-09 18:17:38,249 - manager - INFO - Wrote bot.py for agent _________________
+2025-10-09 18:17:38,256 - manager - INFO - Agent _________________ created and metadata updated
+2025-10-09 18:20:30,430 - manager - INFO - Creating agent '__________________________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\__________________________
+2025-10-09 18:20:30,432 - manager - INFO - Wrote bot.py for agent __________________________
+2025-10-09 18:20:30,438 - manager - INFO - Agent __________________________ created and metadata updated
+2025-10-09 18:22:04,575 - manager - INFO - Поручаем задачу всем сотрудникам: Обьясни что такое солнце
+2025-10-09 18:22:04,577 - manager - INFO -  → Отправляем задачу агенту _____20251009151624
+2025-10-09 18:22:06,372 - manager - INFO - Calling local handle_task for _____20251009151624
+2025-10-09 18:22:10,506 - manager - INFO -  → Отправляем задачу агенту _________________
+2025-10-09 18:22:11,006 - manager - INFO - Calling local handle_task for _________________
+2025-10-09 18:22:14,811 - manager - INFO -  → Отправляем задачу агенту __________________________
+2025-10-09 18:22:15,291 - manager - INFO - Calling local handle_task for __________________________
+2025-10-09 18:22:21,101 - manager - INFO - Все сотрудники завершили выполнение задачи.
+2025-10-09 19:41:30,722 - manager - INFO - Creating agent 'python________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\python________
+2025-10-09 19:41:30,724 - manager - INFO - Wrote bot.py for agent python________
+2025-10-09 19:41:30,726 - manager - INFO - Agent python________ created and metadata updated
+2025-10-09 19:41:47,603 - manager - INFO - Assign task 'Покажи пример цикла' to python________
+2025-10-09 19:41:48,525 - manager - INFO - Calling local handle_task for python________
+2025-10-09 19:57:41,825 - manager - INFO - Assign task 'Покажи пример цикла' to python________
+2025-10-09 19:57:42,508 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:05:35,698 - manager - INFO - Assign task 'Покажи пример цикла' to python________
+2025-10-09 20:05:36,406 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:07:32,080 - manager - INFO - Assign task 'Покажи пример цикла' to python________
+2025-10-09 20:07:32,331 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:09:35,024 - manager - INFO - Assign task 'Покажи пример цикла' to python________
+2025-10-09 20:09:35,284 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:11:30,209 - manager - INFO - Assign task 'Покажи пример цикла' to python________
+2025-10-09 20:11:30,892 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:16:26,240 - manager - INFO - Assign task 'Что такое цикл' to python________
+2025-10-09 20:16:26,489 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:18:58,623 - manager - INFO - Assign task 'Что такое цикл' to python________
+2025-10-09 20:18:58,872 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:19:17,512 - manager - INFO - Assign task 'Покажи пример цикла' to python________
+2025-10-09 20:19:17,765 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:22:05,039 - manager - INFO - Assign task 'Покажи пример цикла' to python________
+2025-10-09 20:22:05,289 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:25:44,047 - manager - INFO - Assign task 'Покажи пример цикла' to python________
+2025-10-09 20:25:44,722 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:28:03,407 - manager - INFO - Assign task 'Покажи пример цикла' to python________
+2025-10-09 20:28:03,662 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:29:06,959 - manager - INFO - Assign task 'Покажи пример цикла' to python________
+2025-10-09 20:29:07,212 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:33:28,319 - manager - INFO - Assign task 'Покажи пример цикла' to python________
+2025-10-09 20:33:29,002 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:35:30,415 - manager - INFO - Assign task 'Покажи пример цикла' to python________
+2025-10-09 20:35:30,676 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:48:57,212 - manager - INFO - Assign task 'Покажи как выглядит условие if ' to python________
+2025-10-09 20:48:58,686 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:51:10,570 - manager - INFO - Assign task 'Обьясни условие if' to python________
+2025-10-09 20:51:11,872 - manager - INFO - Calling local handle_task for python________
+2025-10-09 20:58:29,409 - manager - INFO - Assign task 'Обьясни что такое солнце' to python________
+2025-10-09 20:58:30,668 - manager - INFO - Calling local handle_task for python________

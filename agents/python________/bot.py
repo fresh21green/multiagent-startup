@@ -23,11 +23,11 @@ AMVERA_API_KEY = os.getenv('AMVERA_API_KEY')
 AMVERA_MODEL = 'gpt-4.1'
 
 # manager will replace placeholder text
-__TELEGRAM_TOKEN_PLACEHOLDER__
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
 
-PROMT = __PROMPT_PLACEHOLDER__
+PROMT = """Ты эксперт в python"""
 
 llm = AmveraLLM(model=AMVERA_MODEL, api_token=AMVERA_API_KEY)
 app = FastAPI()

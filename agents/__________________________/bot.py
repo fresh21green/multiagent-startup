@@ -27,7 +27,7 @@ TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
 
-PROMT = """Ты дизайнер"""
+PROMT = """Ты придумываешь эмоциональтные посты для телеграмм"""
 
 llm = AmveraLLM(model=AMVERA_MODEL, api_token=AMVERA_API_KEY)
 app = FastAPI()
