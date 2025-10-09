@@ -211,7 +211,8 @@ async def assign_task_all(task: str = Form(...)):
     await asyncio.gather(*[handle(e) for e in meta])
     save_meta(meta)
     logger.info("Все сотрудники завершили выполнение задачи.")
-    return {"ok": True, "results": results}
+    # return {"ok": True, "results": results}
+    return JSONResponse({"ok": True, "results": results})
 
 @app.post("/assign_task")
 async def assign_task(slug: str = Form(...), task: str = Form(...)):
@@ -234,7 +235,8 @@ async def assign_task(slug: str = Form(...), task: str = Form(...)):
     entry["last_task"] = {"task": task, "result": res}
     save_meta(meta)
     logger.info("Task completed for %s", slug,res)
-    return JSONResponse(res)
+    # return JSONResponse(res)
+    return JSONResponse({"ok": True, "result": res})
 
 @app.get('/download/{name}')
 async def download(name: str):

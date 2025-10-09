@@ -5,9 +5,27 @@ body {
   color: #222;
 }
 
-h2{
-
+.ai-agent-header{
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
+
+.hidden { display: none; }
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  margin-top: 10px;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 
 .manager-fields input, .manager-fields textarea{
   margin: 0 0 20px;
@@ -20,7 +38,7 @@ ul {
   padding: 0;
 }
 
-ul li {
+.agent-card {
     margin: 0 0 20px;
     background: linear-gradient(45deg, #2563eb, #b6edb8);
     display: flex;
@@ -40,10 +58,26 @@ ul li {
   box-shadow: 0 4px 20px rgba(0,0,0,0.06);
 }
 
+.agent-status{
+  color: #fff;
+}
+
+.result {
+  display: none;
+  margin-top: 8px;
+  padding: 20px;
+  background: #f3f4f6;
+  border-radius: 6px;
+  line-height: 25px;
+}
+.result.is-result{
+  display: block;
+}
+
 h1{ text-align:center }
 form{ margin-bottom:12px }
 textarea,input { width: 100%; padding:8px; margin-top:6px; border-radius:6px; border:1px solid #ddd; box-sizing: border-box; } 
-button{ margin-top:8px; padding:8px 12px; border-radius:6px; background:#2563eb; color:#fff; border:none }
+button{ cursor: pointer; margin-top:8px; padding:8px 12px; border-radius:6px; background:#2563eb; color:#fff; border:none }
 .last-task {
     margin-top: 8px;
     padding: 20px;
@@ -52,8 +86,15 @@ button{ margin-top:8px; padding:8px 12px; border-radius:6px; background:#2563eb;
     line-height: 25px;
 }
 
+.block-section {
+    margin-bottom: 40px;
+    border: 1px solid #e4e4e4;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: -1px 3px 8px 0px rgba(34, 60, 80, 0.2);
+}
 
-.section { 
+.text0section { 
     margin-bottom: 20px;
 }
 .task-header {

@@ -20,7 +20,6 @@ fh.setFormatter(fmt)
 logger.addHandler(fh)
 
 AMVERA_API_KEY = os.getenv('AMVERA_API_KEY')
-print("AMVERA_API_KEY:", AMVERA_API_KEY)
 AMVERA_MODEL = 'gpt-4.1'
 
 # manager will replace placeholder text

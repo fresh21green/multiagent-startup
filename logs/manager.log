@@ -617,3 +617,64 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 2025-10-09 12:12:46,452 - manager - INFO - Calling local handle_task for _____20251009085606
 2025-10-09 12:17:25,032 - manager - INFO - Assign task 'Что такое зима' to _____20251009085606
 2025-10-09 12:17:25,279 - manager - INFO - Calling local handle_task for _____20251009085606
+2025-10-09 13:51:24,494 - manager - INFO - Assign task 'Что такое лето' to _____20251009085606
+2025-10-09 13:51:26,246 - manager - INFO - Calling local handle_task for _____20251009085606
+2025-10-09 14:14:35,721 - manager - INFO - Starting manager on port 8000
+2025-10-09 14:20:57,074 - manager - INFO - Assign task 'Что такое осень' to _____20251009085606
+2025-10-09 14:20:58,440 - manager - INFO - Calling local handle_task for _____20251009085606
+2025-10-09 14:22:42,416 - manager - INFO - Assign task 'Что такое весна' to _____20251009085606
+2025-10-09 14:22:43,561 - manager - INFO - Calling local handle_task for _____20251009085606
+2025-10-09 14:25:43,337 - manager - INFO - Assign task 'Что такое фигурное катание' to _____20251009085606
+2025-10-09 14:25:44,615 - manager - INFO - Calling local handle_task for _____20251009085606
+2025-10-09 14:28:23,407 - manager - INFO - Assign task 'Что такое хоккей' to _____20251009085606
+2025-10-09 14:28:24,545 - manager - INFO - Calling local handle_task for _____20251009085606
+2025-10-09 14:30:19,727 - manager - INFO - Assign task 'Что такое футбол' to _____20251009085606
+2025-10-09 14:30:20,989 - manager - INFO - Calling local handle_task for _____20251009085606
+2025-10-09 14:36:44,213 - manager - INFO - Assign task 'Чем заняться вечером' to _____20251009085606
+2025-10-09 14:36:45,472 - manager - INFO - Calling local handle_task for _____20251009085606
+2025-10-09 14:37:20,946 - manager - INFO - Creating agent '________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\________
+2025-10-09 14:37:20,948 - manager - INFO - Wrote bot.py for agent ________
+2025-10-09 14:37:20,952 - manager - INFO - Agent ________ created and metadata updated
+2025-10-09 14:37:43,736 - manager - INFO - Поручаем задачу всем сотрудникам: Придумай как украсить комнату
+2025-10-09 14:37:43,737 - manager - INFO -  → Отправляем задачу агенту _____20251009085606
+2025-10-09 14:37:44,983 - manager - INFO - Calling local handle_task for _____20251009085606
+2025-10-09 14:37:57,610 - manager - INFO -  → Отправляем задачу агенту ________
+2025-10-09 14:37:58,076 - manager - INFO - Calling local handle_task for ________
+2025-10-09 14:38:11,308 - manager - INFO - Все сотрудники завершили выполнение задачи.
+2025-10-09 15:02:28,033 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\_____20251009085606
+2025-10-09 15:02:30,599 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\________
+2025-10-09 15:02:55,003 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-09 15:02:55,005 - manager - INFO - Wrote bot.py for agent _____20251009120255
+2025-10-09 15:02:55,008 - manager - INFO - Agent _____20251009120255 created and metadata updated
+2025-10-09 15:03:13,981 - manager - INFO - Creating agent '________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\________
+2025-10-09 15:03:13,982 - manager - INFO - Wrote bot.py for agent ________
+2025-10-09 15:03:13,985 - manager - INFO - Agent ________ created and metadata updated
+2025-10-09 15:03:42,950 - manager - INFO - Поручаем задачу всем сотрудникам: Как украсить комнату к новому году
+2025-10-09 15:03:42,950 - manager - INFO -  → Отправляем задачу агенту _____20251009120255
+2025-10-09 15:03:43,707 - manager - INFO - Calling local handle_task for _____20251009120255
+2025-10-09 15:04:02,460 - manager - INFO -  → Отправляем задачу агенту ________
+2025-10-09 15:04:02,731 - manager - INFO - Calling local handle_task for ________
+2025-10-09 15:04:16,833 - manager - INFO - Все сотрудники завершили выполнение задачи.
+2025-10-09 15:11:18,673 - manager - INFO - Поручаем задачу всем сотрудникам: Чем заняться на выходные
+2025-10-09 15:11:18,674 - manager - INFO -  → Отправляем задачу агенту _____20251009120255
+2025-10-09 15:11:18,922 - manager - INFO - Calling local handle_task for _____20251009120255
+2025-10-09 15:11:28,490 - manager - INFO -  → Отправляем задачу агенту ________
+2025-10-09 15:11:28,764 - manager - INFO - Calling local handle_task for ________
+2025-10-09 15:11:42,938 - manager - INFO - Все сотрудники завершили выполнение задачи.
+2025-10-09 15:18:54,924 - manager - INFO - Поручаем задачу всем сотрудникам: Придумай настольную игру
+2025-10-09 15:18:54,925 - manager - INFO -  → Отправляем задачу агенту _____20251009120255
+2025-10-09 15:18:55,190 - manager - INFO - Calling local handle_task for _____20251009120255
+2025-10-09 15:19:10,682 - manager - INFO -  → Отправляем задачу агенту ________
+2025-10-09 15:19:10,966 - manager - INFO - Calling local handle_task for ________
+2025-10-09 15:19:40,254 - manager - INFO - Все сотрудники завершили выполнение задачи.
+2025-10-09 15:23:06,807 - manager - INFO - Creating agent '_________________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\_________________
+2025-10-09 15:23:06,809 - manager - INFO - Wrote bot.py for agent _________________
+2025-10-09 15:23:06,812 - manager - INFO - Agent _________________ created and metadata updated
+2025-10-09 15:23:34,492 - manager - INFO - Поручаем задачу всем сотрудникам: Опиши что такое солнце
+2025-10-09 15:23:34,493 - manager - INFO -  → Отправляем задачу агенту _____20251009120255
+2025-10-09 15:23:35,225 - manager - INFO - Calling local handle_task for _____20251009120255
+2025-10-09 15:23:39,341 - manager - INFO -  → Отправляем задачу агенту ________
+2025-10-09 15:23:39,604 - manager - INFO - Calling local handle_task for ________
+2025-10-09 15:23:45,404 - manager - INFO -  → Отправляем задачу агенту _________________
+2025-10-09 15:23:45,671 - manager - INFO - Calling local handle_task for _________________
+2025-10-09 15:23:51,610 - manager - INFO - Все сотрудники завершили выполнение задачи.
