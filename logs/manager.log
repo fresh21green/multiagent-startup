@@ -557,3 +557,63 @@ json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes:
 2025-10-07 23:55:14,349 - manager - INFO - Assign task 'Напиши короткий рассказ о море' to __________
 2025-10-07 23:55:14,616 - manager - INFO - Calling local handle_task for __________
 2025-10-07 23:55:26,258 - manager - INFO - Task completed for __________
+2025-10-09 10:50:32,724 - manager - INFO - Assign task 'Напиши о средиземноморской диете' to __________
+2025-10-09 10:50:33,677 - manager - INFO - Calling local handle_task for __________
+2025-10-09 10:50:33,789 - manager - INFO - Task completed for __________
+2025-10-09 10:55:19,254 - manager - INFO - Assign task 'Напиши о средиземноморской диете' to __________
+2025-10-09 10:55:19,944 - manager - INFO - Calling local handle_task for __________
+2025-10-09 10:55:20,032 - manager - INFO - Task completed for __________
+2025-10-09 10:56:25,610 - manager - INFO - Assign task 'Напиши о средиземноморской диете' to __________
+2025-10-09 10:56:26,312 - manager - INFO - Calling local handle_task for __________
+2025-10-09 10:56:26,408 - manager - INFO - Task completed for __________
+2025-10-09 10:56:53,129 - manager - INFO - Assign task 'Напиши о средиземноморской диете' to __________
+2025-10-09 10:56:53,384 - manager - INFO - Calling local handle_task for __________
+2025-10-09 10:56:53,465 - manager - INFO - Task completed for __________
+2025-10-09 11:50:40,778 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\__________
+2025-10-09 11:50:42,660 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\________
+2025-10-09 11:52:38,540 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-09 11:52:38,542 - manager - INFO - Wrote bot.py for agent ____
+2025-10-09 11:52:38,545 - manager - INFO - Agent ____ created and metadata updated
+2025-10-09 11:52:46,845 - manager - INFO - Assign task 'Что такое зима' to ____
+2025-10-09 11:52:47,596 - manager - INFO - Calling local handle_task for ____
+2025-10-09 11:52:47,679 - manager - INFO - Task completed for ____
+2025-10-09 11:55:41,000 - manager - ERROR - Failed to load metadata: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 43, in load_meta
+    return json.loads(META_FILE.read_text(encoding='utf-8'))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-10-09 11:56:06,817 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-09 11:56:06,819 - manager - INFO - Wrote bot.py for agent _____20251009085606
+2025-10-09 11:56:06,822 - manager - ERROR - Failed to load metadata: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 43, in load_meta
+    return json.loads(META_FILE.read_text(encoding='utf-8'))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-10-09 11:56:06,824 - manager - INFO - Agent _____20251009085606 created and metadata updated
+2025-10-09 11:58:24,479 - manager - INFO - Assign task 'Что такое зима' to _____20251009085606
+2025-10-09 11:58:25,168 - manager - INFO - Calling local handle_task for _____20251009085606
+2025-10-09 11:58:25,257 - manager - INFO - Task completed for _____20251009085606
+2025-10-09 12:02:48,689 - manager - INFO - Assign task 'Что такое зима' to _____20251009085606
+2025-10-09 12:02:49,384 - manager - INFO - Calling local handle_task for _____20251009085606
+2025-10-09 12:12:45,770 - manager - INFO - Assign task 'Что такое зима' to _____20251009085606
+2025-10-09 12:12:46,452 - manager - INFO - Calling local handle_task for _____20251009085606
+2025-10-09 12:17:25,032 - manager - INFO - Assign task 'Что такое зима' to _____20251009085606
+2025-10-09 12:17:25,279 - manager - INFO - Calling local handle_task for _____20251009085606

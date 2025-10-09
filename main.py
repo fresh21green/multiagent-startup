@@ -33,7 +33,7 @@ LOGS_DIR = BASE / "logs"
 AGENTS_DIR.mkdir(exist_ok=True)
 LOGS_DIR.mkdir(exist_ok=True)
 
-META_FILE = AGENTS_DIR / "workers.json"
+META_FILE = AGENTS_DIR / "agents.json"
 if not META_FILE.exists():
     META_FILE.write_text("[]", encoding="utf-8")
 
@@ -233,7 +233,7 @@ async def assign_task(slug: str = Form(...), task: str = Form(...)):
 
     entry["last_task"] = {"task": task, "result": res}
     save_meta(meta)
-    logger.info("Task completed for %s", slug)
+    logger.info("Task completed for %s", slug,res)
     return JSONResponse(res)
 
 @app.get('/download/{name}')
