@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>AI Менеджер</title>
   <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/markdown.css">
   <script src="/static/script.js"></script>
 </head>
 <body>
@@ -46,7 +47,7 @@
             <input type="hidden" name="slug" value="{{ agent.slug }}">
             <input name="task"  id="task-{{ agent.slug }}" placeholder="Задача для этого сотрудника" required>
             <button type="submit" id="btn-{{ agent.slug }}" onclick="assignTask('{{ agent.slug }}')">Отправить задачу</button>
-            <div class="result" id="result-{{ agent.slug }}"></div>
+            <div class="result markdown-body" id="result-{{ agent.slug }}"></div>
           </div>
           <form action="/delete_agent" method="post" style="display:inline;">
             <input type="hidden" name="slug" value="{{ agent.slug }}">
@@ -62,7 +63,7 @@
 
               <div class="text-section">
                 <div class="task-header">Результат:</div> 
-                <div class="last-result">{{ agent.last_task.result.result }}</div>
+                <div class="last-result markdown-body">{{ agent.last_task.result.html | safe}}</div>
               </div>
 
             </div>

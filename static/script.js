@@ -26,7 +26,7 @@ async function assignTaskAll() {
     if (card) {
         statusBox.innerHTML = "Статус: Выполнено";
         card.classList.add("is-result");
-        card.innerHTML = r.result?.result || r.error || 'Ошибка';
+        card.innerHTML = r.result.html || 'Ошибка';
     }
   });
 }
@@ -57,7 +57,7 @@ async function assignTask(slug) {
   if(data.result){
     statusBox.innerHTML = "Статус: Выполнено";
     resultBox.classList.add("is-result");
-    resultBox.innerHTML = data.result.result; ;
+    resultBox.innerHTML = data.result.html;
   }
   else{
     statusBox.innerHTML = "Статус: Ошибка";

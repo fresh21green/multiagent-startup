@@ -8,3 +8,4 @@ langchain-amvera
 python-telegram-bot==20.5
 python-multipart
 utils
+markdown

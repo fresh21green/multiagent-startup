@@ -23,11 +23,11 @@ AMVERA_API_KEY = os.getenv('AMVERA_API_KEY')
 AMVERA_MODEL = 'gpt-4.1'
 
 # manager will replace placeholder text
-TELEGRAM_TOKEN = "7815643531:AAFqkEaZ6dlGt07R2pNxj_xmD_sq8WYaEzI"
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
 
-PROMT = """Ты флорист"""
+PROMPT = """Трудолюбивый,юморной,бубука,обидчивый,быстро отходчивый,добрый,строгий,сильный,любит пиво,любитель поспорить, упрямый,надежный,ценит дружбу,однолюб."""
 
 llm = AmveraLLM(model=AMVERA_MODEL, api_token=AMVERA_API_KEY)
 app = FastAPI()
@@ -112,15 +112,19 @@ def handle_task(task: str):
     """Function used by manager when agent is local: calls LLM and returns result."""
     logger.info('handle_task called with task: %s', task)
     try:
-        full = (PROMT or '') + '\nUser: ' + task
+        full = (PROMPT or '') + '\nUser: ' + task
         resp = llm.invoke(full)
-        text = getattr(resp, 'content', str(resp))
-        logger.info('LLM returned: %s', str(text)[:200])
+        if hasattr(resp, "content"):
+            text = resp.content
+        elif isinstance(resp, dict) and "content" in resp:
+            text = resp["content"]
+        else:
+            text = str(resp)
         return text
     except Exception as e:
         logger.exception('Error in handle_task: %s', e)
         return f'Error: {e}'
-
+    
 @app.post('/webhook')
 async def webhook(request: Request):
     data = await request.json()

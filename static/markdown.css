@@ -1,0 +1,173 @@
+/* markdown.css — clean, readable Markdown styling */
+
+/* Base */
+.markdown-body {
+  box-sizing: border-box;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+               sans-serif;
+  color: #222;
+  line-height: 1.6;
+  background: transparent;
+  word-wrap: break-word;
+}
+
+/* Headings */
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  font-weight: 600;
+  margin-top: 1.6rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.25;
+  color: #111;
+}
+
+.markdown-body h1 { font-size: 2rem; border-bottom: 1px solid #e6e6e6; padding-bottom: .3rem; }
+.markdown-body h2 { font-size: 1.6rem; }
+.markdown-body h3 { font-size: 1.25rem; }
+.markdown-body h4 { font-size: 1rem; }
+.markdown-body h5 { font-size: .95rem; }
+.markdown-body h6 { font-size: .85rem; color: #555; }
+
+/* Paragraphs, links and inline elements */
+.markdown-body p { margin: 0 0 1rem 0; }
+.markdown-body a {
+  color: #0366d6;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(3,102,214,0.25);
+}
+.markdown-body a:hover { text-decoration: underline; }
+
+/* Strong / Emphasis */
+.markdown-body strong { font-weight: 600; }
+.markdown-body em { font-style: italic; }
+
+/* Lists */
+.markdown-body ul,
+.markdown-body ol {
+  margin: 0 0 1rem 0;
+  padding-left: 1.25rem;
+}
+.markdown-body li { margin: 0.25rem 0; }
+
+/* Task list */
+.markdown-body input[type="checkbox"] {
+  margin: 0 .35rem 0 0;
+  vertical-align: middle;
+}
+
+/* Blockquote */
+.markdown-body blockquote {
+  margin: 0 0 1rem 0;
+  padding: 0.6rem 1rem;
+  color: #555;
+  border-left: 4px solid #dfe2e5;
+  background: #f6f8fa;
+  border-radius: 4px;
+}
+
+/* Horizontal rule */
+.markdown-body hr {
+  border: 0;
+  border-top: 1px solid #e6e6e6;
+  margin: 1.5rem 0;
+}
+
+/* Code (inline) */
+.markdown-body code {
+  background: rgba(27,31,35,0.05);
+  padding: .2em .35em;
+  margin: 0;
+  font-size: .95em;
+  border-radius: 6px;
+  font-family: SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+}
+
+/* Code blocks / pre */
+.markdown-body pre {
+  background: #0d0f14;
+  color: #e6eef6;
+  padding: 1rem;
+  overflow: auto;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  margin: 0 0 1rem 0;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+}
+.markdown-body pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+/* Tables */
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  display: block;
+  overflow: auto;
+  margin: 0 0 1rem 0;
+}
+.markdown-body th,
+.markdown-body td {
+  padding: .6rem .75rem;
+  border: 1px solid #e6e6e6;
+  text-align: left;
+  vertical-align: top;
+}
+.markdown-body th {
+  background: #f6f8fa;
+  font-weight: 600;
+}
+
+/* Images */
+.markdown-body img {
+  max-width: 100%;
+  display: block;
+  margin: .6rem 0;
+  border-radius: 6px;
+}
+
+/* Definition lists */
+.markdown-body dl { margin: 0 0 1rem 0; }
+.markdown-body dt { font-weight: 600; }
+.markdown-body dd { margin-left: 1rem; }
+
+/* Footnotes / small text */
+.markdown-body small, .markdown-body .footnote {
+  color: #6a737d;
+  font-size: .9rem;
+}
+
+/* Utilities */
+.markdown-body .muted { color: #6a737d; }
+.markdown-body .kbd {
+  display: inline-block;
+  padding: .15em .4em;
+  font-size: .85em;
+  border-radius: 4px;
+  border: 1px solid #d1d5da;
+  background: #fafbfc;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .markdown-body { padding: 1rem; }
+  .markdown-body h1 { font-size: 1.5rem; }
+  .markdown-body pre { font-size: .85rem; }
+}
+
+/* Optional: subtle syntax highlighting blue for inline code blocks */
+.markdown-body code .token { color: #79b6ff; }
+
+/* Accessibility focus */
+.markdown-body a:focus, .markdown-body button:focus { outline: 3px solid rgba(3,102,214,0.2); outline-offset: 2px; }

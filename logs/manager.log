@@ -742,3 +742,319 @@ json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
 2025-10-09 21:14:23,739 - manager - INFO - Creating agent 'test' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\test
 2025-10-09 21:14:23,742 - manager - INFO - Wrote bot.py for agent test
 2025-10-09 21:14:23,748 - manager - INFO - Agent test created and metadata updated
+2025-10-09 22:16:54,484 - manager - INFO - Assign task 'Обьясни цикл' to python________
+2025-10-09 22:16:55,851 - manager - INFO - Calling local handle_task for python________
+2025-10-09 22:18:32,034 - manager - INFO - Creating agent '___________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-09 22:18:32,037 - manager - INFO - Wrote bot.py for agent ___________
+2025-10-09 22:18:32,044 - manager - INFO - Agent ___________ created and metadata updated
+2025-10-09 22:18:42,648 - manager - INFO - Assign task 'Покажи пример цикла' to ___________
+2025-10-09 22:18:43,443 - manager - INFO - Calling local handle_task for ___________
+2025-10-09 22:44:53,898 - manager - INFO - Assign task 'Покажи пример цикла' to ___________
+2025-10-09 22:44:55,112 - manager - INFO - Calling local handle_task for ___________
+2025-10-09 22:47:40,222 - manager - INFO - Assign task 'Покажи пример цикла' to ___________
+2025-10-09 22:47:40,473 - manager - INFO - Calling local handle_task for ___________
+2025-10-09 22:48:42,925 - manager - INFO - Assign task 'Покажи пример цикла' to ___________
+2025-10-09 22:48:43,175 - manager - INFO - Calling local handle_task for ___________
+2025-10-09 22:55:56,510 - manager - INFO - Assign task 'Покажи пример цикла' to ___________
+2025-10-09 22:55:57,186 - manager - INFO - Calling local handle_task for ___________
+2025-10-09 22:56:56,773 - manager - INFO - Assign task 'Покажи пример цикла' to ___________
+2025-10-09 22:56:57,447 - manager - INFO - Calling local handle_task for ___________
+2025-10-09 22:59:05,998 - manager - INFO - Assign task 'Покажи пример цикла' to ___________
+2025-10-09 22:59:06,673 - manager - INFO - Calling local handle_task for ___________
+2025-10-09 22:59:31,813 - manager - INFO - Assign task 'Покажи пример цикла' to ___________
+2025-10-09 22:59:32,063 - manager - INFO - Calling local handle_task for ___________
+2025-10-09 23:01:16,053 - manager - INFO - Assign task 'Покажи пример цикла' to ___________
+2025-10-09 23:01:16,753 - manager - INFO - Calling local handle_task for ___________
+2025-10-09 23:03:16,140 - manager - INFO - Creating agent '___________2' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________2
+2025-10-09 23:03:16,141 - manager - INFO - Wrote bot.py for agent ___________2
+2025-10-09 23:03:16,144 - manager - INFO - Agent ___________2 created and metadata updated
+2025-10-09 23:03:22,534 - manager - INFO - Assign task 'Покажи пример цикла' to ___________2
+2025-10-09 23:03:23,380 - manager - INFO - Calling local handle_task for ___________2
+2025-10-09 23:06:49,669 - manager - INFO - Assign task 'Покажи пример цикла' to ___________2
+2025-10-09 23:06:50,385 - manager - INFO - Calling local handle_task for ___________2
+2025-10-09 23:06:54,315 - manager - ERROR - Error calling local agent: 'str' object has no attribute 'result'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 154, in call_agent_local
+    return {'ok': True, 'source': 'local', 'result': res.result}
+                                                     ^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'result'
+2025-10-09 23:07:27,069 - manager - INFO - Assign task 'Покажи пример цикла' to ___________2
+2025-10-09 23:07:27,320 - manager - INFO - Calling local handle_task for ___________2
+2025-10-09 23:07:30,605 - manager - ERROR - Error calling local agent: 'str' object has no attribute 'result'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 154, in call_agent_local
+    return {'ok': True, 'source': 'local', 'result': res.result}
+                                                     ^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'result'
+2025-10-09 23:08:02,949 - manager - INFO - Assign task 'Покажи пример цикла' to ___________2
+2025-10-09 23:08:03,658 - manager - INFO - Calling local handle_task for ___________2
+2025-10-09 23:08:07,065 - manager - ERROR - Error calling local agent: 'str' object has no attribute 'result'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 154, in call_agent_local
+    return {'ok': True, 'source': 'local', 'result': res.result}
+                                                     ^^^^^^^^^^
+AttributeError: 'str' object has no attribute 'result'
+2025-10-09 23:11:01,352 - manager - INFO - Assign task 'Покажи пример цикла' to ___________2
+2025-10-09 23:11:02,048 - manager - INFO - Calling local handle_task for ___________2
+2025-10-09 23:12:20,413 - manager - INFO - Assign task 'Покажи пример цикла' to ___________2
+2025-10-09 23:12:21,166 - manager - INFO - Calling local handle_task for ___________2
+2025-10-09 23:12:56,052 - manager - INFO - Assign task 'Какую сказку рассказать' to _____20251009151624
+2025-10-09 23:12:56,309 - manager - INFO - Calling local handle_task for _____20251009151624
+2025-10-09 23:22:23,695 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________2
+2025-10-09 23:22:25,808 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\_____20251009151624
+2025-10-09 23:22:28,792 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\__________________________
+2025-10-09 23:22:30,902 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\_________________
+2025-10-09 23:22:33,376 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\python________
+2025-10-09 23:22:48,628 - manager - INFO - Creating agent '___________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-09 23:22:48,630 - manager - INFO - Wrote bot.py for agent ____________20251009202248
+2025-10-09 23:22:48,633 - manager - INFO - Agent ____________20251009202248 created and metadata updated
+2025-10-09 23:22:57,333 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-09 23:22:57,335 - manager - INFO - Wrote bot.py for agent _____20251009202257
+2025-10-09 23:22:57,338 - manager - INFO - Agent _____20251009202257 created and metadata updated
+2025-10-09 23:23:04,799 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\_____20251009202257
+2025-10-09 23:23:08,551 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\____________20251009202248
+2025-10-09 23:23:11,120 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-09 23:23:13,134 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\test
+2025-10-09 23:23:25,235 - manager - INFO - Creating agent '___________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-09 23:23:25,237 - manager - INFO - Wrote bot.py for agent ___________
+2025-10-09 23:23:25,240 - manager - INFO - Agent ___________ created and metadata updated
+2025-10-09 23:23:33,508 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-09 23:23:33,510 - manager - INFO - Wrote bot.py for agent _____20251009202333
+2025-10-09 23:23:33,513 - manager - INFO - Agent _____20251009202333 created and metadata updated
+2025-10-09 23:23:48,357 - manager - INFO - Assign task 'Приведи пример цикла' to ___________
+2025-10-09 23:23:49,195 - manager - INFO - Calling local handle_task for ___________
+2025-10-09 23:24:04,164 - manager - INFO - Assign task 'Придумай сказку' to _____20251009202333
+2025-10-09 23:24:04,421 - manager - INFO - Calling local handle_task for _____20251009202333
+2025-10-10 20:52:05,068 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 20:52:07,654 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\_____20251009202333
+2025-10-10 20:52:26,005 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-10 20:52:26,009 - manager - INFO - Wrote bot.py for agent _____20251010175226
+2025-10-10 20:52:26,014 - manager - INFO - Agent _____20251010175226 created and metadata updated
+2025-10-10 20:52:49,713 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\_____20251010175226
+2025-10-10 20:53:21,030 - manager - INFO - Creating agent '___________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 20:53:21,032 - manager - INFO - Wrote bot.py for agent ___________
+2025-10-10 20:53:21,037 - manager - INFO - Agent ___________ created and metadata updated
+2025-10-10 20:53:35,497 - manager - INFO - Assign task 'Обьясни понятие цикл' to ___________
+2025-10-10 20:53:37,346 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 21:27:42,518 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 21:28:15,641 - manager - INFO - Creating agent '___________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 21:28:15,643 - manager - INFO - Wrote bot.py for agent ___________
+2025-10-10 21:28:15,646 - manager - INFO - Agent ___________ created and metadata updated
+2025-10-10 21:28:38,595 - manager - INFO - Assign task 'Покажи пример цикла python' to ___________
+2025-10-10 21:28:39,302 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 21:45:54,176 - manager - INFO - Assign task 'Покажи пример цикла js' to ___________
+2025-10-10 21:45:54,935 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 21:46:48,549 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 21:46:59,680 - manager - INFO - Creating agent '___________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 21:46:59,682 - manager - INFO - Wrote bot.py for agent ___________
+2025-10-10 21:46:59,684 - manager - INFO - Agent ___________ created and metadata updated
+2025-10-10 21:49:44,188 - manager - ERROR - Failed to load metadata: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 43, in load_meta
+    return json.loads(META_FILE.read_text(encoding='utf-8'))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-10-10 21:49:53,969 - manager - INFO - Creating agent '___________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 21:49:53,971 - manager - INFO - Wrote bot.py for agent ____________20251010184953
+2025-10-10 21:49:53,974 - manager - ERROR - Failed to load metadata: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 43, in load_meta
+    return json.loads(META_FILE.read_text(encoding='utf-8'))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-10-10 21:49:53,977 - manager - INFO - Agent ____________20251010184953 created and metadata updated
+2025-10-10 21:51:18,671 - manager - ERROR - Failed to load metadata: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 43, in load_meta
+    return json.loads(META_FILE.read_text(encoding='utf-8'))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-10-10 21:51:32,331 - manager - INFO - Creating agent '___________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 21:51:32,333 - manager - INFO - Wrote bot.py for agent ___________
+2025-10-10 21:51:32,335 - manager - ERROR - Failed to load metadata: Expecting value: line 1 column 1 (char 0)
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 43, in load_meta
+    return json.loads(META_FILE.read_text(encoding='utf-8'))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2025-10-10 21:51:32,338 - manager - INFO - Agent ___________ created and metadata updated
+2025-10-10 21:51:45,681 - manager - INFO - Assign task 'Обьясни понятие цикл' to ___________
+2025-10-10 21:51:46,383 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 21:55:57,000 - manager - INFO - Assign task 'Обьясни понятие цикл в  js' to ___________
+2025-10-10 21:55:57,687 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 22:03:23,456 - manager - INFO - Assign task 'Обьясни понятие цикл в php' to ___________
+2025-10-10 22:03:24,146 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 22:07:39,855 - manager - INFO - Assign task 'Обьясни понятие цикл в php' to ___________
+2025-10-10 22:07:40,568 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 22:08:48,935 - manager - INFO - Assign task 'Обьясни понятие цикл в erlang' to ___________
+2025-10-10 22:08:49,675 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 22:13:36,351 - manager - INFO - Assign task 'Обьясни понятие цикл в python' to ___________
+2025-10-10 22:13:37,078 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 22:16:00,303 - manager - INFO - Assign task 'Обьясни понятие цикл в python' to ___________
+2025-10-10 22:16:00,991 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 22:18:03,440 - manager - INFO - Assign task 'Обьясни понятие цикл в python' to ___________
+2025-10-10 22:18:04,146 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 22:19:18,942 - manager - INFO - Assign task 'Обьясни понятие цикл в python' to ___________
+2025-10-10 22:19:19,662 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 22:25:50,016 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 22:26:04,380 - manager - INFO - Creating agent '___________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 22:26:04,382 - manager - INFO - Wrote bot.py for agent ___________
+2025-10-10 22:26:04,385 - manager - INFO - Agent ___________ created and metadata updated
+2025-10-10 22:26:10,431 - manager - INFO - Assign task 'Обьясни понятие цикл' to ___________
+2025-10-10 22:26:11,184 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 22:26:26,753 - manager - ERROR - Failed to save metadata: Object of type AIMessage is not JSON serializable
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 50, in save_meta
+    META_FILE.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding='utf-8')
+                         ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+TypeError: Object of type AIMessage is not JSON serializable
+2025-10-10 22:27:55,086 - manager - INFO - Assign task 'Обьясни понятие цикл' to ___________
+2025-10-10 22:27:55,344 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 22:28:03,535 - manager - ERROR - Failed to save metadata: Object of type AIMessage is not JSON serializable
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 50, in save_meta
+    META_FILE.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding='utf-8')
+                         ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ~~~~~~^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 261, in iterencode
+    return _iterencode(o, 0)
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+                    f'is not JSON serializable')
+TypeError: Object of type AIMessage is not JSON serializable
+2025-10-10 22:39:09,238 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 22:39:25,156 - manager - INFO - Creating agent '___________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 22:39:25,158 - manager - INFO - Wrote bot.py for agent ___________
+2025-10-10 22:39:25,161 - manager - INFO - Agent ___________ created and metadata updated
+2025-10-10 22:39:29,662 - manager - INFO - Assign task 'Обьясни понятие цикл' to ___________
+2025-10-10 22:39:30,459 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 22:39:49,008 - manager - ERROR - Error calling local agent: 'AIMessage' object is not subscriptable
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 157, in call_agent_local
+    parsed = parse_llm_response(res)
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 262, in parse_llm_response
+    content = getattr(res["result"], "content", str(res["result"]))
+                      ~~~^^^^^^^^^^
+TypeError: 'AIMessage' object is not subscriptable
+2025-10-10 22:47:02,286 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 22:47:22,389 - manager - INFO - Creating agent '___________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 22:47:22,391 - manager - INFO - Wrote bot.py for agent ___________
+2025-10-10 22:47:22,394 - manager - INFO - Agent ___________ created and metadata updated
+2025-10-10 22:47:25,397 - manager - INFO - Assign task 'Обьясни понятие цикл' to ___________
+2025-10-10 22:47:26,164 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 22:49:44,612 - manager - INFO - Assign task 'Обьясни понятие цикл' to ___________
+2025-10-10 22:49:44,863 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 22:50:26,331 - manager - INFO - Assign task 'Обьясни понятие цикл' to ___________
+2025-10-10 22:50:26,583 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 22:58:37,749 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 22:58:51,002 - manager - INFO - Creating agent '___________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-10 22:58:51,004 - manager - INFO - Wrote bot.py for agent ___________
+2025-10-10 22:58:51,007 - manager - INFO - Agent ___________ created and metadata updated
+2025-10-10 22:58:55,196 - manager - INFO - Assign task 'Обьясни понятие цикл' to ___________
+2025-10-10 22:58:55,980 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 23:01:05,915 - manager - INFO - Assign task 'Цикл в  erlang' to ___________
+2025-10-10 23:01:06,167 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 23:12:59,616 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-10 23:12:59,618 - manager - INFO - Wrote bot.py for agent ____
+2025-10-10 23:12:59,621 - manager - INFO - Agent ____ created and metadata updated
+2025-10-10 23:13:39,235 - manager - INFO - Поручаем задачу всем сотрудникам: Цикл в python
+2025-10-10 23:13:39,235 - manager - INFO -  → Отправляем задачу агенту ___________
+2025-10-10 23:13:39,921 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 23:13:53,497 - manager - INFO -  → Отправляем задачу агенту ____
+2025-10-10 23:13:53,773 - manager - INFO - Calling local handle_task for ____
+2025-10-10 23:14:08,052 - manager - INFO - Все сотрудники завершили выполнение задачи.
+2025-10-10 23:15:43,954 - manager - INFO - Поручаем задачу всем сотрудникам: Цикл в js
+2025-10-10 23:15:43,955 - manager - INFO -  → Отправляем задачу агенту ___________
+2025-10-10 23:15:44,207 - manager - INFO - Calling local handle_task for ___________
+2025-10-10 23:15:54,469 - manager - INFO -  → Отправляем задачу агенту ____
+2025-10-10 23:15:54,728 - manager - INFO - Calling local handle_task for ____
+2025-10-10 23:16:05,683 - manager - INFO - Все сотрудники завершили выполнение задачи.
+2025-10-11 11:28:20,816 - manager - INFO - Creating agent '________' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\________
+2025-10-11 11:28:20,818 - manager - INFO - Wrote bot.py for agent ________
+2025-10-11 11:28:20,821 - manager - INFO - Agent ________ created and metadata updated
+2025-10-11 11:29:17,942 - manager - INFO - Assign task 'Дизайн детской комнаты своими руками недорого' to ________
+2025-10-11 11:29:18,946 - manager - INFO - Calling local handle_task for ________
+2025-10-11 20:20:20,670 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-11 20:20:25,413 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\___________
+2025-10-11 20:20:28,495 - manager - INFO - Deleted agent directory C:\Users\Work\MyAiAgents\multiagent-startup\agents\________
+2025-10-11 20:50:44,628 - manager - INFO - Creating agent '_____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\_____
+2025-10-11 20:50:44,631 - manager - INFO - Wrote bot.py for agent _____
+2025-10-11 20:50:44,634 - manager - INFO - Agent _____ created and metadata updated
+2025-10-11 21:06:44,289 - manager - INFO - Creating agent '_____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\_____
+2025-10-11 21:06:44,292 - manager - INFO - Wrote bot.py for agent ______20251011180644
+2025-10-11 21:06:44,295 - manager - INFO - Agent ______20251011180644 created and metadata updated
+2025-10-11 21:14:59,841 - manager - INFO - Creating agent '____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\____
+2025-10-11 21:14:59,843 - manager - INFO - Wrote bot.py for agent ____
+2025-10-11 21:14:59,846 - manager - INFO - Agent ____ created and metadata updated
+2025-10-11 21:39:40,119 - manager - INFO - Creating agent '_____' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\_____
+2025-10-11 21:39:40,121 - manager - INFO - Wrote bot.py for agent ______20251011183940
+2025-10-11 21:39:40,124 - manager - INFO - Agent ______20251011183940 created and metadata updated
+2025-10-11 22:00:09,842 - manager - INFO - Поручаем задачу всем сотрудникам: Ты оказлся в такой ситуации: ты оказался влесу один, у тебя нет палтки, еды на один день,воды тоже хватит на один день,у тебя 50мл коньяка но этого тебе мало чтобы напится, хочется выпить.В 500 метрах от тебя есть люди которые давно живут в лесу и у них есть вода,еда и бухло(алкоголь).Что ты будешь делать дальше?Какие действия предпримешь?
+2025-10-11 22:00:09,843 - manager - INFO -  → Отправляем задачу агенту _____
+2025-10-11 22:00:10,820 - manager - INFO - Calling local handle_task for _____
+2025-10-11 22:00:29,959 - manager - INFO -  → Отправляем задачу агенту ______20251011180644
+2025-10-11 22:00:30,241 - manager - INFO - Calling local handle_task for ______20251011180644
+2025-10-11 22:00:43,353 - manager - INFO -  → Отправляем задачу агенту ____
+2025-10-11 22:00:43,627 - manager - INFO - Calling local handle_task for ____
+2025-10-11 22:01:04,316 - manager - INFO -  → Отправляем задачу агенту ______20251011183940
+2025-10-11 22:01:04,593 - manager - INFO - Calling local handle_task for ______20251011183940
+2025-10-11 22:01:16,122 - manager - INFO - Все сотрудники завершили выполнение задачи.
+2025-10-12 14:07:23,588 - manager - INFO - Обновлены данные агента ______20251011183940
+2025-10-12 14:10:56,936 - manager - INFO - Обновлены данные агента ______20251011183940
+2025-10-12 14:13:04,382 - manager - INFO - Обновлены данные агента ______20251011183940
+2025-10-12 14:47:21,090 - manager - INFO - Создаем агента '____'
+2025-10-12 14:47:21,136 - manager - INFO - Агент _____20251012114721 успешно создан
+2025-10-12 14:47:22,807 - manager - INFO - Webhook успешно установлен для агента _____20251012114721: https://your-domain.com/agents/_____20251012114721/webhook
+2025-10-12 14:54:31,862 - manager - INFO - Удален агент _____20251012114721
+2025-10-12 14:55:22,597 - manager - INFO - Создаем агента '____'
+2025-10-12 14:55:22,652 - manager - INFO - Агент _____20251012115522 успешно создан
+2025-10-12 14:55:59,851 - manager - INFO - Удален агент _____20251012115522
+2025-10-12 14:56:44,696 - manager - INFO - Создаем агента '____'
+2025-10-12 14:56:44,752 - manager - INFO - Агент _____20251012115644 успешно создан
+2025-10-12 14:56:46,667 - manager - WARNING - Не удалось установить webhook: {"ok":false,"error_code":400,"description":"Bad Request: bad webhook: An HTTPS URL must be provided for webhook"}

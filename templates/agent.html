@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Настройки агента — {{ agent.name }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1>⚙️ Настройки агента "{{ agent.name }}"</h1>
+
+<form action="/update_agent/{{ agent.slug }}" method="post">
+    <label>Имя агента:</label><br>
+    <input type="text" name="name" value="{{ agent.name }}" required><br><br>
+
+    <label>Telegram токен:</label><br>
+    <input type="text" name="telegram_token" placeholder="Оставь пустым, если не нужно"><br><br>
+
+    <label>Prompt (подсказка агента):</label><br>
+    <textarea name="prompt" rows="8" cols="60">{{ prompt }}</textarea><br><br>
+
+    <label>Deploy URL (если агент развернут удалённо):</label><br>
+    <input type="url" name="deploy_url" value="{{ agent.deploy_url }}" placeholder="https://example.com"><br><br>
+
+    <button type="submit">💾 Сохранить изменения</button>
+    <a href="/">⬅ Назад</a>
+</form>
+
+</body>
+</html>
