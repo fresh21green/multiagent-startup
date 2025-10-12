@@ -304,7 +304,7 @@ async def update_agent(
 @app.post("/agents/{slug}/webhook")
 async def proxy_agent_webhook(slug: str, request: Request):
     """
-    Принимает webhook от Telegram и проксирует его в bot.py конкретного агента.
+    Принимает webhook от Telegram и проксирует его во внутренний bot.py конкретного агента.
     """
     try:
         meta = load_meta()
@@ -316,36 +316,29 @@ async def proxy_agent_webhook(slug: str, request: Request):
         if not bot_path.exists():
             raise HTTPException(status_code=404, detail="bot.py not found")
 
-        # Загружаем модуль агента
+        # Загружаем код агента
         spec = importlib.util.spec_from_file_location(f"agent_{slug}", str(bot_path))
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
 
-        # У агента обязательно должен быть app (FastAPI)
+        # Проверяем наличие FastAPI-приложения в агенте
         if not hasattr(mod, "app"):
             raise HTTPException(status_code=500, detail="Agent app not found")
 
-        # Получаем тело запроса от Telegram
+        # Получаем JSON-данные из запроса Telegram
         data = await request.json()
 
-        # Ищем эндпоинт /webhook у агента
-        if hasattr(mod.app, "routes"):
-            for route in mod.app.routes:
-                if route.path == "/webhook" and route.methods and "POST" in route.methods:
-                    # Имитируем локальный вызов /webhook
-                    response = await mod.app(request)
-                    return response
+        # Отправляем их во внутреннее FastAPI-приложение агента через TestClient
+        from fastapi.testclient import TestClient
+        client = TestClient(mod.app)
+        response = client.post("/webhook", json=data)
 
-        # Если webhook не найден — вызываем напрямую handle_task
-        if hasattr(mod, "handle_task"):
-            text = data.get("message", {}).get("text", "")
-            res = mod.handle_task(text)
-            return JSONResponse({"ok": True, "result": res})
-
-        raise HTTPException(status_code=500, detail="No webhook or handler found")
+        # Возвращаем ответ Telegram'у
+        return JSONResponse(response.json())
 
     except Exception as e:
         logger.exception("Ошибка обработки webhook агента %s: %s", slug, e)
-        raise HTTPException(status_code=500, detail=str(e)) 
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 
