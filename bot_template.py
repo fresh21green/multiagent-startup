@@ -142,9 +142,10 @@ def handle_task(task: str):
 @app.post("/webhook")
 async def webhook(request: Request):
     """Обрабатывает входящие сообщения Telegram через webhook."""
+    logger.info("request: %s", request)
     data = await request.json()
     update = Update.de_json(data, None)
-
+    
     if update.message and update.message.text:
         user_text = update.message.text
         chat_id = update.message.chat.id
