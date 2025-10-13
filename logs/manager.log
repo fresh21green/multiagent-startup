@@ -1274,3 +1274,120 @@ KeyError: 'result'
 2025-10-13 13:19:00,372 - manager - INFO - agent
 2025-10-13 13:19:07,738 - manager - INFO - agent
 2025-10-13 13:21:15,495 - manager - INFO - agent
+2025-10-13 14:12:37,540 - manager - INFO - Создан каталог: Business
+2025-10-13 14:12:37,565 - manager - INFO - Добавлен каталог 'Business' в agents.json
+2025-10-13 14:13:10,401 - manager - INFO - Creating agent '__________' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business
+2025-10-13 14:13:10,441 - manager - INFO - Агент ___________20251013111310 успешно создан
+2025-10-13 14:20:50,400 - manager - INFO - Creating agent 'tester' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business
+2025-10-13 14:20:50,444 - manager - INFO - Агент tester_20251013112050 успешно создан
+2025-10-13 14:21:53,446 - manager - INFO - Creating agent 'tetrfg' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business
+2025-10-13 14:21:53,490 - manager - INFO - Агент tetrfg_20251013112153 успешно создан
+2025-10-13 14:24:15,440 - manager - INFO - Creating agent 'tessthtfhg' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business
+2025-10-13 14:24:15,485 - manager - INFO - Агент tessthtfhg_20251013112415 успешно создан
+2025-10-13 14:27:20,194 - manager - INFO - Creating agent 'ропрл' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business
+2025-10-13 14:27:20,241 - manager - INFO - Агент ______20251013112720 успешно создан
+2025-10-13 14:59:15,928 - manager - INFO - Удален агент ___________20251013111310
+2025-10-13 14:59:39,183 - manager - INFO - Удален агент tester_20251013112050
+2025-10-13 15:11:52,091 - manager - INFO - agent
+2025-10-13 15:14:20,820 - manager - INFO - Creating agent 'Методолог по курсу ИИ' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business
+2025-10-13 15:14:20,859 - manager - INFO - Агент ______________________20251013121420 успешно создан
+2025-10-13 15:14:20,957 - manager - ERROR - Ошибка при установке Telegram webhook: cannot access local variable 'webhook_url' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 142, in create_agent
+    logger.info("webhook_url", webhook_url)
+                               ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'webhook_url' where it is not associated with a value
+2025-10-13 15:15:54,114 - manager - INFO - agent
+2025-10-13 15:15:54,129 - manager - INFO - bot_file_exist
+2025-10-13 15:16:09,728 - manager - INFO - Обновлены данные агента ______________________20251013121420
+2025-10-13 15:16:09,759 - manager - INFO - agent
+2025-10-13 15:16:09,776 - manager - INFO - bot_file_exist
+2025-10-13 15:16:30,541 - manager - INFO - Обновлены данные агента ______________________20251013121420
+2025-10-13 15:16:30,571 - manager - INFO - agent
+2025-10-13 15:16:30,587 - manager - INFO - bot_file_exist
+2025-10-13 15:19:39,539 - manager - INFO - Обновлены данные агента ______________________20251013121420
+2025-10-13 15:19:39,564 - manager - INFO - Обновлены данные агента ______________________20251013121420
+2025-10-13 15:19:39,595 - manager - INFO - agent
+2025-10-13 15:19:39,612 - manager - INFO - bot_file_exist
+2025-10-13 15:20:53,183 - manager - INFO - Обновлены данные агента ______________________20251013121420
+2025-10-13 15:20:53,207 - manager - INFO - Обновлены данные агента ______________________20251013121420
+2025-10-13 15:20:53,238 - manager - INFO - agent
+2025-10-13 15:20:53,253 - manager - INFO - bot_file_exist
+2025-10-13 15:26:11,730 - manager - INFO - Удален агент ______________________20251013121420
+2025-10-13 15:26:50,862 - manager - INFO - Creating agent 'Test' in folder 'Без каталога (root)' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Без каталога (root)
+2025-10-13 15:26:50,904 - manager - INFO - Агент test успешно создан
+2025-10-13 15:26:50,967 - manager - ERROR - Ошибка при установке Telegram webhook: cannot access local variable 'webhook_url' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 142, in create_agent
+    logger.info("webhook_url", webhook_url)
+                               ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'webhook_url' where it is not associated with a value
+2025-10-13 15:40:40,472 - manager - INFO - Удалён пустой каталог: Без каталога (root)
+2025-10-13 15:41:57,883 - manager - INFO - Creating agent 'Дизайнер' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business
+2025-10-13 15:41:57,922 - manager - INFO - Агент _________20251013124157 успешно создан
+2025-10-13 15:41:57,987 - manager - ERROR - Ошибка при установке Telegram webhook: cannot access local variable 'webhook_url' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 142, in create_agent
+    logger.info("webhook_url", webhook_url)
+                               ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'webhook_url' where it is not associated with a value
+2025-10-13 15:47:57,051 - manager - INFO - Удален агент _________20251013124157
+2025-10-13 15:48:49,881 - manager - INFO - Creating agent 'Психолог' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business
+2025-10-13 15:48:49,925 - manager - INFO - Агент _________20251013124849 успешно создан
+2025-10-13 15:48:49,989 - manager - ERROR - Ошибка при установке Telegram webhook: cannot access local variable 'webhook_url' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 144, in create_agent
+    logger.info("webhook_url", webhook_url)
+                               ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'webhook_url' where it is not associated with a value
+2025-10-13 15:57:42,508 - manager - INFO - Удален агент _________20251013124849
+2025-10-13 15:58:20,326 - manager - INFO - Creating agent 'Психолог 2' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business
+2025-10-13 15:58:20,359 - manager - INFO - Агент _________2_20251013125820 успешно создан
+2025-10-13 15:58:20,444 - manager - ERROR - Ошибка при установке Telegram webhook: cannot access local variable 'webhook_url' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 146, in create_agent
+    logger.info("webhook_url", webhook_url)
+                               ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'webhook_url' where it is not associated with a value
+2025-10-13 16:01:38,666 - manager - INFO - Удален агент _________2_20251013125820
+2025-10-13 16:02:33,152 - manager - INFO - Creating agent 'Психолог 3' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business
+2025-10-13 16:02:33,152 - manager - ERROR - Ошибка создания директории агента: [WinError 183] Невозможно создать файл, так как он уже существует: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\Business'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 110, in create_agent
+    dest.mkdir(parents=True, exist_ok=False)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py", line 722, in mkdir
+    os.mkdir(self, mode)
+    ~~~~~~~~^^^^^^^^^^^^
+FileExistsError: [WinError 183] Невозможно создать файл, так как он уже существует: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\Business'
+2025-10-13 16:04:26,286 - manager - INFO - Creating agent 'Психолог 3' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business
+2025-10-13 16:04:26,287 - manager - ERROR - Ошибка создания директории агента: [WinError 183] Невозможно создать файл, так как он уже существует: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\Business'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 110, in create_agent
+    dest.mkdir(parents=True, exist_ok=False)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py", line 722, in mkdir
+    os.mkdir(self, mode)
+    ~~~~~~~~^^^^^^^^^^^^
+FileExistsError: [WinError 183] Невозможно создать файл, так как он уже существует: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\Business'
+2025-10-13 16:05:50,364 - manager - INFO - Creating agent 'Психолог 3' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business
+2025-10-13 16:05:50,408 - manager - INFO - Агент _________3_20251013130550 успешно создан
+2025-10-13 16:05:50,497 - manager - ERROR - Ошибка при установке Telegram webhook: cannot access local variable 'webhook_url' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 147, in create_agent
+    logger.info("webhook_url", webhook_url)
+                               ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'webhook_url' where it is not associated with a value
+2025-10-13 16:07:11,135 - manager - INFO - Удален агент _________3_20251013130550
+2025-10-13 16:07:48,398 - manager - INFO - Creating agent 'Психолог' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business\________
+2025-10-13 16:07:48,432 - manager - INFO - Агент ________ успешно создан
+2025-10-13 16:07:48,517 - manager - ERROR - Ошибка при установке Telegram webhook: cannot access local variable 'webhook_url' where it is not associated with a value
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 147, in create_agent
+    logger.info("webhook_url", webhook_url)
+                               ^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'webhook_url' where it is not associated with a value
+2025-10-13 16:09:41,367 - manager - INFO - Удален агент ________
+2025-10-13 16:10:15,024 - manager - INFO - Creating agent 'Психолог3' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business\________3
+2025-10-13 16:10:15,057 - manager - INFO - Агент ________3 успешно создан
+2025-10-13 16:10:16,087 - manager - INFO - Webhook успешно установлен для агента ________3: https://multiagent-startup.onrender.com/agents/Business/________3/webhook

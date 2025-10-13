@@ -24,10 +24,11 @@
         <input type="text" name="name" placeholder="Имя сотрудника" required>
         <textarea name="prompt" placeholder="Промт-инструкция" required></textarea>
         <label for="folder">Каталог:</label>
+        <!-- <pre>{{ folders | tojson(indent=2) }}</pre> -->
         <select name="folder" id="folder-select">
-          <option value="" selected>Без каталога (root)</option>
+          <option>root</option>
           {% for folder in folders %}
-            {% if folder != "root" %}
+            {% if folder and folder != "root" and folder|length > 0 %}
               <option value="{{ folder }}">{{ folder }}</option>
             {% endif %}
           {% endfor %}
@@ -36,6 +37,7 @@
         <button type="submit">Создать</button>
       </form>
     </div>
+
 
     <div id="folders-container">
       {% for folder, agents in folders.items() %}
@@ -299,16 +301,86 @@ if (select) {
 }
 
 // --- Раскрытие/сворачивание каталога ---
-function toggleFolder(folder) {
+async function toggleFolder(folder) {
   const list = document.getElementById("agents-" + folder);
   if (!list) return;
 
-  if (list.style.display === "none" || !list.style.display) {
-    list.style.display = "block";
-  } else {
-    list.style.display = "none";
+  // Подсвечиваем активную папку
+  document.querySelectorAll(".folder-title").forEach(el => el.classList.remove("active"));
+  const currentFolderTitle = document.querySelector(`#folder-${folder} .folder-title`);
+  if (currentFolderTitle) currentFolderTitle.classList.add("active");
+
+  // --- Загружаем агентов этого каталога ---
+  try {
+    const response = await fetch(`/folder/${folder}`);
+    if (!response.ok) throw new Error("Ошибка загрузки агентов");
+
+    const agents = await response.json();
+
+    // --- Очищаем секцию сотрудников ---
+    const agentsSection = document.querySelector(".ai-agents ul");
+    if (!agentsSection) return;
+    agentsSection.innerHTML = "";
+
+    if (agents.length === 0) {
+      agentsSection.innerHTML = "<p><em>В этом каталоге нет сотрудников.</em></p>";
+      return;
+    }
+
+    // --- Добавляем карточки ---
+    for (const agent of agents) {
+      const agentCard = document.createElement("li");
+      agentCard.className = "agent-card";
+      agentCard.id = "agent-card-" + agent.slug;
+      console.log('agent',agent)
+      agentCard.innerHTML = `
+        <div class="ai-agent-header">
+          <h2>${agent.name}</h2>
+          <div class="agent-status" id="status-${agent.slug}">Статус: Готов</div>
+          <a href="/agent/${agent.slug}" target="_blank" class="agent-link">🔗 Перейти к сотруднику</a>
+        </div>
+
+        <div style="display:inline;">
+          <input type="hidden" name="slug" value="${agent.slug}">
+          <input name="task" id="task-${agent.slug}" placeholder="Задача для этого сотрудника" required>
+          <button type="submit" id="btn-${agent.slug}" onclick="assignTask('${agent.slug}')">Отправить задачу</button>
+          <div class="result markdown-body" id="result-${agent.slug}"></div>
+        </div>
+
+        <form action="/delete_agent" method="post" style="display:inline;">
+          <input type="hidden" name="slug" value="${agent.slug}">
+          <button type="submit">Удалить сотрудника</button>
+        </form>
+
+        
+      `;
+      if(agent.last_task){
+      agentCard.innerHTML = agentCard.innerHTML + `
+        <div class="last-task">
+            <div class="text-section">
+              <div class="task-header">Последняя задача:</div>
+              ${agent.last_task.task}
+            </div>
+
+            <div class="text-section">
+              <div class="task-header">Результат:</div> 
+              <div class="last-result markdown-body">${ agent.last_task.result.html }</div>
+            </div>
+
+          </div>
+        `
+      }
+      agentsSection.appendChild(agentCard);
+    }
+  } catch (err) {
+    console.error("Ошибка при загрузке агентов:", err);
+    const agentsSection = document.querySelector(".ai-agents ul");
+    if (agentsSection)
+      agentsSection.innerHTML = "<p><em>⚠️ Ошибка при загрузке сотрудников.</em></p>";
   }
 }
+
+
 
 // --- Удаление агента из папки ---
 async function deleteAgent(slug, folder) {

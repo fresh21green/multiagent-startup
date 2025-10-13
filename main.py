@@ -54,29 +54,33 @@ def slugify(name: str):
 # --- ГЛАВНАЯ СТРАНИЦА ---
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    """Главная страница — показывает каталоги и сотрудников в них."""
     meta = load_meta()
-
-    # Загружаем список папок из файловой системы
-    folders_fs = [p.name for p in AGENTS_DIR.iterdir() if p.is_dir()]
-
-    # Собираем агентов по папкам
     folders = {}
-    agents = []
-    # for folder in folders_fs:
-    #     folders.setdefault(folder, [])
+    agents_root = []
+
+    logger.info("Get '%s' in folder '%s' at %s",meta )
 
     for agent in meta:
         folder = agent.get("folder") or "root"
-        if not agent.get("is_folder") == True:
+        if not agent.get("is_folder"):
             folders.setdefault(folder, []).append(agent)
         if folder == "root":
-            agents.append(agent)
+            agents_root.append(agent)
 
-    if "root" not in folders:
-        folders["root"] = []
-        
-    return templates.TemplateResponse("index.html", {"request": request, "folders": folders,"agents": agents})
+    return templates.TemplateResponse(
+        "index.html",
+        {"request": request, "folders": folders, "agents": agents_root},
+    )
+
+# Новый маршрут для выборки сотрудников по каталогу
+@app.get("/folder/{folder_name}")
+async def get_folder_agents(folder_name: str):
+    meta = load_meta()
+    agents = [
+        a for a in meta
+        if (a.get("folder") or "root") == folder_name and not a.get("is_folder")
+    ]
+    return JSONResponse(agents)
 
 
 # --- СОЗДАНИЕ НОВОГО АГЕНТА ---
@@ -90,15 +94,18 @@ async def create_agent(request: Request, name: str = Form(...), prompt: str = Fo
     slug = slugify(name)
     # if slug in agents:
     #     return RedirectResponse(f"/agent/{slug}", status_code=303)
-    dest = AGENTS_DIR / folder if folder else AGENTS_DIR
+    dest = AGENTS_DIR / folder / slug if folder else AGENTS_DIR
+    logger.info("dest", dest)
     folder = folder.strip()
-    logger.info("Creating agent '%s' in folder '%s' at %s", slug, folder or "root", dest)
+    
+    logger.info("Creating agent '%s' in folder '%s' at %s", name, folder, dest)
 
     # Проверка на существование
     if dest.exists():
         import datetime
         slug = f"{slug}_{datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%d%H%M%S')}"
         dest = AGENTS_DIR / slug
+        logger.info("dest2", dest)
 
     try:
         dest.mkdir(parents=True, exist_ok=False)
@@ -106,6 +113,7 @@ async def create_agent(request: Request, name: str = Form(...), prompt: str = Fo
         logger.exception("Ошибка создания директории агента: %s", e)
         raise HTTPException(status_code=500, detail=str(e))
 
+    print(f"DEBUG: Creating agent {name} in folder {folder} at {dest}")
     # --- Формируем код агента из шаблона ---
     template = (BASE / 'bot_template.py').read_text(encoding='utf-8')
     safe_prompt = prompt.replace('"""', '\"\"\"')
@@ -135,7 +143,8 @@ async def create_agent(request: Request, name: str = Form(...), prompt: str = Fo
         try:
             import requests
             BASE_URL = os.getenv("BASE_URL") or "https://your-domain.com"
-            logger.info("webhook_url", webhook_url)
+            logger.info("BASE_URL", BASE_URL)
+          
             if folder:
                 webhook_url = f"{BASE_URL.rstrip('/')}/agents/{folder}/{slug}/webhook"
             else:
@@ -161,6 +170,7 @@ async def update_agent(request: Request, slug: str, name: str = Form(...), promp
     meta = load_meta()
     """Сохраняет обновлённые данные агента."""
     meta = load_meta()
+    logger.info("Обновлены данные агента %s", slug)
     agent = next((a for a in meta if a["slug"] == slug), None)
     if not agent:
         raise HTTPException(status_code=404, detail="Agent not found")
@@ -346,6 +356,10 @@ async def view_agent(request: Request, slug: str):
 @app.post('/agents/{slug}/webhook')
 @app.post('/agents/{folder}/{slug}/webhook')
 async def proxy_agent_webhook(request: Request, slug: str, folder: str = None):
+    if folder:
+        logger.info("Proxying webhook for agent %s in folder %s", slug, folder)
+    else:
+        logger.info("Proxying webhook for agent %s", slug)
     try:
         meta = load_meta()
         if folder:
@@ -383,7 +397,7 @@ async def proxy_agent_webhook(request: Request, slug: str, folder: str = None):
         raise HTTPException(status_code=500, detail=str(e))
     
 
-@app.post("/delete_folder")
+@app.post("/delete_folder") 
 async def delete_folder(name: str = Form(...)):
     """Удаляет каталог, если он пустой"""
     folder = name.strip()
