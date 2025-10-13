@@ -3,6 +3,7 @@
     "name": "Света",
     "slug": "_____",
     "created_at": "2025-10-11T17:50:44.633224Z",
+    "folder": "people",
     "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\_____",
     "deploy_url": "",
     "status": "created",
@@ -18,6 +19,7 @@
     "name": "Антон",
     "slug": "______20251011180644",
     "created_at": "2025-10-11T18:06:44.294413Z",
+    "folder": "people",
     "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\______20251011180644",
     "deploy_url": "",
     "status": "created",
@@ -33,6 +35,7 @@
     "name": "Ника",
     "slug": "____",
     "created_at": "2025-10-11T18:14:59.845282Z",
+    "folder": "people",
     "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\____",
     "deploy_url": "",
     "status": "created",
@@ -48,6 +51,7 @@
     "name": "Гриша",
     "slug": "______20251011183940",
     "created_at": "2025-10-11T18:39:40.123802Z",
+    "folder": "people",
     "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\______20251011183940",
     "deploy_url": "",
     "status": "created",
@@ -58,13 +62,5 @@
         "images": []
       }
     }
-  },
-  {
-    "name": "Няня",
-    "slug": "_____20251012115644",
-    "created_at": "2025-10-12T11:56:44.750718Z",
-    "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\_____20251012115644",
-    "deploy_url": "",
-    "status": "created"
   }
 ]

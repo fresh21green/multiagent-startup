@@ -8,7 +8,9 @@ logger = logging.getLogger("manager")
 BASE = Path(__file__).parent
 AGENTS_DIR = BASE / "agents"
 AGENTS_DIR.mkdir(exist_ok=True)
-META_FILE = AGENTS_DIR / "workers.json"
+META_FILE = AGENTS_DIR / "agents.json"
+logger.info("AGENTS_DIR", AGENTS_DIR)
+logger.info("META_FILE", META_FILE)
 
 if not META_FILE.exists():
     META_FILE.write_text("[]", encoding="utf-8")
@@ -68,6 +70,7 @@ def load_meta():
 
 def save_meta(meta):
     """Сохраняет JSON-файл метаданных агентов."""
+    logger.info("META_FILE", META_FILE)
     try:
         META_FILE.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
     except Exception as e:

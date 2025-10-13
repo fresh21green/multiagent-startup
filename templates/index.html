@@ -10,6 +10,14 @@
 <body>
   <div class="container">
     <h1>🤖 AI Менеджер</h1>
+    <h3>➕ Создать каталог</h3>
+
+    <form id="folderForm"  method="post">
+      <input type="text" name="name" id="folderName" placeholder="Имя каталога" required>
+      <button type="submit">Создать папку</button>
+    </form>
+
+    <div id="folderMessage"></div>
     <div class="ai-creator block-section">
       <h2>Создать сотрудника</h2>
       <form action="/create_agent" method="post" class="manager-fields">
@@ -18,6 +26,31 @@
         <input type="text" name="telegram_token" placeholder="Telegram токен (опционально)">
         <button type="submit">Создать</button>
       </form>
+    </div>
+
+    <div id="folders-container">
+      {% for folder, agents in folders.items() %}
+        <section id="folder-{{ folder }}" class="folder">
+          <div class="folder-header">
+            <h2 class="folder-title" onclick="toggleFolder('{{ folder }}')">📂 {{ folder }}</h2>
+            <button class="delete-folder-btn" onclick="deleteFolder('{{ folder }}')">🗑️</button>
+          </div>
+          <ul class="agents-list" id="agents-{{ folder }}" style="display:none;">
+            {% for agent in agents %}
+              <li id="agent-{{ agent.slug }}">
+                🤖 <a href="/agent/{{ agent.slug }}">{{ agent.name }}</a>
+                {% if agent.deploy_url %}
+                  — 🌐 <small>{{ agent.deploy_url }}</small>
+                {% endif %}
+                <button class="delete-btn" onclick="deleteAgent('{{ agent.slug }}', '{{ folder }}')">🗑️</button>
+              </li>
+            {% endfor %}
+            {% if agents|length == 0 %}
+              <li><em>Пока пусто</em></li>
+            {% endif %}
+          </ul>
+        </section>
+      {% endfor %}
     </div>
 
     {% if agents %}
@@ -77,6 +110,192 @@
     {% endif %}
     </div>
   </div>
+  <script>
+/* === Создание каталога === */
+document.getElementById("folderForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const input = document.getElementById("folderName");
+  const name = input.value.trim();
+  const message = document.getElementById("folderMessage");
+
+  if (!name) {
+    message.textContent = "❗Введите имя каталога";
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("name", name);
+
+  try {
+    const res = await fetch("/create_folder", { method: "POST", body: formData });
+    const data = await res.json();
+
+    if (data.ok) {
+      message.textContent = "✅ Каталог добавлен: " + name;
+
+      // Найдём контейнер всех каталогов
+      const container = document.getElementById("folders-container");
+
+      // Проверим, нет ли уже такого
+      if (!document.getElementById("folder-" + name)) {
+        const html = `
+        <section id="folder-${name}" class="folder">
+          <div class="folder-header">
+            <h2 class="folder-title" onclick="toggleFolder('${name}')">📂 ${name}</h2>
+            <button class="delete-folder-btn" onclick="deleteFolder('${name}')">🗑️</button>
+          </div>
+          <ul class="agents-list" id="agents-${name}" style="display:none;">
+            {% if agents|length == 0 %}
+              <li><em>Пока пусто</em></li>
+            {% endif %}
+          </ul>
+        </section>
+        `;
+        // Вставляем новый каталог в начало контейнера
+        container.insertAdjacentHTML("afterbegin", html);
+      }
+
+      // Добавляем в выпадающий список
+      const select = document.querySelector("form[action='/create_agent'] select[name='folder']");
+      if (select) {
+        const option = document.createElement("option");
+        option.value = name;
+        option.textContent = name;
+        select.appendChild(option);
+      }
+
+      input.value = "";
+    } else if (data.error === "exists") {
+      message.textContent = "⚠️ Такой каталог уже существует.";
+    } else {
+      message.textContent = "❌ Ошибка при создании каталога.";
+    }
+  } catch (err) {
+    console.error(err);
+    message.textContent = "⚠️ Ошибка соединения с сервером.";
+  }
+});
+
+
+/* === Создание агента === */
+document.querySelector("form[action='/create_agent']").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const form = e.target;
+  const message = document.getElementById("folderMessage");
+  const formData = new FormData(form);
+
+  try {
+    const res = await fetch("/create_agent", { method: "POST", body: formData });
+    if (res.redirected) {
+      const folder = formData.get("folder") || "root";
+      const name = formData.get("name");
+      const slug = name.toLowerCase().replace(/[^a-z0-9_-]/g, "_");
+
+      // Найти или создать секцию каталога
+      let folderSection = document.getElementById("folder-" + folder);
+      if (!folderSection) {
+        const container = document.getElementById("folders-container");
+        const newFolder = document.createElement("section");
+        newFolder.id = "folder-" + folder;
+        newFolder.className = "folder";
+        newFolder.innerHTML = `
+          <h2>📂 ${folder}</h2>
+          <ul></ul>
+        `;
+        container.insertAdjacentElement("afterbegin", newFolder);
+        folderSection = newFolder;
+      }
+
+      // Добавляем агента
+      const ul = folderSection.querySelector("ul");
+      const li = document.createElement("li");
+      li.innerHTML = `🤖 <a href="/agent/${slug}">${name}</a>`;
+      ul.appendChild(li);
+
+      // Удаляем <em>Пока пусто>
+      const empty = ul.querySelector("em");
+      if (empty) empty.parentElement.remove();
+
+      message.textContent = "✅ Агент добавлен: " + name;
+
+      form.reset();
+    } else {
+      message.textContent = "❌ Ошибка при создании агента.";
+    }
+  } catch (err) {
+    console.error(err);
+    message.textContent = "⚠️ Ошибка соединения с сервером.";
+  }
+});
+
+// --- Раскрытие/сворачивание каталога ---
+function toggleFolder(folder) {
+  const list = document.getElementById("agents-" + folder);
+  if (!list) return;
+
+  if (list.style.display === "none" || !list.style.display) {
+    list.style.display = "block";
+  } else {
+    list.style.display = "none";
+  }
+}
+
+// --- Удаление агента из папки ---
+async function deleteAgent(slug, folder) {
+  if (!confirm("Удалить агента '" + slug + "' из каталога '" + folder + "'?")) return;
+
+  const formData = new FormData();
+  formData.append("slug", slug);
+
+  try {
+    const res = await fetch("/delete_agent", { method: "POST", body: formData });
+    if (res.redirected || res.ok) {
+      // Удаляем из DOM
+      const li = document.getElementById("agent-" + slug);
+      if (li) li.remove();
+
+      // Если папка пустая — добавим надпись
+      const ul = document.getElementById("agents-" + folder);
+      if (ul && ul.children.length === 0) {
+        const empty = document.createElement("li");
+        empty.innerHTML = "<em>Пока пусто</em>";
+        ul.appendChild(empty);
+      }
+    } else {
+      alert("Ошибка при удалении агента");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Ошибка соединения с сервером");
+  }
+}
+async function deleteFolder(folder) {
+  if (!confirm("Удалить каталог '" + folder + "'? Он должен быть пуст.")) return;
+
+  const formData = new FormData();
+  formData.append("name", folder);
+
+  try {
+    const res = await fetch("/delete_folder", { method: "POST", body: formData });
+    const data = await res.json();
+
+    if (data.ok) {
+      // Удаляем блок каталога из DOM
+      const section = document.getElementById("folder-" + folder);
+      if (section) section.remove();
+      alert("✅ Каталог '" + folder + "' удалён.");
+    } else if (data.error === "not_empty") {
+      alert("⚠️ Нельзя удалить: в каталоге есть " + data.count + " агент(ов).");
+    } else {
+      alert("❌ Ошибка при удалении каталога.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("⚠️ Ошибка соединения с сервером.");
+  }
+}
+</script>
 </body>
 
 </html>

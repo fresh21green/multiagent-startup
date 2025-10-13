@@ -1058,3 +1058,24 @@ TypeError: 'AIMessage' object is not subscriptable
 2025-10-12 14:56:44,696 - manager - INFO - Создаем агента '____'
 2025-10-12 14:56:44,752 - manager - INFO - Агент _____20251012115644 успешно создан
 2025-10-12 14:56:46,667 - manager - WARNING - Не удалось установить webhook: {"ok":false,"error_code":400,"description":"Bad Request: bad webhook: An HTTPS URL must be provided for webhook"}
+2025-10-12 16:37:16,026 - manager - INFO - Created folder: еуые
+2025-10-12 16:46:16,903 - manager - INFO - Удален агент _____20251012115644
+2025-10-13 08:55:51,384 - manager - INFO - Удалён пустой каталог: ____
+2025-10-13 08:56:05,685 - manager - INFO - Удалён пустой каталог: _____
+2025-10-13 08:56:12,640 - manager - INFO - Удалён пустой каталог: ______20251011180644
+2025-10-13 08:56:16,691 - manager - INFO - Удалён пустой каталог: ______20251011183940
+2025-10-13 08:56:31,809 - manager - INFO - Создан каталог: test
+2025-10-13 08:56:31,810 - manager - INFO - Добавлен каталог 'test' в agents.json
+2025-10-13 09:01:42,377 - manager - INFO - Удалён пустой каталог: test
+2025-10-13 09:01:47,085 - manager - INFO - Создан каталог: test
+2025-10-13 09:02:27,317 - manager - INFO - Удалён пустой каталог: test
+2025-10-13 09:02:31,757 - manager - INFO - Создан каталог: test
+2025-10-13 09:04:53,717 - manager - INFO - Удалён пустой каталог: test
+2025-10-13 09:04:57,649 - manager - INFO - Создан каталог: test
+2025-10-13 09:05:24,388 - manager - INFO - Удалён пустой каталог: test
+2025-10-13 09:05:29,120 - manager - INFO - Создан каталог: test
+2025-10-13 09:05:34,421 - manager - INFO - Удалён пустой каталог: test
+2025-10-13 09:09:16,897 - manager - INFO - Creating agent '________' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents
+2025-10-13 09:09:16,926 - manager - INFO - Агент _________20251013060916 успешно создан
+2025-10-13 09:14:41,284 - manager - INFO - Creating agent '____' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents
+2025-10-13 09:14:41,324 - manager - INFO - Агент _____20251013061441 успешно создан
