@@ -1079,3 +1079,198 @@ TypeError: 'AIMessage' object is not subscriptable
 2025-10-13 09:09:16,926 - manager - INFO - Агент _________20251013060916 успешно создан
 2025-10-13 09:14:41,284 - manager - INFO - Creating agent '____' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents
 2025-10-13 09:14:41,324 - manager - INFO - Агент _____20251013061441 успешно создан
+2025-10-13 09:34:35,408 - manager - INFO - agent
+2025-10-13 09:34:43,064 - manager - INFO - agent
+2025-10-13 09:36:30,031 - manager - INFO - agent
+2025-10-13 09:40:58,354 - manager - INFO - agent
+2025-10-13 09:41:28,504 - manager - INFO - agent
+2025-10-13 09:42:49,312 - manager - INFO - agent
+2025-10-13 09:44:35,958 - manager - INFO - agent
+2025-10-13 09:45:22,266 - manager - INFO - agent
+2025-10-13 09:46:32,513 - manager - INFO - agent
+2025-10-13 09:46:32,527 - manager - INFO - bot_file_exist
+2025-10-13 09:47:30,277 - manager - INFO - Назначаем задачу 'Что такое зима' агенту _____20251013061441
+2025-10-13 09:47:31,229 - manager - INFO - Вызов локального агента _____20251013061441
+2025-10-13 09:47:43,584 - manager - INFO - Задача для _____20251013061441 завершена
+2025-10-13 09:48:16,039 - manager - INFO - Creating agent '___________' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents
+2025-10-13 09:48:16,073 - manager - INFO - Агент ____________20251013064816 успешно создан
+2025-10-13 09:50:28,179 - manager - INFO - Creating agent '____' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents
+2025-10-13 09:50:28,220 - manager - INFO - Агент _____20251013065028 успешно создан
+2025-10-13 09:55:42,748 - manager - INFO - Назначаем задачу 'Обьясни понятие цикл' агенту ____________20251013064816
+2025-10-13 09:55:43,470 - manager - INFO - Вызов локального агента ____________20251013064816
+2025-10-13 09:55:59,153 - manager - INFO - Задача для ____________20251013064816 завершена
+2025-10-13 09:59:46,846 - manager - INFO - Назначаем задачу 'Обьясни понятие цикл' агенту ____________20251013064816
+2025-10-13 09:59:47,543 - manager - INFO - Вызов локального агента ____________20251013064816
+2025-10-13 10:00:51,638 - manager - INFO - Назначаем задачу 'Обьясни понятие цикл' агенту ____________20251013064816
+2025-10-13 10:00:52,377 - manager - INFO - Вызов локального агента ____________20251013064816
+2025-10-13 10:01:09,688 - manager - INFO - Задача для ____________20251013064816 завершена
+2025-10-13 10:01:21,730 - manager - INFO - Назначаем задачу 'Обьясни понятие цикл' агенту ____________20251013064816
+2025-10-13 10:01:22,411 - manager - INFO - Вызов локального агента ____________20251013064816
+2025-10-13 10:01:28,543 - manager - INFO - Задача для ____________20251013064816 завершена
+2025-10-13 10:05:08,373 - manager - INFO - Назначаем задачу 'Обьясни понятие цикл' агенту ____________20251013064816
+2025-10-13 10:05:09,652 - manager - INFO - Вызов локального агента ____________20251013064816
+2025-10-13 10:05:15,741 - manager - INFO - Задача для ____________20251013064816 завершена
+2025-10-13 10:09:10,383 - manager - INFO - Удален агент _____20251013065028
+2025-10-13 10:09:13,287 - manager - INFO - Удален агент _____20251013061441
+2025-10-13 10:09:16,775 - manager - INFO - Удален агент _________20251013060916
+2025-10-13 10:09:19,431 - manager - INFO - Удален агент ____________20251013064816
+2025-10-13 10:09:33,488 - manager - INFO - Creating agent '___________' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents
+2025-10-13 10:09:33,527 - manager - INFO - Агент ____________20251013070933 успешно создан
+2025-10-13 10:12:03,818 - manager - INFO - Creating agent '____' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents
+2025-10-13 10:12:03,857 - manager - INFO - Агент _____20251013071203 успешно создан
+2025-10-13 10:16:55,475 - manager - INFO - Creating agent 'test' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents
+2025-10-13 10:16:55,518 - manager - INFO - Агент test_20251013071655 успешно создан
+2025-10-13 10:17:32,855 - manager - INFO - Creating agent 'test2' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents
+2025-10-13 10:17:32,893 - manager - INFO - Агент test2_20251013071732 успешно создан
+2025-10-13 10:21:39,952 - manager - INFO - Удалён пустой каталог: test_20251013071655
+2025-10-13 10:21:50,253 - manager - INFO - agent
+2025-10-13 10:21:50,267 - manager - INFO - bot_file_exist
+2025-10-13 10:26:19,040 - manager - INFO - Creating agent '___' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents
+2025-10-13 10:26:19,074 - manager - INFO - Агент ____20251013072619 успешно создан
+2025-10-13 10:26:52,099 - manager - INFO - Создан каталог: Test
+2025-10-13 10:26:52,119 - manager - INFO - Добавлен каталог 'Test' в agents.json
+2025-10-13 10:28:37,805 - manager - INFO - Создан каталог: Test3
+2025-10-13 10:28:37,820 - manager - INFO - Добавлен каталог 'Test3' в agents.json
+2025-10-13 10:28:45,175 - manager - INFO - Удален агент ____20251013072619
+2025-10-13 10:28:51,492 - manager - INFO - Удален агент test2_20251013071732
+2025-10-13 10:28:59,676 - manager - INFO - Удален агент _____20251013071203
+2025-10-13 10:29:15,167 - manager - INFO - Удален агент ____________20251013070933
+2025-10-13 10:29:20,030 - manager - INFO - Удалён пустой каталог: Test
+2025-10-13 10:29:24,373 - manager - INFO - Удалён пустой каталог: Test3
+2025-10-13 10:29:30,931 - manager - INFO - Удалён пустой каталог: _____
+2025-10-13 10:29:38,979 - manager - INFO - Удалён пустой каталог: еуые
+2025-10-13 10:29:59,157 - manager - INFO - Creating agent '___________' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents
+2025-10-13 10:29:59,189 - manager - INFO - Агент ____________20251013072959 успешно создан
+2025-10-13 10:31:40,398 - manager - INFO - Удален агент ____________20251013072959
+2025-10-13 10:31:54,210 - manager - INFO - Creating agent '___________' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents
+2025-10-13 10:31:54,254 - manager - INFO - Агент ____________20251013073154 успешно создан
+2025-10-13 10:32:04,008 - manager - INFO - Creating agent '____' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents
+2025-10-13 10:32:04,050 - manager - INFO - Агент _____20251013073204 успешно создан
+2025-10-13 10:35:40,901 - manager - INFO - agent
+2025-10-13 10:40:48,305 - manager - INFO - agent
+2025-10-13 10:40:54,779 - manager - INFO - agent
+2025-10-13 10:42:48,645 - manager - INFO - agent
+2025-10-13 10:42:48,659 - manager - INFO - bot_file_exist
+2025-10-13 10:43:06,764 - manager - INFO - agent
+2025-10-13 10:43:06,778 - manager - INFO - bot_file_exist
+2025-10-13 10:43:52,680 - manager - INFO - Поручаем задачу всем агентам: Обьясни что такое солнце
+2025-10-13 10:43:52,681 - manager - ERROR - Ошибка при поручении агенту _____: 'result'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 259, in handle
+    entry["last_task"] = {"task": task, "result": parse_llm_response(res["result"])}
+                                                                     ~~~^^^^^^^^^^
+KeyError: 'result'
+2025-10-13 10:43:52,682 - manager - ERROR - Ошибка вызова локального агента: [Errno 2] No such file or directory: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\bot.py'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 26, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\bot.py'
+2025-10-13 10:43:52,684 - manager - ERROR - Ошибка при поручении агенту folder_marketing: 'result'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 259, in handle
+    entry["last_task"] = {"task": task, "result": parse_llm_response(res["result"])}
+                                                                     ~~~^^^^^^^^^^
+KeyError: 'result'
+2025-10-13 10:43:52,684 - manager - ERROR - Ошибка при поручении агенту ______20251011180644: 'result'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 259, in handle
+    entry["last_task"] = {"task": task, "result": parse_llm_response(res["result"])}
+                                                                     ~~~^^^^^^^^^^
+KeyError: 'result'
+2025-10-13 10:43:52,685 - manager - ERROR - Ошибка при поручении агенту ____: 'result'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 259, in handle
+    entry["last_task"] = {"task": task, "result": parse_llm_response(res["result"])}
+                                                                     ~~~^^^^^^^^^^
+KeyError: 'result'
+2025-10-13 10:43:52,686 - manager - ERROR - Ошибка при поручении агенту ______20251011183940: 'result'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 259, in handle
+    entry["last_task"] = {"task": task, "result": parse_llm_response(res["result"])}
+                                                                     ~~~^^^^^^^^^^
+KeyError: 'result'
+2025-10-13 10:43:52,687 - manager - ERROR - Ошибка вызова локального агента: [Errno 2] No such file or directory: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\bot.py'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 26, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\bot.py'
+2025-10-13 10:43:52,688 - manager - ERROR - Ошибка при поручении агенту folder_test: 'result'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 259, in handle
+    entry["last_task"] = {"task": task, "result": parse_llm_response(res["result"])}
+                                                                     ~~~^^^^^^^^^^
+KeyError: 'result'
+2025-10-13 10:43:52,689 - manager - ERROR - Ошибка вызова локального агента: [Errno 2] No such file or directory: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\bot.py'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 26, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\bot.py'
+2025-10-13 10:43:52,690 - manager - ERROR - Ошибка при поручении агенту folder_Test: 'result'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 259, in handle
+    entry["last_task"] = {"task": task, "result": parse_llm_response(res["result"])}
+                                                                     ~~~^^^^^^^^^^
+KeyError: 'result'
+2025-10-13 10:43:52,691 - manager - ERROR - Ошибка вызова локального агента: [Errno 2] No such file or directory: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\bot.py'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 26, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\bot.py'
+2025-10-13 10:43:52,692 - manager - ERROR - Ошибка при поручении агенту folder_Test3: 'result'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 259, in handle
+    entry["last_task"] = {"task": task, "result": parse_llm_response(res["result"])}
+                                                                     ~~~^^^^^^^^^^
+KeyError: 'result'
+2025-10-13 10:43:53,409 - manager - INFO - Вызов локального агента ____________20251013073154
+2025-10-13 10:43:59,244 - manager - INFO - Вызов локального агента _____20251013073204
+2025-10-13 10:44:04,662 - manager - INFO - Все агенты завершили выполнение задачи.
+2025-10-13 10:44:25,591 - manager - INFO - Удалён пустой каталог: ____________20251013073154
+2025-10-13 10:44:30,028 - manager - INFO - Удалён пустой каталог: _____20251013073204
+2025-10-13 10:45:00,430 - manager - INFO - Создан каталог: business
+2025-10-13 10:45:00,449 - manager - INFO - Добавлен каталог 'business' в agents.json
+2025-10-13 11:26:36,169 - manager - INFO - Creating agent '__________' in folder 'business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\business
+2025-10-13 11:26:36,208 - manager - INFO - Агент ___________20251013082636 успешно создан
+2025-10-13 11:29:51,947 - manager - INFO - agent
+2025-10-13 11:30:22,027 - manager - INFO - Creating agent '____' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\root
+2025-10-13 11:30:22,062 - manager - INFO - Агент ____ успешно создан
+2025-10-13 11:30:27,609 - manager - INFO - agent
+2025-10-13 11:46:09,703 - manager - INFO - Удалён пустой каталог: ___________20251013082636
+2025-10-13 11:50:43,889 - manager - INFO - Creating agent 'coder1' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\root
+2025-10-13 11:50:43,926 - manager - INFO - Агент coder1_20251013085043 успешно создан
+2025-10-13 12:26:34,933 - manager - INFO - Создан каталог: test
+2025-10-13 12:26:34,953 - manager - INFO - Добавлен каталог 'test' в agents.json
+2025-10-13 13:07:12,164 - manager - INFO - Создан каталог: test
+2025-10-13 13:07:12,197 - manager - INFO - Добавлен каталог 'test' в agents.json
+2025-10-13 13:10:25,143 - manager - INFO - Creating agent 'tester' in folder 'test' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\test
+2025-10-13 13:10:25,185 - manager - INFO - Агент tester_20251013101025 успешно создан
+2025-10-13 13:12:38,548 - manager - INFO - Creating agent 'test2' in folder 'test' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\test
+2025-10-13 13:12:38,593 - manager - INFO - Агент test2_20251013101238 успешно создан
+2025-10-13 13:12:54,487 - manager - INFO - Creating agent 'test3' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\root
+2025-10-13 13:12:54,533 - manager - INFO - Агент test3_20251013101254 успешно создан
+2025-10-13 13:13:17,593 - manager - INFO - agent
+2025-10-13 13:13:17,608 - manager - INFO - bot_file_exist
+2025-10-13 13:13:22,409 - manager - INFO - agent
+2025-10-13 13:13:22,424 - manager - INFO - bot_file_exist
+2025-10-13 13:13:28,238 - manager - INFO - agent
+2025-10-13 13:13:28,253 - manager - INFO - bot_file_exist
+2025-10-13 13:18:51,111 - manager - INFO - agent
+2025-10-13 13:19:00,372 - manager - INFO - agent
+2025-10-13 13:19:07,738 - manager - INFO - agent
+2025-10-13 13:21:15,495 - manager - INFO - agent

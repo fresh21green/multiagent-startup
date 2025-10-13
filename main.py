@@ -62,15 +62,15 @@ async def index(request: Request):
 
     # Собираем агентов по папкам
     folders = {}
-    for folder in folders_fs:
-        folders.setdefault(folder, [])
+    agents = []
+    # for folder in folders_fs:
+    #     folders.setdefault(folder, [])
 
     for agent in meta:
         folder = agent.get("folder") or "root"
-        if not agent.get("is_folder"):
+        if not agent.get("is_folder") == True:
             folders.setdefault(folder, []).append(agent)
         if folder == "root":
-            agents = []
             agents.append(agent)
 
     if "root" not in folders:
@@ -81,13 +81,15 @@ async def index(request: Request):
 
 # --- СОЗДАНИЕ НОВОГО АГЕНТА ---
 @app.post('/create_agent')
-async def create_agent(request: Request, name: str = Form(...), prompt: str = Form(''), telegram_token: str = Form(''), folder: str = Form('')):
+async def create_agent(request: Request, name: str = Form(...), prompt: str = Form(''), telegram_token: str = Form(''), folder: str = Form('root')):
     """Создает нового агента на основе шаблона."""
     name = name.strip()
     if not name:
         raise HTTPException(status_code=400, detail='Name required')
 
     slug = slugify(name)
+    # if slug in agents:
+    #     return RedirectResponse(f"/agent/{slug}", status_code=303)
     dest = AGENTS_DIR / folder if folder else AGENTS_DIR
     folder = folder.strip()
     logger.info("Creating agent '%s' in folder '%s' at %s", slug, folder or "root", dest)
@@ -124,7 +126,7 @@ async def create_agent(request: Request, name: str = Form(...), prompt: str = Fo
 
     # --- Обновляем метаданные ---
     meta = load_meta()
-    entry = {'name': name, 'slug': slug, 'folder': folder, 'created_at': __import__('datetime').datetime.utcnow().isoformat() + 'Z', 'path': str(dest), 'deploy_url':'', 'status':'created'}
+    entry = {'name': name, 'slug': slug, 'folder': folder, "is_folder": False, 'created_at': __import__('datetime').datetime.utcnow().isoformat() + 'Z', 'path': str(dest), 'deploy_url':'', 'status':'created'}
     meta.append(entry)
     save_meta(meta)
     logger.info("Агент %s успешно создан", slug)
@@ -152,7 +154,6 @@ async def create_agent(request: Request, name: str = Form(...), prompt: str = Fo
         except Exception as e:
             logger.exception("Ошибка при установке Telegram webhook: %s", e)
 
-    return RedirectResponse('/', status_code=303)
     return RedirectResponse('/', status_code=303)
 
 @app.post("/update_agent/{slug}")
@@ -256,8 +257,8 @@ async def assign_task_all(task: str = Form(...)):
                 path = Path(entry.get("path") or "")
                 res = await call_agent_local(path, task) if path.exists() else {"ok": False, "error": "no_path"}
 
-            entry["last_task"] = {"task": task, "result": res["result"]}
-            results.append({"agent": slug, "result": res["result"]})
+            entry["last_task"] = {"task": task, "result": parse_llm_response(res["result"])}
+            results.append({"agent": slug, "result": parse_llm_response(res["result"])})
         except Exception as e:
             logger.exception(f"Ошибка при поручении агенту {slug}: {e}")
             results.append({"agent": slug, "result": {"ok": False, "error": str(e)}})
@@ -283,11 +284,10 @@ async def assign_task(slug: str = Form(...), task: str = Form(...)):
     else:
         path = Path(entry.get("path") or "")
         res = await call_agent_local(path, task) if path.exists() else {"ok": False, "error": "no_path_or_url"}
-
-    entry["last_task"] = {"task": task, "result": res["result"]}
+    entry["last_task"] = {"task": task, "result": parse_llm_response(res["result"])}
     save_meta(meta)
     logger.info("Задача для %s завершена", slug)
-    return JSONResponse({"ok": True, "agent": slug, "result": res["result"]})
+    return JSONResponse({"ok": True, "agent": slug, "result": parse_llm_response(res["result"])})
 
 
 def parse_llm_response(res):
@@ -318,15 +318,20 @@ if __name__ == '__main__':
 async def view_agent(request: Request, slug: str):
     """Страница агента — просмотр и редактирование его настроек."""
     meta = load_meta()
+    logger.info("meta", meta)
     agent = next((a for a in meta if a["slug"] == slug), None)
+    logger.info("agent", agent)
     if not agent:
         raise HTTPException(status_code=404, detail="Agent not found")
 
     # Загружаем prompt из bot.py (если есть)
     bot_file = Path(agent["path"]) / "bot.py"
+    logger.info("bot_file.exists()", bot_file.exists())
     prompt = ""
     if bot_file.exists():
+        logger.info("bot_file_exist")
         text = bot_file.read_text(encoding="utf-8")
+        logger.info("text",text)
         match = re.search(r'PROMPT\s*=\s*"""(.*?)"""', text, re.DOTALL)
         print('match',match,text)
         if match:

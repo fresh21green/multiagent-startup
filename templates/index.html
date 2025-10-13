@@ -23,6 +23,15 @@
       <form action="/create_agent" method="post" class="manager-fields">
         <input type="text" name="name" placeholder="Имя сотрудника" required>
         <textarea name="prompt" placeholder="Промт-инструкция" required></textarea>
+        <label for="folder">Каталог:</label>
+        <select name="folder" id="folder-select">
+          <option value="" selected>Без каталога (root)</option>
+          {% for folder in folders %}
+            {% if folder != "root" %}
+              <option value="{{ folder }}">{{ folder }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
         <input type="text" name="telegram_token" placeholder="Telegram токен (опционально)">
         <button type="submit">Создать</button>
       </form>
@@ -50,6 +59,7 @@
             {% endif %}
           </ul>
         </section>
+  
       {% endfor %}
     </div>
 
@@ -73,7 +83,7 @@
           <div class="ai-agent-header">
             <h2>{{ agent.name or agent.slug }}</h2>
             <div class="agent-status" id="status-{{ agent.slug }}">Статус: Готов</div>
-              <a href="{{ agent.url }}" target="_blank" class="agent-link">🔗 Перейти к сотруднику</a>
+              <a href="/agent/{{ agent.slug }}" target="_blank" class="agent-link">🔗 Перейти к сотруднику</a>
           </div>
 
           <div  style="display:inline;">
@@ -133,10 +143,9 @@ document.getElementById("folderForm").addEventListener("submit", async (e) => {
     if (data.ok) {
       message.textContent = "✅ Каталог добавлен: " + name;
 
-      // Найдём контейнер всех каталогов
       const container = document.getElementById("folders-container");
 
-      // Проверим, нет ли уже такого
+      // Проверяем, нет ли уже такого каталога
       if (!document.getElementById("folder-" + name)) {
         const html = `
         <section id="folder-${name}" class="folder">
@@ -145,13 +154,10 @@ document.getElementById("folderForm").addEventListener("submit", async (e) => {
             <button class="delete-folder-btn" onclick="deleteFolder('${name}')">🗑️</button>
           </div>
           <ul class="agents-list" id="agents-${name}" style="display:none;">
-            {% if agents|length == 0 %}
-              <li><em>Пока пусто</em></li>
-            {% endif %}
+            <li><em>Пока пусто</em></li>
           </ul>
         </section>
         `;
-        // Вставляем новый каталог в начало контейнера
         container.insertAdjacentHTML("afterbegin", html);
       }
 
@@ -177,7 +183,7 @@ document.getElementById("folderForm").addEventListener("submit", async (e) => {
 });
 
 
-/* === Создание агента === */
+/* === Создание агента без перезагрузки === */
 document.querySelector("form[action='/create_agent']").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -187,12 +193,12 @@ document.querySelector("form[action='/create_agent']").addEventListener("submit"
 
   try {
     const res = await fetch("/create_agent", { method: "POST", body: formData });
-    if (res.redirected) {
+    if (res.redirected || res.ok) {
       const folder = formData.get("folder") || "root";
       const name = formData.get("name");
       const slug = name.toLowerCase().replace(/[^a-z0-9_-]/g, "_");
 
-      // Найти или создать секцию каталога
+      // --- Добавляем в папку ---
       let folderSection = document.getElementById("folder-" + folder);
       if (!folderSection) {
         const container = document.getElementById("folders-container");
@@ -200,25 +206,79 @@ document.querySelector("form[action='/create_agent']").addEventListener("submit"
         newFolder.id = "folder-" + folder;
         newFolder.className = "folder";
         newFolder.innerHTML = `
-          <h2>📂 ${folder}</h2>
-          <ul></ul>
+          <div class="folder-header">
+            <h2 class="folder-title" onclick="toggleFolder('${folder}')">📂 ${folder}</h2>
+            <button class="delete-folder-btn" onclick="deleteFolder('${folder}')">🗑️</button>
+          </div>
+          <ul class="agents-list" id="agents-${folder}" style="display:block;">
+            <li id="agent-${slug}">
+              🤖 <a href="/agent/${slug}">${name}</a>
+              <button class="delete-btn" onclick="deleteAgent('${slug}', '${folder}')">🗑️</button>
+            </li>
+          </ul>
         `;
         container.insertAdjacentElement("afterbegin", newFolder);
-        folderSection = newFolder;
+      } else {
+        const ul = folderSection.querySelector("ul");
+        if (ul) {
+          // Удаляем "Пока пусто", если есть
+          const empty = ul.querySelector("em");
+          if (empty) empty.parentElement.remove();
+
+          const li = document.createElement("li");
+          li.id = "agent-" + slug;
+          li.innerHTML = `🤖 <a href="/agent/${slug}">${name}</a>
+                          <button class="delete-btn" onclick="deleteAgent('${slug}', '${folder}')">🗑️</button>`;
+          ul.appendChild(li);
+        }
       }
 
-      // Добавляем агента
-      const ul = folderSection.querySelector("ul");
-      const li = document.createElement("li");
-      li.innerHTML = `🤖 <a href="/agent/${slug}">${name}</a>`;
-      ul.appendChild(li);
+      // --- Добавляем в общий блок "Сотрудники" ---
+      let aiAgentsDiv = document.querySelector(".ai-agents ul");
 
-      // Удаляем <em>Пока пусто>
-      const empty = ul.querySelector("em");
-      if (empty) empty.parentElement.remove();
+      // Если блока ещё нет (первый агент) — создаём его
+      if (!aiAgentsDiv) {
+        const container = document.querySelector(".ai-agents");
+        if (!container) {
+          // Создаём блок ai-agents, если его вообще нет
+          const div = document.createElement("div");
+          div.className = "ai-agents";
+          div.innerHTML = `<ul id="agents-list"></ul>`;
+          document.querySelector(".container").appendChild(div);
+          aiAgentsDiv = div.querySelector("ul");
+        } else {
+          aiAgentsDiv = document.createElement("ul");
+          container.appendChild(aiAgentsDiv);
+        }
+      }
 
-      message.textContent = "✅ Агент добавлен: " + name;
+      // Добавляем карточку агента
+      const agentCard = document.createElement("li");
+      agentCard.className = "agent-card";
+      agentCard.id = "agent-card-" + slug;
+      agentCard.innerHTML = `
+        <div class="ai-agent-header">
+          <h2>${name}</h2>
+          <div class="agent-status" id="status-${slug}">Статус: Готов</div>
+          <a href="/agent/${slug}" target="_blank" class="agent-link">🔗 Перейти к сотруднику</a>
+        </div>
+        <div style="display:inline;">
+          <input type="hidden" name="slug" value="${slug}">
+          <input name="task" id="task-${slug}" placeholder="Задача для этого сотрудника" required>
+          <button type="submit" id="btn-${slug}" onclick="assignTask('${slug}')">Отправить задачу</button>
+          <div class="result markdown-body" id="result-${slug}"></div>
+        </div>
+        <form action="/delete_agent" method="post" style="display:inline;">
+          <input type="hidden" name="slug" value="${slug}">
+          <button type="submit">Удалить сотрудника</button>
+        </form>
+      `;
+      if(folder == 'root'){
+        aiAgentsDiv.appendChild(agentCard);
+      }
+      
 
+      message.textContent = "✅ Агент '" + name + "' успешно создан!";
       form.reset();
     } else {
       message.textContent = "❌ Ошибка при создании агента.";
@@ -228,6 +288,15 @@ document.querySelector("form[action='/create_agent']").addEventListener("submit"
     message.textContent = "⚠️ Ошибка соединения с сервером.";
   }
 });
+
+// Добавляем новый каталог в выпадающий список
+const select = document.getElementById("folder-select");
+if (select) {
+  const option = document.createElement("option");
+  option.value = name;
+  option.textContent = name;
+  select.appendChild(option);
+}
 
 // --- Раскрытие/сворачивание каталога ---
 function toggleFolder(folder) {

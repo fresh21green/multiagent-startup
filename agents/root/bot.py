@@ -27,7 +27,7 @@ TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
 
 # Подсказка (промпт) агента
-PROMPT = """ Ты синоптик"""
+PROMPT = """ывыа"""
 
 # --- ИНИЦИАЛИЗАЦИЯ LLM И API ---
 llm = AmveraLLM(model=AMVERA_MODEL, api_token=AMVERA_API_KEY)

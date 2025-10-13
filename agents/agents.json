@@ -3,7 +3,7 @@
     "name": "Света",
     "slug": "_____",
     "created_at": "2025-10-11T17:50:44.633224Z",
-    "folder": "people",
+    "folder": "root",
     "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\_____",
     "deploy_url": "",
     "status": "created",
@@ -16,17 +16,10 @@
     }
   },
   {
-    "folder": "marketing",
-    "is_folder": true,
-    "name": "marketing",
-    "slug": "folder_marketing",
-    "created_at": "2025-10-13T05:03:17.097640Z"
-  },
-  {
     "name": "Антон",
     "slug": "______20251011180644",
     "created_at": "2025-10-11T18:06:44.294413Z",
-    "folder": "people",
+    "folder": "root",
     "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\______20251011180644",
     "deploy_url": "",
     "status": "created",
@@ -42,7 +35,7 @@
     "name": "Ника",
     "slug": "____",
     "created_at": "2025-10-11T18:14:59.845282Z",
-    "folder": "people",
+    "folder": "root",
     "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\____",
     "deploy_url": "",
     "status": "created",
@@ -58,7 +51,7 @@
     "name": "Гриша",
     "slug": "______20251011183940",
     "created_at": "2025-10-11T18:39:40.123802Z",
-    "folder": "people",
+    "folder": "root",
     "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\______20251011183940",
     "deploy_url": "",
     "status": "created",
@@ -75,23 +68,35 @@
     "is_folder": true,
     "name": "test",
     "slug": "folder_test",
-    "created_at": "2025-10-13T05:56:31.809928Z"
+    "created_at": "2025-10-13T10:07:12.166062Z"
   },
   {
-    "name": "Синоптик",
-    "slug": "_________20251013060916",
-    "folder": "",
-    "created_at": "2025-10-13T06:09:16.925596Z",
-    "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\_________20251013060916",
+    "name": "tester",
+    "slug": "tester_20251013101025",
+    "folder": "test",
+    "is_folder": false,
+    "created_at": "2025-10-13T10:10:25.168273Z",
+    "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\tester_20251013101025",
     "deploy_url": "",
     "status": "created"
   },
   {
-    "name": "Няня",
-    "slug": "_____20251013061441",
-    "folder": "",
-    "created_at": "2025-10-13T06:14:41.309858Z",
-    "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\_____20251013061441",
+    "name": "test2",
+    "slug": "test2_20251013101238",
+    "folder": "test",
+    "is_folder": false,
+    "created_at": "2025-10-13T10:12:38.577521Z",
+    "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\test2_20251013101238",
+    "deploy_url": "",
+    "status": "created"
+  },
+  {
+    "name": "test3",
+    "slug": "test3_20251013101254",
+    "folder": "root",
+    "is_folder": false,
+    "created_at": "2025-10-13T10:12:54.515474Z",
+    "path": "C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\test3_20251013101254",
     "deploy_url": "",
     "status": "created"
   }
