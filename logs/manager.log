@@ -1391,3 +1391,8 @@ UnboundLocalError: cannot access local variable 'webhook_url' where it is not as
 2025-10-13 16:10:15,024 - manager - INFO - Creating agent 'Психолог3' in folder 'Business' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\Business\________3
 2025-10-13 16:10:15,057 - manager - INFO - Агент ________3 успешно создан
 2025-10-13 16:10:16,087 - manager - INFO - Webhook успешно установлен для агента ________3: https://multiagent-startup.onrender.com/agents/Business/________3/webhook
+2025-10-13 22:03:12,814 - manager - INFO - Назначаем задачу 'Чем заняться вечером' агенту tetrfg_20251013112153
+2025-10-13 22:03:13,501 - manager - INFO - Вызов локального агента tetrfg_20251013112153
+2025-10-13 22:03:29,024 - manager - INFO - Задача для tetrfg_20251013112153 завершена
+2025-10-13 22:08:01,903 - manager - INFO - Создан каталог: Test
+2025-10-13 22:08:01,921 - manager - INFO - Добавлен каталог 'Test' в agents.json

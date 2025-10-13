@@ -305,6 +305,20 @@ async function toggleFolder(folder) {
   const list = document.getElementById("agents-" + folder);
   if (!list) return;
 
+  // Закрываем все другие каталоги
+  document.querySelectorAll(".agents-list").forEach(ul => {
+    if (ul.id !== "agents-" + folder) {
+      ul.style.display = "none";
+    }
+  });
+
+  // Раскрываем/сворачиваем текущий каталог
+  if (list.style.display === "none" || !list.style.display) {
+    list.style.display = "block";
+  } else {
+    list.style.display = "none";
+  }
+
   // Подсвечиваем активную папку
   document.querySelectorAll(".folder-title").forEach(el => el.classList.remove("active"));
   const currentFolderTitle = document.querySelector(`#folder-${folder} .folder-title`);
@@ -316,8 +330,6 @@ async function toggleFolder(folder) {
     if (!response.ok) throw new Error("Ошибка загрузки агентов");
 
     const agents = await response.json();
-
-    // --- Очищаем секцию сотрудников ---
     const agentsSection = document.querySelector(".ai-agents ul");
     if (!agentsSection) return;
     agentsSection.innerHTML = "";
@@ -332,43 +344,36 @@ async function toggleFolder(folder) {
       const agentCard = document.createElement("li");
       agentCard.className = "agent-card";
       agentCard.id = "agent-card-" + agent.slug;
-      console.log('agent',agent)
       agentCard.innerHTML = `
         <div class="ai-agent-header">
           <h2>${agent.name}</h2>
           <div class="agent-status" id="status-${agent.slug}">Статус: Готов</div>
           <a href="/agent/${agent.slug}" target="_blank" class="agent-link">🔗 Перейти к сотруднику</a>
         </div>
-
         <div style="display:inline;">
           <input type="hidden" name="slug" value="${agent.slug}">
           <input name="task" id="task-${agent.slug}" placeholder="Задача для этого сотрудника" required>
           <button type="submit" id="btn-${agent.slug}" onclick="assignTask('${agent.slug}')">Отправить задачу</button>
           <div class="result markdown-body" id="result-${agent.slug}"></div>
         </div>
-
         <form action="/delete_agent" method="post" style="display:inline;">
           <input type="hidden" name="slug" value="${agent.slug}">
           <button type="submit">Удалить сотрудника</button>
         </form>
-
-        
       `;
       if(agent.last_task){
-      agentCard.innerHTML = agentCard.innerHTML + `
-        <div class="last-task">
+        agentCard.innerHTML += `
+          <div class="last-task">
             <div class="text-section">
               <div class="task-header">Последняя задача:</div>
               ${agent.last_task.task}
             </div>
-
             <div class="text-section">
               <div class="task-header">Результат:</div> 
               <div class="last-result markdown-body">${ agent.last_task.result.html }</div>
             </div>
-
           </div>
-        `
+        `;
       }
       agentsSection.appendChild(agentCard);
     }
@@ -379,6 +384,7 @@ async function toggleFolder(folder) {
       agentsSection.innerHTML = "<p><em>⚠️ Ошибка при загрузке сотрудников.</em></p>";
   }
 }
+
 
 
 
