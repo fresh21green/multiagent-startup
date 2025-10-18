@@ -14,7 +14,7 @@ python-telegram-bot==20.7
 
 # --- Сетевые запросы и API ---
 requests==2.32.3
-httpx[brotli,http2,socks]>=0.28.1
+httpx~=0.25.2
 
 # --- Асинхронность и фоновые задачи ---
 aiofiles>=23.2.1
