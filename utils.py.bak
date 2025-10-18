@@ -70,27 +70,8 @@ def load_meta():
 
 def save_meta(meta):
     """Сохраняет JSON-файл метаданных агентов."""
+    logger.info("META_FILE", META_FILE)
     try:
         META_FILE.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
     except Exception as e:
         logger.exception("Не удалось сохранить метаданные: %s", e)
-
-
-import json
-from pathlib import Path
-import logging
-logger = logging.getLogger("manager")
-def save_memory(agent_path: Path, record: dict):
-    try:
-        mem_file = Path(agent_path) / "memory.json"
-        if mem_file.exists():
-            try:
-                data = json.loads(mem_file.read_text(encoding="utf-8"))
-            except Exception:
-                data = []
-        else:
-            data = []
-        data.append(record)
-        mem_file.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-    except Exception as e:
-        logger.warning("save_memory error: %s", e)

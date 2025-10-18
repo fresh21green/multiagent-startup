@@ -40,6 +40,9 @@ ul {
 
 .agent-card {
     margin: 0 0 20px;
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.4s ease;
     background: linear-gradient(45deg, #2563eb, #b6edb8);
     display: flex;
     flex-direction: column;
@@ -251,4 +254,88 @@ form[action='/create_agent'] select:focus {
 .agents-list {
   padding: 8px 20px;
   list-style: none;
+}
+
+#memoryOut button:hover {
+  background: #eef;
+}
+
+.folder-select {
+  padding: 6px;
+  border-radius: 6px;
+  background: #f9f9f9;
+  font-size: 14px;
+}
+
+.folder.highlight-folder {
+  background-color: #f0f9ff;
+  border: 1px solid #cce4ff;
+  box-shadow: 0 0 10px rgba(80,150,255,0.4);
+  border-radius: 8px;
+  transition: all 0.4s ease;
+}
+
+/* Контейнер */
+#employees-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/* Карточки сотрудников */
+.employee-card {
+  flex: 0 0 240px;
+  background: #f9fafc;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 10px 14px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+.employee-card h4 { margin: 0 0 5px 0; }
+
+.employee-card.running { border-color: #e6b800; }
+.employee-card.done { border-color: #3bb143; }
+.employee-card.error { border-color: #cc0000; }
+
+.emp-status { font-weight: 600; }
+.emp-result { margin-top: 6px; font-size: 0.9em; color: #444; }
+
+/* Спиннер */
+.spinner {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top-color: #007bff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Подсветка каталога */
+.folder.highlight-folder {
+  background-color: #f0f9ff;
+  border: 1px solid #cce4ff;
+  box-shadow: 0 0 10px rgba(80,150,255,0.4);
+  border-radius: 8px;
+  transition: all 0.4s ease;
+}
+
+.task {
+  padding: 0 20px;
+  margin: 0 0 20px 0;
+}
+
+.agent-card.new-agent {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.agent-card.new-agent.visible {
+  opacity: 1;
+  transform: translateY(0);
 }

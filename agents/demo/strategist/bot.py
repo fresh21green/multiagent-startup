@@ -7,7 +7,6 @@ from fastapi import FastAPI, Request
 from telegram import Update
 from langchain_amvera import AmveraLLM
 from dotenv import load_dotenv
-from pathlib import Path
 
 # === Загрузка переменных окружения ===
 load_dotenv()
@@ -15,10 +14,7 @@ load_dotenv()
 # --- ЛОГИРОВАНИЕ ---
 logger = logging.getLogger("agent")
 logger.setLevel(logging.DEBUG)
-
-log_dir = Path(__file__).parent
-fh = logging.FileHandler(log_dir / "agent.log", encoding="utf-8")
-
+fh = logging.FileHandler("agent.log", encoding="utf-8")
 fh.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
 logger.addHandler(fh)
 
@@ -34,11 +30,11 @@ if not AMVERA_MODEL:
 
 
 # Здесь менеджер подставит реальные данные
-__TELEGRAM_TOKEN_PLACEHOLDER__
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
 
 # Подсказка (промпт) агента
-PROMPT = __PROMPT_PLACEHOLDER__
+PROMPT = """Ты стратег. Думай системно, предлагай решения высокого уровня."""
 
 # --- ИНИЦИАЛИЗАЦИЯ ---
 app = FastAPI()
@@ -98,9 +94,6 @@ def handle_task(task: str):
     Выполняет задачу агента через LLM Amvera.
     Возвращает чистый текст результата.
     """
-    if len(task) > 4000:
-     task = task[-4000:]
-
     try:
         if not AMVERA_API_KEY:
             return "⚠️ Ошибка: отсутствует AMVERA_API_KEY. Укажите его в .env"
@@ -112,9 +105,6 @@ def handle_task(task: str):
         logger.info(f"Запрос к LLM: {query[:120]}...")
 
         # Основной вызов LLM
-        if len(query) > 4000:
-            logger.warning(f"⚠️ Контекст слишком длинный ({len(query)} символов) — обрезаем до 4000.")
-            query = query[-4000:]
         resp = llm.invoke(query)
         
 

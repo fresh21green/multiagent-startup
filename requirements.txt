@@ -1,11 +1,25 @@
-fastapi
-uvicorn[standard]
-jinja2
-python-dotenv
-requests
-pathlib
-langchain-amvera
-python-telegram-bot==20.5
-python-multipart
-utils
-markdown
+# --- Основное ядро проекта ---
+fastapi==0.115.2
+uvicorn[standard]==0.30.6
+python-dotenv==1.0.1
+markdown==3.7
+
+# --- Работа с LLM (Amvera) ---
+langchain-amvera>=0.1.7
+openai>=1.45.0
+tiktoken>=0.7.0
+
+# --- Telegram боты ---
+python-telegram-bot==20.7
+
+# --- Сетевые запросы и API ---
+requests==2.32.3
+httpx[brotli,http2,socks]>=0.28.1
+
+# --- Асинхронность и фоновые задачи ---
+aiofiles>=23.2.1
+anyio>=4.4.0
+
+# --- Утилиты и дополнительные зависимости ---
+jinja2>=3.1.4
+pydantic>=2.8.2

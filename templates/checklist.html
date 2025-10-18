@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>🧩 Multiagent System — Checklist</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    body { padding: 20px; background: #fafafa; font-family: system-ui, sans-serif; }
+    h1 { font-size: 22px; margin-bottom: 15px; }
+    section { background: #fff; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+    button { margin: 5px; padding: 6px 10px; border-radius: 6px; border: 1px solid #ccc; cursor: pointer; background: #f9f9f9; }
+    button:hover { background: #eef; }
+    pre { background: #f4f4f4; padding: 10px; border-radius: 6px; max-height: 300px; overflow: auto; }
+    input, textarea { border: 1px solid #ccc; border-radius: 5px; padding: 5px; }
+    #brainProgress {
+      background: linear-gradient(90deg, #2196F3, #4CAF50);
+      box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>🧠 Multiagent System — Автоматический тест</h1>
+
+  <section>
+    <h3>🔍 Проверка структуры (root и ассистент)</h3>
+    <button onclick="checkRoot()">Проверить папку root и ассистента</button>
+    <pre id="rootOut"></pre>
+  </section>
+
+  <section>
+    <h3>🧾 Поручить задачу всем сотрудникам</h3>
+    <textarea id="taskAll" rows="3" cols="60" placeholder="Введите задачу для всех..."></textarea><br>
+    <button onclick="assignAll()">🚀 Отправить задачу всем</button>
+    <pre id="taskOut"></pre>
+  </section>
+
+  <section>
+    <h3>🧠 Мозговой штурм (живой режим)</h3>
+    <input id="topic" placeholder="Введите тему..." style="width:70%;">
+    <button onclick="runBrainstorm()">Запустить штурм</button>
+    
+    <div id="brainProgress" style="margin-top:10px; height:8px; width:0%; background:#007bff; border-radius:5px; transition:width 0.4s;"></div>
+    
+    <pre id="brainOut" style="margin-top:15px; white-space:pre-wrap;"></pre>
+  </section>
+
+  <section>
+    <h3>✉️ Делегирование</h3>
+    <input id="fromSlug" placeholder="от кого (slug)" style="width:20%;">
+    <input id="toSlug" placeholder="кому (slug)" style="width:20%;">
+    <input id="msg" placeholder="сообщение" style="width:40%;">
+    <button onclick="delegate()">Отправить</button>
+    <pre id="delegOut"></pre>
+  </section>
+
+  <section>
+    <h3>📂 Виртуальный офис</h3>
+    <button onclick="window.open('/office','_blank')">Открыть /office</button>
+  </section>
+
+  <section>
+    <h3>🧠 Проверка памяти агентов</h3>
+    <button onclick="checkMemory()">Проверить memory.json</button>
+    <pre id="memoryOut"></pre>
+  </section>
+
+  <section>
+    <h3>🧩 Дополнительно</h3>
+    <button onclick="window.open('/','_blank')">Перейти на главную</button>
+  </section>
+
+<script>
+async function checkRoot(){
+  const r = await fetch('/folder/root');
+  if(!r.ok){
+    document.getElementById('rootOut').textContent = "❌ Не удалось получить данные папки root";
+    return;
+  }
+  const j = await r.json();
+  const assistant = j.find(a => a.slug === 'assistant_default');
+  document.getElementById('rootOut').textContent = assistant
+    ? "✅ Папка root найдена. Сотрудник: " + assistant.name
+    : "⚠️ Папка root есть, но ассистент не найден";
+}
+
+async function assignAll(){
+  const task = document.getElementById('taskAll').value.trim();
+  if(!task) return alert('Введите задачу!');
+  const fd = new FormData();
+  fd.append('task', task);
+  const res = await fetch('/assign_task_all', { method:'POST', body: fd });
+  const json = await res.json();
+  document.getElementById('taskOut').textContent = json.ok
+    ? JSON.stringify(json.results, null, 2)
+    : "❌ Ошибка: " + (json.detail || json.error || 'Неизвестно');
+}
+
+async function runBrainstorm(){
+  const topic = document.getElementById('topic').value.trim();
+  if(!topic) return alert('Введите тему!');
+  
+  const output = document.getElementById('brainOut');
+  const progress = document.getElementById('brainProgress');
+  output.textContent = '';
+  progress.style.width = '0%';
+
+  // Запускаем мозговой штурм (пошагово)
+  const fd = new FormData();
+  fd.append('topic', topic);
+  const res = await fetch('/brainstorm', { method:'POST', body: fd });
+  const json = await res.json();
+
+  if(!json.ok){
+    output.textContent = '❌ Ошибка: ' + (json.detail || json.error);
+    return;
+  }
+
+  const discussion = json.discussion;
+  const total = discussion.length || 1;
+
+  for (let i = 0; i < discussion.length; i++) {
+    const d = discussion[i];
+    progress.style.width = `${((i+1)/total)*100}%`;
+
+    output.textContent += `👤 ${d.agent}:\n${d.response}\n\n`;
+    await new Promise(r => setTimeout(r, 600)); // немного задержки для эффекта "разговора"
+  }
+
+  if(json.summary){
+    progress.style.width = '100%';
+    output.textContent += "----------------------------------\n";
+    output.textContent += "🧩 Итоговое мнение ассистента:\n" + json.summary;
+  }
+
+  // Через пару секунд сбросить полосу
+  setTimeout(() => progress.style.width = '0%', 3000);
+}
+
+async function delegate(){
+  const from = document.getElementById('fromSlug').value.trim();
+  const to = document.getElementById('toSlug').value.trim();
+  const msg = document.getElementById('msg').value.trim();
+  if(!from || !to || !msg) return alert('Заполните все поля!');
+  const fd = new FormData();
+  fd.append('from_slug', from);
+  fd.append('to_slug', to);
+  fd.append('message', msg);
+  const res = await fetch('/delegate_task', { method:'POST', body: fd });
+  const json = await res.json();
+  document.getElementById('delegOut').textContent = JSON.stringify(json, null, 2);
+}
+
+async function checkMemory(){
+  const out = document.getElementById('memoryOut');
+  out.textContent = '⏳ Проверка...';
+  try {
+    const res = await fetch('/check_memory');
+    const json = await res.json();
+    if(!json.ok){
+      out.textContent = '❌ Ошибка: ' + (json.error || 'Неизвестная ошибка');
+      return;
+    }
+
+    // очищаем контейнер
+    out.innerHTML = '';
+    const memories = json.memories;
+
+    for (const agent in memories){
+      const section = document.createElement('div');
+      section.style.marginBottom = '15px';
+      const title = document.createElement('h4');
+      title.textContent = `🤖 ${agent}`;
+      section.appendChild(title);
+
+      const mem = memories[agent];
+      if (typeof mem === 'string'){
+        section.innerHTML += `<p>⚠️ ${mem}</p>`;
+      } else if (!mem.length){
+        section.innerHTML += `<p>(память пуста)</p>`;
+      } else {
+        mem.forEach((m, i) => {
+          const block = document.createElement('div');
+          block.style.margin = '8px 0';
+          block.style.padding = '6px 10px';
+          block.style.background = '#f8f8f8';
+          block.style.borderRadius = '6px';
+          block.style.fontSize = '14px';
+          block.innerHTML = `
+            <b>#${i+1}</b> ${m.task || '(нет задачи)'}<br>
+            ${m.result ? `🧩 <i>${m.result.slice(0,100)}...</i><br>` : ''}
+            ${m.context_sent ? `✂️ <b>context_sent:</b> ${m.context_sent.slice(0,100)}...<br>` : ''}
+          `;
+          // Добавляем кнопку разворачивания full_context
+          if (m.full_context) {
+            const btn = document.createElement('button');
+            btn.textContent = '📜 Показать полный контекст';
+            btn.style.marginTop = '5px';
+            btn.style.padding = '3px 8px';
+            btn.style.fontSize = '13px';
+            btn.style.border = '1px solid #ccc';
+            btn.style.borderRadius = '4px';
+            btn.style.cursor = 'pointer';
+            btn.style.background = '#fff';
+
+            const fullText = document.createElement('pre');
+            fullText.textContent = m.full_context;
+            fullText.style.display = 'none';
+            fullText.style.whiteSpace = 'pre-wrap';
+            fullText.style.background = '#f0f0f0';
+            fullText.style.padding = '8px';
+            fullText.style.borderRadius = '6px';
+            fullText.style.marginTop = '5px';
+
+            btn.addEventListener('click', () => {
+              const visible = fullText.style.display === 'block';
+              fullText.style.display = visible ? 'none' : 'block';
+              btn.textContent = visible ? '📜 Показать полный контекст' : '🔽 Скрыть контекст';
+            });
+
+            block.appendChild(btn);
+            block.appendChild(fullText);
+          }
+          section.appendChild(block);
+        });
+      }
+      out.appendChild(section);
+    }
+  } catch(e){
+    out.textContent = '❌ Ошибка: ' + e;
+  }
+}
+
+</script>
+</body>
+</html>

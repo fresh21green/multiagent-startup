@@ -1396,3 +1396,505 @@ UnboundLocalError: cannot access local variable 'webhook_url' where it is not as
 2025-10-13 22:03:29,024 - manager - INFO - Задача для tetrfg_20251013112153 завершена
 2025-10-13 22:08:01,903 - manager - INFO - Создан каталог: Test
 2025-10-13 22:08:01,921 - manager - INFO - Добавлен каталог 'Test' в agents.json
+2025-10-15 10:18:35,740 - manager - INFO - agent
+2025-10-15 10:18:35,753 - manager - INFO - bot_file_exist
+2025-10-15 10:18:43,717 - manager - INFO - agent
+2025-10-15 10:18:43,730 - manager - INFO - bot_file_exist
+2025-10-15 10:26:14,544 - manager - INFO - agent
+2025-10-15 10:26:14,557 - manager - INFO - bot_file_exist
+2025-10-15 11:12:08,149 - manager - ERROR - Не удалось загрузить метаданные: Expecting value: line 33 column 3 (char 734)
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 65, in load_meta
+    return json.loads(META_FILE.read_text(encoding="utf-8"))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 33 column 3 (char 734)
+2025-10-15 11:14:46,393 - manager - ERROR - Не удалось загрузить метаданные: Expecting value: line 33 column 3 (char 734)
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 65, in load_meta
+    return json.loads(META_FILE.read_text(encoding="utf-8"))
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 33 column 3 (char 734)
+2025-10-15 11:20:19,500 - manager - INFO - Creating agent 'test' in folder 'root' at C:\Users\Work\MyAiAgents\multiagent-startup\agents\root\test
+2025-10-15 11:20:19,536 - manager - INFO - Агент test успешно создан
+2025-10-15 11:36:14,554 - manager - INFO - Поручаем задачу всем агентам: Придумай интересный урок по обучению использования нейросетей
+2025-10-15 11:36:14,556 - manager - ERROR - Ошибка вызова локального агента: [Errno 2] No such file or directory: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\bot.py'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 26, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\bot.py'
+2025-10-15 11:36:14,557 - manager - ERROR - Ошибка при поручении агенту folder_demo: 'result'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 393, in handle
+    entry["last_task"] = {"task": task, "result": parse_llm_response(res["result"])}
+                                                                     ~~~^^^^^^^^^^
+KeyError: 'result'
+2025-10-15 11:36:14,561 - manager - INFO - Вызов локального агента strategist
+2025-10-15 11:36:14,773 - manager - INFO - Вызов локального агента copywriter
+2025-10-15 11:36:14,980 - manager - INFO - Вызов локального агента designer
+2025-10-15 11:36:15,184 - manager - ERROR - Ошибка вызова локального агента: [Errno 2] No such file or directory: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\bot.py'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 26, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\bot.py'
+2025-10-15 11:36:15,186 - manager - ERROR - Ошибка при поручении агенту folder_root: 'result'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 393, in handle
+    entry["last_task"] = {"task": task, "result": parse_llm_response(res["result"])}
+                                                                     ~~~^^^^^^^^^^
+KeyError: 'result'
+2025-10-15 11:36:15,193 - manager - INFO - Вызов локального агента assistant_default
+2025-10-15 11:36:15,237 - manager - INFO - Все агенты завершили выполнение задачи.
+2025-10-15 11:37:37,740 - manager - INFO - Вызов локального агента strategist
+2025-10-15 11:37:37,942 - manager - INFO - Вызов локального агента copywriter
+2025-10-15 11:37:38,144 - manager - INFO - Вызов локального агента designer
+2025-10-15 11:37:38,347 - manager - INFO - Вызов локального агента assistant_default
+2025-10-15 11:54:23,822 - manager - INFO - Поручаем задачу всем агентам: Составь короткий план по улучшению интерфейса мультиагентной системы
+2025-10-15 11:54:23,823 - manager - INFO - Вызов локального агента strategist
+2025-10-15 11:54:24,033 - manager - INFO - Вызов локального агента copywriter
+2025-10-15 11:54:24,237 - manager - INFO - Вызов локального агента designer
+2025-10-15 11:54:24,442 - manager - INFO - Вызов локального агента assistant_default
+2025-10-15 11:54:24,495 - manager - INFO - Все агенты завершили выполнение задачи.
+2025-10-15 11:54:47,134 - manager - INFO - Вызов локального агента strategist
+2025-10-15 11:54:47,337 - manager - INFO - Вызов локального агента copywriter
+2025-10-15 11:54:47,540 - manager - INFO - Вызов локального агента designer
+2025-10-15 11:54:47,744 - manager - INFO - Вызов локального агента assistant_default
+2025-10-15 11:58:18,677 - manager - INFO - Поручаем задачу всем агентам: Составь короткий план по улучшению интерфейса
+2025-10-15 11:58:18,679 - manager - INFO - Вызов локального агента strategist
+2025-10-15 11:58:18,888 - manager - INFO - Вызов локального агента copywriter
+2025-10-15 11:58:19,091 - manager - INFO - Вызов локального агента designer
+2025-10-15 11:58:19,297 - manager - INFO - Вызов локального агента assistant_default
+2025-10-15 11:58:19,347 - manager - INFO - Все агенты завершили выполнение задачи.
+2025-10-15 12:03:50,982 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:03:51,904 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:03:52,888 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:03:53,856 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:03:54,951 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:03:55,898 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:03:56,984 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:03:57,958 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:03:59,060 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:00,006 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:00,987 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:01,944 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:02,899 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:03,983 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:05,100 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:06,105 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:07,077 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:08,040 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:09,018 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:10,133 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:11,233 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:12,220 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:13,206 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:14,220 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:15,190 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:16,159 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:42,282 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:43,331 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:44,154 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:45,101 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:46,103 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:47,135 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:48,131 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:49,094 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:50,101 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:51,058 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:52,025 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:53,078 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:54,020 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:54,996 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:55,978 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:56,951 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:57,948 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:58,929 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:04:59,888 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:00,945 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:01,904 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:02,851 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:03,966 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:05,040 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:06,019 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:07,082 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:08,226 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:09,203 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:10,138 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:11,118 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:12,258 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:13,220 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:14,197 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:15,204 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:16,151 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:17,146 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:18,154 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:19,118 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:20,112 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:21,097 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:26,491 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:27,450 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:28,531 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:29,494 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:30,580 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:31,664 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:32,759 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:33,847 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:34,824 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:35,905 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:36,898 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:37,835 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:38,854 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:39,899 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:40,870 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:41,826 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:05:42,914 - manager - INFO - Демо-агенты обновлены: теперь используют AmveraLLM
+2025-10-15 12:07:56,133 - manager - INFO - ✅ Демо-агенты обновлены до LLM-версий (однократно).
+2025-10-15 12:07:57,165 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-15 12:08:43,196 - manager - INFO - Поручаем задачу всем агентам: Составь короткий план по улучшению интерфейса
+2025-10-15 12:08:43,965 - manager - INFO - Вызов локального агента strategist
+2025-10-15 12:08:58,795 - manager - INFO - Вызов локального агента copywriter
+2025-10-15 12:09:03,536 - manager - INFO - Вызов локального агента designer
+2025-10-15 12:09:17,757 - manager - INFO - Все агенты завершили выполнение задачи.
+2025-10-15 12:09:47,964 - manager - INFO - Вызов локального агента strategist
+2025-10-15 12:10:03,235 - manager - INFO - Вызов локального агента copywriter
+2025-10-15 12:10:12,529 - manager - INFO - Вызов локального агента designer
+2025-10-16 21:43:29,696 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 21:44:00,332 - manager - INFO - Вызов локального агента strategist
+2025-10-16 21:44:21,114 - manager - INFO - Вызов локального агента copywriter
+2025-10-16 21:44:38,294 - manager - INFO - Вызов локального агента designer
+2025-10-16 21:52:56,433 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 21:53:07,531 - manager - INFO - Вызов локального агента strategist
+2025-10-16 21:53:30,783 - manager - INFO - Вызов локального агента copywriter
+2025-10-16 21:53:53,812 - manager - INFO - Вызов локального агента designer
+2025-10-16 21:57:44,869 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 21:57:54,683 - manager - INFO - Назначаем задачу 'Как улучшить UX интерфейса' агенту designer
+2025-10-16 21:57:55,350 - manager - INFO - Вызов локального агента designer
+2025-10-16 21:58:21,666 - manager - INFO - Задача для designer завершена
+2025-10-16 22:01:38,658 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:01:51,343 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:02:48,256 - manager - INFO - Вызов локального агента strategist
+2025-10-16 22:03:14,330 - manager - INFO - Вызов локального агента copywriter
+2025-10-16 22:03:32,387 - manager - INFO - Вызов локального агента designer
+2025-10-16 22:03:34,296 - manager - INFO - Вызов локального агента assistant_default
+2025-10-16 22:03:34,298 - manager - INFO - Вызов локального агента assistant_default
+2025-10-16 22:10:54,460 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:12:05,809 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:13:43,961 - manager - INFO - ✅ Демо-агенты обновлены до LLM-версий (однократно).
+2025-10-16 22:13:45,072 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:14:07,888 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:14:29,249 - manager - INFO - Вызов локального агента strategist
+2025-10-16 22:14:32,716 - manager - INFO - Вызов локального агента copywriter
+2025-10-16 22:15:33,225 - manager - INFO - Вызов локального агента designer
+2025-10-16 22:15:39,563 - manager - INFO - Вызов локального агента assistant_default
+2025-10-16 22:15:39,567 - manager - INFO - Вызов локального агента assistant_default
+2025-10-16 22:23:30,447 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:24:31,870 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:25:48,713 - manager - WARNING - У агента strategist нет bot.py, пропуск.
+2025-10-16 22:25:48,714 - manager - WARNING - У агента copywriter нет bot.py, пропуск.
+2025-10-16 22:25:48,715 - manager - WARNING - У агента designer нет bot.py, пропуск.
+2025-10-16 22:25:48,715 - manager - WARNING - У агента assistant_default нет bot.py, пропуск.
+2025-10-16 22:25:48,716 - manager - ERROR - Ошибка вызова локального агента: [Errno 2] No such file or directory: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\root\\assistant_default\\bot.py'
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 26, in call_agent_local
+    spec.loader.exec_module(mod)
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^
+  File "<frozen importlib._bootstrap_external>", line 1023, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1160, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1218, in get_data
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\Work\\MyAiAgents\\multiagent-startup\\agents\\root\\assistant_default\\bot.py'
+2025-10-16 22:26:34,212 - manager - INFO - ✅ Демо-агенты обновлены до LLM-версий (однократно).
+2025-10-16 22:26:35,729 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:27:04,886 - manager - INFO - Вызов локального агента strategist
+2025-10-16 22:27:08,205 - manager - INFO - Вызов локального агента copywriter
+2025-10-16 22:27:12,351 - manager - INFO - Вызов локального агента designer
+2025-10-16 22:28:07,722 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:29:07,984 - manager - INFO - ✅ Демо-агенты обновлены до LLM-версий (однократно).
+2025-10-16 22:29:09,265 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:32:38,463 - manager - WARNING - У агента strategist нет bot.py, пропуск.
+2025-10-16 22:32:38,464 - manager - WARNING - У агента copywriter нет bot.py, пропуск.
+2025-10-16 22:32:38,465 - manager - WARNING - У агента designer нет bot.py, пропуск.
+2025-10-16 22:35:49,316 - manager - INFO - ✅ Демо-агенты обновлены до LLM-версий (однократно).
+2025-10-16 22:35:50,457 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:36:08,822 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:37:06,265 - manager - INFO - Вызов локального агента strategist
+2025-10-16 22:37:18,950 - manager - INFO - Вызов локального агента copywriter
+2025-10-16 22:37:28,871 - manager - INFO - Вызов локального агента designer
+2025-10-16 22:37:30,977 - manager - INFO - Вызов локального агента assistant_default
+2025-10-16 22:37:30,979 - manager - INFO - Вызов локального агента assistant_default
+2025-10-16 22:40:01,379 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:40:41,264 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:41:12,765 - manager - INFO - Назначаем задачу 'Придумай крутой веб-интерфейс для мультиагентной системы' агенту copywriter
+2025-10-16 22:41:14,086 - manager - INFO - Вызов локального агента copywriter
+2025-10-16 22:41:17,035 - manager - INFO - Задача для copywriter завершена
+2025-10-16 22:45:36,958 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:46:00,707 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:47:39,289 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:48:55,683 - manager - INFO - ✅ Демо-агенты обновлены до LLM-версий (однократно).
+2025-10-16 22:48:56,935 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:49:51,509 - manager - INFO - ✅ Демо-агенты обновлены до LLM-версий (однократно).
+2025-10-16 22:49:52,736 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:52:40,346 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:52:56,365 - manager - INFO - Назначаем задачу 'Что такое зима' агенту assistant_default
+2025-10-16 22:52:56,375 - manager - INFO - Вызов локального агента assistant_default
+2025-10-16 22:52:56,383 - manager - INFO - Задача для assistant_default завершена
+2025-10-16 22:53:17,442 - manager - INFO - agent
+2025-10-16 22:53:17,471 - manager - INFO - bot_file_exist
+2025-10-16 22:53:31,150 - manager - INFO - Назначаем задачу 'Что такое лето' агенту copywriter
+2025-10-16 22:53:32,582 - manager - INFO - Вызов локального агента copywriter
+2025-10-16 22:53:33,880 - manager - INFO - Задача для copywriter завершена
+2025-10-16 22:54:17,789 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 22:54:22,847 - manager - INFO - Назначаем задачу 'Что такое лето' агенту copywriter
+2025-10-16 22:54:24,061 - manager - INFO - Вызов локального агента copywriter
+2025-10-16 22:54:37,291 - manager - INFO - Задача для copywriter завершена
+2025-10-16 22:55:00,657 - manager - INFO - Вызов локального агента strategist
+2025-10-16 22:55:25,896 - manager - INFO - Вызов локального агента copywriter
+2025-10-16 22:55:45,585 - manager - INFO - Вызов локального агента designer
+2025-10-16 22:55:46,937 - manager - INFO - Вызов локального агента assistant_default
+2025-10-16 22:55:46,940 - manager - INFO - Вызов локального агента assistant_default
+2025-10-16 23:17:09,648 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 23:18:34,609 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 23:24:13,012 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 23:25:08,997 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 23:25:30,651 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 23:25:49,174 - manager - INFO - Вызов локального агента strategist
+2025-10-16 23:26:08,424 - manager - INFO - Вызов локального агента copywriter
+2025-10-16 23:26:36,681 - manager - INFO - Вызов локального агента designer
+2025-10-16 23:27:11,612 - manager - INFO - Вызов локального агента assistant_default
+2025-10-16 23:27:11,616 - manager - INFO - Вызов локального агента assistant_default
+2025-10-16 23:36:15,518 - manager - DEBUG - Демо-агенты уже обновлены ранее — пропуск upgrade_demo_agents_to_llm()
+2025-10-16 23:40:56,236 - manager - INFO - Вызов локального агента strategist
+2025-10-16 23:41:21,714 - manager - INFO - Вызов локального агента copywriter
+2025-10-16 23:41:40,870 - manager - INFO - Вызов локального агента designer
+2025-10-16 23:42:03,782 - manager - INFO - Вызов локального агента assistant_default
+2025-10-16 23:42:19,169 - manager - INFO - Вызов локального агента assistant_default
+2025-10-16 23:42:22,371 - manager - ERROR - Ошибка вызова локального агента: HTTP ошибка 400: Client error '400 Bad Request' for url 'https://kong-proxy.yc.amvera.ru/api/v1/models/gpt'
+For more information check: https://httpstatuses.com/400
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 373, in _generate
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_models.py", line 749, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '400 Bad Request' for url 'https://kong-proxy.yc.amvera.ru/api/v1/models/gpt'
+For more information check: https://httpstatuses.com/400
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 30, in call_agent_local
+    res = mod.handle_task(task)
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\root\assistant_default\bot.py", line 15, in handle_task
+    resp = llm.invoke(query)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 395, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1025, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 842, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1091, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 382, in _generate
+    raise ValueError(f"HTTP ошибка {e.response.status_code}: {e}") from e
+ValueError: HTTP ошибка 400: Client error '400 Bad Request' for url 'https://kong-proxy.yc.amvera.ru/api/v1/models/gpt'
+For more information check: https://httpstatuses.com/400
+2025-10-17 00:23:43,552 - manager - INFO - Вызов локального агента designer
+2025-10-17 00:50:59,989 - manager - ERROR - Ошибка при штурме агента strategist: name 'context' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 211, in brainstorm
+    f"Вот что уже предложили другие участники:\n{context}\n\n"
+                                                 ^^^^^^^
+NameError: name 'context' is not defined
+2025-10-17 00:50:59,992 - manager - ERROR - Ошибка при штурме агента copywriter: name 'context' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 211, in brainstorm
+    f"Вот что уже предложили другие участники:\n{context}\n\n"
+                                                 ^^^^^^^
+NameError: name 'context' is not defined
+2025-10-17 00:50:59,993 - manager - ERROR - Ошибка при штурме агента designer: name 'context' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 211, in brainstorm
+    f"Вот что уже предложили другие участники:\n{context}\n\n"
+                                                 ^^^^^^^
+NameError: name 'context' is not defined
+2025-10-17 00:50:59,994 - manager - ERROR - Ошибка при штурме агента assistant_default: name 'context' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 211, in brainstorm
+    f"Вот что уже предложили другие участники:\n{context}\n\n"
+                                                 ^^^^^^^
+NameError: name 'context' is not defined
+2025-10-17 00:51:00,605 - manager - INFO - Вызов локального агента assistant_default
+2025-10-17 00:55:24,773 - manager - ERROR - Ошибка при штурме агента strategist: name 'context' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 211, in brainstorm
+    f"Вот что уже предложили другие участники:\n{context}\n\n"
+                                                 ^^^^^^^
+NameError: name 'context' is not defined
+2025-10-17 00:55:24,776 - manager - ERROR - Ошибка при штурме агента copywriter: name 'context' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 211, in brainstorm
+    f"Вот что уже предложили другие участники:\n{context}\n\n"
+                                                 ^^^^^^^
+NameError: name 'context' is not defined
+2025-10-17 00:55:24,777 - manager - ERROR - Ошибка при штурме агента designer: name 'context' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 211, in brainstorm
+    f"Вот что уже предложили другие участники:\n{context}\n\n"
+                                                 ^^^^^^^
+NameError: name 'context' is not defined
+2025-10-17 00:55:24,778 - manager - ERROR - Ошибка при штурме агента assistant_default: name 'context' is not defined
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\main.py", line 211, in brainstorm
+    f"Вот что уже предложили другие участники:\n{context}\n\n"
+                                                 ^^^^^^^
+NameError: name 'context' is not defined
+2025-10-17 00:55:25,376 - manager - INFO - Вызов локального агента assistant_default
+2025-10-17 00:58:34,176 - manager - INFO - Вызов локального агента strategist
+2025-10-17 00:58:54,621 - manager - INFO - Вызов локального агента copywriter
+2025-10-17 00:59:04,194 - manager - INFO - Вызов локального агента designer
+2025-10-17 00:59:22,266 - manager - INFO - Вызов локального агента assistant_default
+2025-10-17 00:59:32,930 - manager - INFO - Вызов локального агента assistant_default
+2025-10-17 00:59:33,558 - manager - ERROR - Ошибка вызова локального агента: HTTP ошибка 400: Client error '400 Bad Request' for url 'https://kong-proxy.yc.amvera.ru/api/v1/models/gpt'
+For more information check: https://httpstatuses.com/400
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 373, in _generate
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_models.py", line 749, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '400 Bad Request' for url 'https://kong-proxy.yc.amvera.ru/api/v1/models/gpt'
+For more information check: https://httpstatuses.com/400
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 30, in call_agent_local
+    res = mod.handle_task(task)
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\root\assistant_default\bot.py", line 15, in handle_task
+    resp = llm.invoke(query)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 395, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1025, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 842, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1091, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 382, in _generate
+    raise ValueError(f"HTTP ошибка {e.response.status_code}: {e}") from e
+ValueError: HTTP ошибка 400: Client error '400 Bad Request' for url 'https://kong-proxy.yc.amvera.ru/api/v1/models/gpt'
+For more information check: https://httpstatuses.com/400
+2025-10-17 01:08:13,572 - manager - INFO - Вызов локального агента strategist
+2025-10-17 01:08:34,524 - manager - INFO - Вызов локального агента copywriter
+2025-10-17 01:08:43,059 - manager - INFO - Вызов локального агента designer
+2025-10-17 01:09:03,191 - manager - INFO - Вызов локального агента assistant_default
+2025-10-17 01:09:17,104 - manager - INFO - Вызов локального агента assistant_default
+2025-10-17 01:09:18,068 - manager - ERROR - Ошибка вызова локального агента: HTTP ошибка 400: Client error '400 Bad Request' for url 'https://kong-proxy.yc.amvera.ru/api/v1/models/gpt'
+For more information check: https://httpstatuses.com/400
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 373, in _generate
+    response.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_models.py", line 749, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '400 Bad Request' for url 'https://kong-proxy.yc.amvera.ru/api/v1/models/gpt'
+For more information check: https://httpstatuses.com/400
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\utils.py", line 30, in call_agent_local
+    res = mod.handle_task(task)
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\root\assistant_default\bot.py", line 15, in handle_task
+    resp = llm.invoke(query)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 395, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1025, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 842, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1091, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 382, in _generate
+    raise ValueError(f"HTTP ошибка {e.response.status_code}: {e}") from e
+ValueError: HTTP ошибка 400: Client error '400 Bad Request' for url 'https://kong-proxy.yc.amvera.ru/api/v1/models/gpt'
+For more information check: https://httpstatuses.com/400

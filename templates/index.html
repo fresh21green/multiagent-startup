@@ -17,7 +17,7 @@
       <button type="submit">Создать папку</button>
     </form>
 
-    <div id="folderMessage"></div>
+    
     <div class="ai-creator block-section">
       <h2>Создать сотрудника</h2>
       <form action="/create_agent" method="post" class="manager-fields">
@@ -38,22 +38,26 @@
       </form>
     </div>
 
+    <div id="folderMessage"></div>
+
 
     <div id="folders-container">
       {% for folder, agents in folders.items() %}
-        <section id="folder-{{ folder }}" class="folder">
+        <section id="folder-{{ folder }}" class="folder" data-folder="{{ folder }}">
           <div class="folder-header">
             <h2 class="folder-title" onclick="toggleFolder('{{ folder }}')">📂 {{ folder }}</h2>
             <button class="delete-folder-btn" onclick="deleteFolder('{{ folder }}')">🗑️</button>
           </div>
+
           <ul class="agents-list" id="agents-{{ folder }}" style="display:none;">
             {% for agent in agents %}
-              <li id="agent-{{ agent.slug }}">
+              <li>
                 🤖 <a href="/agent/{{ agent.slug }}">{{ agent.name }}</a>
-                {% if agent.deploy_url %}
-                  — 🌐 <small>{{ agent.deploy_url }}</small>
-                {% endif %}
-                <button class="delete-btn" onclick="deleteAgent('{{ agent.slug }}', '{{ folder }}')">🗑️</button>
+                {% if agent.deploy_url %} — 🌐 <small>{{ agent.deploy_url }}</small>{% endif %}
+
+                <!-- Новые кнопки -->
+                <button onclick="delegatePrompt('{{ agent.slug }}')" title="Передать задачу другому агенту">✉️</button>
+                <button onclick="addConnectionPrompt('{{ agent.slug }}')" title="Добавить связь">➕ связь</button>
               </li>
             {% endfor %}
             {% if agents|length == 0 %}
@@ -61,17 +65,28 @@
             {% endif %}
           </ul>
         </section>
-  
       {% endfor %}
     </div>
 
+
     {% if agents %}
     <div class="ai-task-sender block-section">
-    <h2>Поручить задачу сотрудникам</h2>
-      <form action="/assign_task_all" method="post">
-          <textarea name="task" id="global-task" placeholder="Введите общую задачу..." required></textarea>
-          <button id="assign-all-btn" onclick="assignTaskAll()">Поручить задачу сотрудникам</button>
-      </form>
+      <section id="assignAll">
+      <h2>Поручить задачу всем в каталоге</h2>
+        <form id="assignForm" method="post">
+          <label>Каталог:</label>
+          <select name="folder" id="folderSelect">
+            {% for folder in folders.keys() %}
+              <option value="{{ folder }}">{{ folder }}</option>
+            {% endfor %}
+          </select>
+
+          <textarea name="task" id="taskInput" placeholder="Введите задачу..." required></textarea>
+          <button type="submit">Отправить задачу</button>
+        </form>
+
+        <div id="assignResult"></div>
+      </section>
     </div>
     {% endif %}
 
@@ -92,18 +107,18 @@
             <input type="hidden" name="slug" value="{{ agent.slug }}">
             <input name="task"  id="task-{{ agent.slug }}" placeholder="Задача для этого сотрудника" required>
             <button type="submit" id="btn-{{ agent.slug }}" onclick="assignTask('{{ agent.slug }}')">Отправить задачу</button>
-            <div class="result markdown-body" id="result-{{ agent.slug }}"></div>
           </div>
           <form action="/delete_agent" method="post" style="display:inline;">
             <input type="hidden" name="slug" value="{{ agent.slug }}">
             <button type="submit">Удалить сотрудника</button>
           </form>
+          <div class="result markdown-body" id="result-{{ agent.slug }}"></div>
           {% if agent.last_task %}
             <div class="last-task">
 
               <div class="text-section">
                 <div class="task-header">Последняя задача:</div>
-                {{agent.last_task.task }}
+                <div class="task">{{agent.last_task.task }}</div>
               </div>
 
               <div class="text-section">
@@ -186,108 +201,72 @@ document.getElementById("folderForm").addEventListener("submit", async (e) => {
 
 
 /* === Создание агента без перезагрузки === */
+// === Автоматическое обновление секции "Сотрудники" после создания сотрудника ===
 document.querySelector("form[action='/create_agent']").addEventListener("submit", async (e) => {
   e.preventDefault();
 
   const form = e.target;
-  const message = document.getElementById("folderMessage");
   const formData = new FormData(form);
+  const folder = formData.get("folder") || "root";
+  const name = formData.get("name");
+  const msg = document.getElementById("folderMessage");
+  msg.textContent = "⏳ Создание сотрудника...";
 
   try {
     const res = await fetch("/create_agent", { method: "POST", body: formData });
     if (res.redirected || res.ok) {
-      const folder = formData.get("folder") || "root";
-      const name = formData.get("name");
-      const slug = name.toLowerCase().replace(/[^a-z0-9_-]/g, "_");
+      msg.textContent = `✅ Сотрудник "${name}" создан в каталоге "${folder}"`;
 
-      // --- Добавляем в папку ---
-      let folderSection = document.getElementById("folder-" + folder);
-      if (!folderSection) {
-        const container = document.getElementById("folders-container");
-        const newFolder = document.createElement("section");
-        newFolder.id = "folder-" + folder;
-        newFolder.className = "folder";
-        newFolder.innerHTML = `
-          <div class="folder-header">
-            <h2 class="folder-title" onclick="toggleFolder('${folder}')">📂 ${folder}</h2>
-            <button class="delete-folder-btn" onclick="deleteFolder('${folder}')">🗑️</button>
+      // 🔹 Загружаем агентов выбранного каталога
+      const resAgents = await fetch(`/folder/${folder}`);
+      const agents = await resAgents.json();
+
+      // 🔹 Находим секцию "Сотрудники"
+      const agentsSection = document.querySelector(".ai-agents ul");
+      if (!agentsSection) return;
+
+      // 🔹 Переключаем "Сотрудники" на новый каталог
+      agentsSection.innerHTML = "";
+      agents.forEach(agent => {
+        const card = document.createElement("li");
+        card.className = "agent-card new-agent";
+        setTimeout(() => card.classList.add("visible"), 50);
+        card.id = `agent-card-${agent.slug}`;
+        card.innerHTML = `
+          <div class="ai-agent-header">
+            <h2>${agent.name}</h2>
+            <div class="agent-status" id="status-${agent.slug}">Статус: Готов</div>
+            <a href="/agent/${agent.slug}" target="_blank" class="agent-link">🔗 Перейти к сотруднику</a>
           </div>
-          <ul class="agents-list" id="agents-${folder}" style="display:block;">
-            <li id="agent-${slug}">
-              🤖 <a href="/agent/${slug}">${name}</a>
-              <button class="delete-btn" onclick="deleteAgent('${slug}', '${folder}')">🗑️</button>
-            </li>
-          </ul>
+          <div style="display:inline;">
+            <input type="hidden" name="slug" value="${agent.slug}">
+            <input name="task" id="task-${agent.slug}" placeholder="Задача для этого сотрудника" required>
+            <button type="submit" id="btn-${agent.slug}" onclick="assignTask('${agent.slug}')">Отправить задачу</button>
+          </div>
+          <div class="result markdown-body" id="result-${agent.slug}" style="display:none;"></div>
+          <form action="/delete_agent" method="post" style="display:inline;">
+            <input type="hidden" name="slug" value="${agent.slug}">
+            <button type="submit">Удалить сотрудника</button>
+          </form>
         `;
-        container.insertAdjacentElement("afterbegin", newFolder);
-      } else {
-        const ul = folderSection.querySelector("ul");
-        if (ul) {
-          // Удаляем "Пока пусто", если есть
-          const empty = ul.querySelector("em");
-          if (empty) empty.parentElement.remove();
+        agentsSection.appendChild(card);
+        setTimeout(() => card.classList.add("visible"), 50);
+      });
 
-          const li = document.createElement("li");
-          li.id = "agent-" + slug;
-          li.innerHTML = `🤖 <a href="/agent/${slug}">${name}</a>
-                          <button class="delete-btn" onclick="deleteAgent('${slug}', '${folder}')">🗑️</button>`;
-          ul.appendChild(li);
-        }
-      }
+      // 🔹 Раскрываем соответствующий каталог
+      const list = document.getElementById("agents-" + folder);
+      if (list) list.style.display = "block";
+      document.querySelectorAll(".folder-title").forEach(el => el.classList.remove("active"));
+      const activeTitle = document.querySelector(`#folder-${folder} .folder-title`);
+      if (activeTitle) activeTitle.classList.add("active");
 
-      // --- Добавляем в общий блок "Сотрудники" ---
-      let aiAgentsDiv = document.querySelector(".ai-agents ul");
-
-      // Если блока ещё нет (первый агент) — создаём его
-      if (!aiAgentsDiv) {
-        const container = document.querySelector(".ai-agents");
-        if (!container) {
-          // Создаём блок ai-agents, если его вообще нет
-          const div = document.createElement("div");
-          div.className = "ai-agents";
-          div.innerHTML = `<ul id="agents-list"></ul>`;
-          document.querySelector(".container").appendChild(div);
-          aiAgentsDiv = div.querySelector("ul");
-        } else {
-          aiAgentsDiv = document.createElement("ul");
-          container.appendChild(aiAgentsDiv);
-        }
-      }
-
-      // Добавляем карточку агента
-      const agentCard = document.createElement("li");
-      agentCard.className = "agent-card";
-      agentCard.id = "agent-card-" + slug;
-      agentCard.innerHTML = `
-        <div class="ai-agent-header">
-          <h2>${name}</h2>
-          <div class="agent-status" id="status-${slug}">Статус: Готов</div>
-          <a href="/agent/${slug}" target="_blank" class="agent-link">🔗 Перейти к сотруднику</a>
-        </div>
-        <div style="display:inline;">
-          <input type="hidden" name="slug" value="${slug}">
-          <input name="task" id="task-${slug}" placeholder="Задача для этого сотрудника" required>
-          <button type="submit" id="btn-${slug}" onclick="assignTask('${slug}')">Отправить задачу</button>
-          <div class="result markdown-body" id="result-${slug}"></div>
-        </div>
-        <form action="/delete_agent" method="post" style="display:inline;">
-          <input type="hidden" name="slug" value="${slug}">
-          <button type="submit">Удалить сотрудника</button>
-        </form>
-      `;
-      if(folder == 'root'){
-        aiAgentsDiv.appendChild(agentCard);
-      }
-      
-
-      message.textContent = "✅ Агент '" + name + "' успешно создан!";
+      // Очистка формы
       form.reset();
     } else {
-      message.textContent = "❌ Ошибка при создании агента.";
+      msg.textContent = "⚠️ Ошибка при создании сотрудника.";
     }
   } catch (err) {
-    console.error(err);
-    message.textContent = "⚠️ Ошибка соединения с сервером.";
+    msg.textContent = "❌ Ошибка: " + err.message;
   }
 });
 
@@ -354,8 +333,8 @@ async function toggleFolder(folder) {
           <input type="hidden" name="slug" value="${agent.slug}">
           <input name="task" id="task-${agent.slug}" placeholder="Задача для этого сотрудника" required>
           <button type="submit" id="btn-${agent.slug}" onclick="assignTask('${agent.slug}')">Отправить задачу</button>
-          <div class="result markdown-body" id="result-${agent.slug}"></div>
         </div>
+        <div class="result markdown-body" id="result-${agent.slug}"></div>
         <form action="/delete_agent" method="post" style="display:inline;">
           <input type="hidden" name="slug" value="${agent.slug}">
           <button type="submit">Удалить сотрудника</button>
@@ -366,7 +345,7 @@ async function toggleFolder(folder) {
           <div class="last-task">
             <div class="text-section">
               <div class="task-header">Последняя задача:</div>
-              ${agent.last_task.task}
+              <div class="task">${ agent.last_task.task }</div>
             </div>
             <div class="text-section">
               <div class="task-header">Результат:</div> 
@@ -418,10 +397,14 @@ async function deleteAgent(slug, folder) {
   }
 }
 async function deleteFolder(folder) {
+  console.log("Удаляем каталог:", folder);
   if (!confirm("Удалить каталог '" + folder + "'? Он должен быть пуст.")) return;
 
   const formData = new FormData();
-  formData.append("name", folder);
+  formData.append("name", encodeURIComponent(folder));
+  console.log("Отправляем:", [...formData.entries()]);
+
+  
 
   try {
     const res = await fetch("/delete_folder", { method: "POST", body: formData });
@@ -442,6 +425,126 @@ async function deleteFolder(folder) {
     alert("⚠️ Ошибка соединения с сервером.");
   }
 }
+
+async function delegatePrompt(fromSlug){
+  const to = prompt('Введите slug получателя:');
+  if(!to) return;
+  const message = prompt('Введите сообщение для делегирования:');
+  if(!message) return;
+
+  const fd = new FormData();
+  fd.append('from_slug', fromSlug);
+  fd.append('to_slug', to);
+  fd.append('message', message);
+
+  const res = await fetch('/delegate_task', { method:'POST', body: fd });
+  const json = await res.json();
+  alert(json.ok ? '✅ Сообщение отправлено' : '❌ Ошибка: ' + (json.detail || json.error || 'неизвестно'));
+}
+
+async function addConnectionPrompt(fromSlug){
+  const to = prompt('Добавить связь с (slug другого агента):');
+  if(!to) return;
+  const fd = new FormData();
+  fd.append('from_slug', fromSlug);
+  fd.append('to_slug', to);
+
+  const res = await fetch('/add_connection', { method:'POST', body: fd });
+  const json = await res.json();
+  if(json.ok && json.added){
+    alert('✅ Связь добавлена');
+  } else if(json.ok){
+    alert('⚠️ Связь уже существует');
+  } else {
+    alert('❌ Ошибка при добавлении связи');
+  }
+}
+
+document.getElementById("assignForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const form = e.target;
+  const data = new FormData(form);
+  const folder = data.get("folder");
+  const task = data.get("task");
+  const resultDiv = document.getElementById("assignResult");
+
+  resultDiv.innerHTML = `⏳ Отправляем задачу команде <b>${folder}</b>...`;
+
+  try {
+    // 🔹 Получаем агентов выбранного каталога
+    const resAgents = await fetch(`/folder/${folder}`);
+    const agents = await resAgents.json();
+
+    // 🔹 Находим секцию "Сотрудники"
+    const agentsSection = document.querySelector(".ai-agents ul");
+    if (agentsSection) {
+      agentsSection.innerHTML = ""; // очищаем старых сотрудников (root)
+    }
+
+    // 🔹 Добавляем карточки агентов выбранного каталога
+    agents.forEach(agent => {
+      const li = document.createElement("li");
+      li.className = "agent-card";
+      li.id = `agent-card-${agent.slug}`;
+      li.innerHTML = `
+        <div class="ai-agent-header">
+          <h2>${agent.name}</h2>
+          <div class="agent-status" id="status-${agent.slug}">Статус:  Выполняется...<span class="spinner"></span></div>
+          <a href="/agent/${agent.slug}" target="_blank" class="agent-link">🔗 Перейти к сотруднику</a>
+        </div>
+
+        <div style="display:inline;">
+          <input type="hidden" name="slug" value="${agent.slug}">
+          <input name="task" id="task-${agent.slug}" placeholder="Задача для этого сотрудника" value="${task}" required>
+          <button type="submit" id="btn-${agent.slug}" onclick="assignTask('${agent.slug}')">Отправить задачу</button>
+          <div class="result markdown-body" id="result-${agent.slug}"></div>
+        </div>
+      `;
+      agentsSection.appendChild(li);
+    });
+
+    // 🧠 Отправляем задачу всем агентам выбранного каталога
+    const res = await fetch("/assign_task_folder", {
+      method: "POST",
+      body: data
+    });
+    const json = await res.json();
+
+    // 🔄 Обновляем статусы после выполнения
+    if (json.ok) {
+      for (const r of json.results) {
+        const statusBox = document.getElementById(`status-${r.agent}`);
+        const resultBox = document.getElementById(`result-${r.agent}`);
+
+        if (statusBox) {
+          if (r.error) {
+            statusBox.innerHTML = "Статус: ❌ Ошибка";
+          } else {
+            statusBox.innerHTML = "Статус: ✅ Выполнено";
+          }
+        }
+
+        if (resultBox) {
+          if (r.result && r.result.html) {
+            resultBox.style.display = "block";
+            resultBox.innerHTML = r.result.html;
+          } else if (r.result) {
+            resultBox.textContent = r.result;
+          } else if (r.error) {
+            resultBox.textContent = r.error;
+          }
+        }
+      }
+
+      resultDiv.innerHTML = `<h4>Задача выполнена для каталога <b>${folder}</b>.</h4>`;
+    } else {
+      resultDiv.innerHTML = "⚠️ Ошибка: " + (json.error || "неизвестно");
+    }
+  } catch (err) {
+    resultDiv.innerHTML = "❌ Ошибка: " + err.message;
+  }
+});
 </script>
 </body>
 

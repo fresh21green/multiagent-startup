@@ -21,6 +21,13 @@
     <label>Deploy URL (если агент развернут удалённо):</label><br>
     <input type="url" name="deploy_url" value="{{ agent.deploy_url }}" placeholder="https://example.com"><br><br>
 
+    <label>Каталог:</label>
+    <select name="folder" class="folder-select">
+        {% for f in folders %}
+            <option value="{{ f }}" {% if agent.folder == f %}selected{% endif %}>📁 {{ f }}</option>
+        {% endfor %}
+    </select>
+
     <button type="submit">💾 Сохранить изменения</button>
     <a href="/">⬅ Назад</a>
 </form>
