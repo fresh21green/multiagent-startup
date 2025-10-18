@@ -119,6 +119,10 @@ button{ cursor: pointer; margin-top:8px; padding:8px 12px; border-radius:6px; ba
     align-items: center;
 }
 
+#folderMessage{
+    margin: 0 0 25px;
+}
+
 .folder-title {
   cursor: pointer;
   background: #f5f5f5;
