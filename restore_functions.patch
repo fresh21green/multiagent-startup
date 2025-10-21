@@ -1,0 +1,194 @@
+diff --git a/static/js/core.js b/static/js/core.js
+--- a/static/js/core.js
++++ b/static/js/core.js
+@@
+ document.addEventListener("DOMContentLoaded", () => {
+   if (window.lucide) lucide.createIcons();
+   if (typeof AIManager !== "undefined" && AIManager.init) AIManager.init();
+   if (typeof refreshFolderSelect === "function") refreshFolderSelect();
+ });
++
++// === 🧠 Глобальный статус системы ===
++function setSystemStatus(state, message) {
++  const bar = document.getElementById("system-status-bar");
++  const text = document.getElementById("system-status-text");
++  const icon = document.getElementById("system-status-icon");
++  if (!bar || !text || !icon) return;
++
++  bar.classList.remove("active", "busy", "error");
++
++  switch (state) {
++    case "busy":
++      icon.textContent = "⚙️";
++      text.textContent = message || "Идёт обработка задачи...";
++      bar.classList.add("busy");
++      break;
++    case "error":
++      icon.textContent = "⚠️";
++      text.textContent = message || "Ошибка системы";
++      bar.classList.add("error");
++      break;
++    default:
++      icon.textContent = "🧠";
++      text.textContent = message || "Все агенты активны";
++      bar.classList.add("active");
++      break;
++  }
++}
++
++// === 🗂️ Обновление списка каталогов ===
++async function refreshFolderSelect() {
++  try {
++    const res = await fetch("/folders");
++    if (!res.ok) throw new Error("Не удалось получить список каталогов");
++    const folders = await res.json();
++    const select = document.getElementById("folder-select");
++    if (!select) return;
++    select.innerHTML = folders.map(f => `<option value="\${f}">\${f}</option>`).join("");
++  } catch (e) {
++    console.error("Ошибка при загрузке каталогов:", e);
++  }
++}
+diff --git a/static/js/office.js b/static/js/office.js
+--- a/static/js/office.js
++++ b/static/js/office.js
+@@
+   }
+ }
++
++// === 📋 Отправка задачи из правой панели ===
++async function assignTaskFromOffice(slug, task) {
++  const statusBlock = document.querySelector("#sp-meta");
++  const resultBox = document.querySelector("#sp-last-result");
++  setSystemStatus("busy", "⚙️ Выполняется задача...");
++  if (resultBox) resultBox.innerHTML = `<div class="spinner"></div> Выполняется...`;
++
++  try {
++    window.__OfficeGraph__?.setAgentStatus(slug, "running");
++    window.__OfficeGraph__?.refresh();
++
++    const res = await fetch("/assign_task", {
++      method: "POST",
++      headers: { "Content-Type": "application/x-www-form-urlencoded" },
++      body: new URLSearchParams({ slug, task }),
++    });
++    const data = await res.json();
++    if (!data.ok) throw new Error(data.error || "Ошибка выполнения");
++
++    window.__OfficeGraph__?.setAgentStatus(slug, "done", data.result?.html, task);
++    window.__OfficeGraph__?.refresh();
++
++    if (statusBlock) {
++      statusBlock.innerHTML = `
++        <div>Тип: <b>Сотрудник</b></div>
++        <div>Каталог: <b>\${currentNode?.folder || "—"}</b></div>
++        <div>Статус: <b>✅ Готово</b></div>`;
++    }
++
++    if (resultBox) {
++      resultBox.innerHTML = data.result?.html || data.result || "—";
++      resultBox.scrollTop = resultBox.scrollHeight;
++    }
++
++    const showLink = document.getElementById("sp-show-result");
++    if (showLink) {
++      showLink.style.display = "inline-block";
++      showLink.textContent = "📊 Показать результат";
++      showLink.onclick = (e) => {
++        e.preventDefault();
++        showAgentResultBlock(slug, data.result?.html || data.result || "—");
++      };
++    }
++    setSystemStatus("active", "🧠 Все агенты активны");
++  } catch (err) {
++    console.error(err);
++    window.__OfficeGraph__?.setAgentStatus(slug, "error");
++    window.__OfficeGraph__?.refresh();
++    if (resultBox)
++      resultBox.innerHTML = `<p class="error">❌ Ошибка: \${err.message}</p>`;
++    setSystemStatus("error", "❌ Ошибка при выполнении задачи");
++  }
++}
++
++// === 📋 Показ результатов агента ===
++function showAgentResultBlock(agentName, resultMarkdown) {
++  let block = document.getElementById("agent-results-block");
++  if (!block) {
++    block = document.createElement("section");
++    block.id = "agent-results-block";
++    block.className = "panel";
++    block.style.marginTop = "40px";
++    block.innerHTML = `
++      <h2>📋 Результат агента</h2>
++      <div id="agent-results-content" class="markdown-body"></div>`;
++    document.body.appendChild(block);
++  }
++  const content = document.getElementById("agent-results-content");
++  content.innerHTML = `<h3>\${agentName}</h3>\${marked.parse(resultMarkdown || "_(нет данных)_")}`;
++  block.scrollIntoView({ behavior: "smooth" });
++}
++
++// === 🧠 Результаты мозгового штурма ===
++function showBrainstormResults(summary, discussion) {
++  let resultsBlock = document.getElementById("brainstorm-results-block");
++  if (!resultsBlock) {
++    resultsBlock = document.createElement("section");
++    resultsBlock.id = "brainstorm-results-block";
++    resultsBlock.className = "panel";
++    resultsBlock.style.marginTop = "40px";
++    resultsBlock.innerHTML = `
++      <h2>🧠 Результаты мозгового штурма</h2>
++      <div id="brainstorm-discussion" class="markdown-body"></div>
++      <div id="brainstorm-summary" class="markdown-body" style="margin-top:15px;"></div>`;
++    document.body.appendChild(resultsBlock);
++  }
++  const discEl = document.getElementById("brainstorm-discussion");
++  const sumEl = document.getElementById("brainstorm-summary");
++  discEl.innerHTML = discussion.map(d => `<div><b>\${d.agent}</b>: \${marked.parse(d.response)}</div>`).join("");
++  sumEl.innerHTML = marked.parse(summary || "_(нет данных)_");
++  resultsBlock.scrollIntoView({ behavior: "smooth" });
++}
+diff --git a/static/js/brainstorm.js b/static/js/brainstorm.js
+--- a/static/js/brainstorm.js
++++ b/static/js/brainstorm.js
+@@
+   } catch (err) {
+     output.textContent = `❌ Ошибка: \${err.message}`;
+     progress.style.background = "#ef476f";
+     setSystemStatus("error", "❌ Ошибка мозгового штурма");
+   }
+ }
++
++// === 🧩 Итоговое отображение результатов мозгового штурма ===
++function finalizeBrainstorm(summary, discussion) {
++  const output = document.getElementById("brainOut");
++  const link = document.createElement("a");
++  link.href = "#brainstorm-results-block";
++  link.textContent = "📊 Показать результаты";
++  link.className = "show-result-link";
++  link.onclick = (e) => {
++    e.preventDefault();
++    showBrainstormResults(summary, discussion);
++  };
++  output.appendChild(link);
++}
++
++function showBrainstormResults(summary, discussion) {
++  let resultsBlock = document.getElementById("brainstorm-results-block");
++  if (!resultsBlock) {
++    resultsBlock = document.createElement("section");
++    resultsBlock.id = "brainstorm-results-block";
++    resultsBlock.className = "panel";
++    resultsBlock.style.marginTop = "40px";
++    resultsBlock.innerHTML = `
++      <h2>🧠 Результаты мозгового штурма</h2>
++      <div id="brainstorm-discussion" class="markdown-body"></div>
++      <div id="brainstorm-summary" class="markdown-body" style="margin-top:15px;"></div>`;
++    document.body.appendChild(resultsBlock);
++  }
++  const discEl = document.getElementById("brainstorm-discussion");
++  const sumEl = document.getElementById("brainstorm-summary");
++  discEl.innerHTML = discussion.map(d => `<div><b>\${d.agent}</b>: \${marked.parse(d.response)}</div>`).join("");
++  sumEl.innerHTML = marked.parse(summary || "_(нет данных)_");
++  resultsBlock.scrollIntoView({ behavior: "smooth" });
++}

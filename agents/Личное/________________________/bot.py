@@ -38,7 +38,7 @@ TELEGRAM_TOKEN = globals().get("TELEGRAM_TOKEN", None)
 TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}" if TELEGRAM_TOKEN else None
 
 # Подсказка (промпт) агента
-PROMPT = __PROMPT_PLACEHOLDER__
+PROMPT = """"""
 
 # --- ИНИЦИАЛИЗАЦИЯ ---
 app = FastAPI()

@@ -1,0 +1,891 @@
+
+:root {
+  --bg-main: #0d1b2a;
+  --bg-panel: rgba(17, 27, 47, 0.6);
+  --text-main: #e0e8f0;
+  --accent: #00b4d8;
+  --accent-glow: #48cae4;
+  --error: #ef476f;
+  --success: #06d6a0;
+  --warning: #ffd166;
+}
+.sidebar {
+  background: linear-gradient(180deg, #0d1b2a, #1b263b);
+  width: 250px;
+  color: var(--accent-glow);
+  height: 100vh;
+  padding: 20px;
+  position: fixed;
+}
+.main-content {
+  margin-left: 330px;
+  padding: 55px 0 20px 0;
+  background: radial-gradient(circle at 20% 20%, #0d1b2a, #1b263b);
+  color: var(--text-main);
+  min-height: 100vh;
+}
+.agent-card {
+  background: var(--bg-panel);
+  border: 1px solid rgba(0, 180, 216, 0.3);
+  border-radius: 12px;
+  padding: 15px;
+  margin-bottom: 10px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 12px rgba(0, 180, 216, 0.2);
+  transition: 0.3s;
+}
+.agent-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(0, 180, 216, 0.5);
+}
+
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 8px var(--accent); }
+  50% { box-shadow: 0 0 20px var(--accent-glow); }
+  100% { box-shadow: 0 0 8px var(--accent); }
+}
+.status.running { color: var(--warning); animation: glowPulse 2s infinite; }
+.status.done { color: var(--success); }
+.status.error { color: var(--error); }
+
+/* === Стили страницы index.html === */
+
+.page-header {
+  margin-bottom: 20px;
+}
+.page-header .subtitle {
+  color: var(--text-dim);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+.message {
+  background: rgba(0, 180, 216, 0.1);
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  border-radius: 8px;
+  color: var(--accent-glow);
+  margin-bottom: 20px;
+  display: none;
+}
+.message.show { display: block; }
+
+/* === Каталоги === */
+.folder {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 10px rgba(0, 180, 216, 0.15);
+}
+.folder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.folder-title {
+  cursor: pointer;
+  color: var(--accent-glow);
+  margin: 0;
+}
+.folder-actions button {
+  margin-left: 8px;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.folder-actions button:hover {
+  background: var(--accent-glow);
+  box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* === Список агентов внутри каталога === */
+.agents-list {
+  list-style: none;
+  margin-top: 12px;
+  padding: 0;
+}
+.agents-list li {
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+.agents-list li:hover {
+  background: rgba(0, 180, 216, 0.1);
+}
+.agents-list a {
+  color: var(--text-main);
+  text-decoration: none;
+}
+.agents-list button {
+  margin-left: 10px;
+  background: rgba(239, 71, 111, 0.2);
+  color: var(--error);
+  border: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.agents-list button:hover {
+  background: var(--error);
+  color: #fff;
+}
+
+/* === Навигация тем === */
+.theme-toggle {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.theme-toggle button {
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  color: var(--text-main);
+  border-radius: 6px;
+  padding: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.theme-toggle button:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+/* === 🎛️ Multiagent System — Theme: AI Command Center v2 === */
+/* Улучшенный UI: иконки, кнопки, поля, плавные эффекты, фокус, glow */
+
+:root {
+  --bg-main: #0d1b2a;
+  --bg-panel: rgba(17, 27, 47, 0.6);
+  --text-main: #e0e8f0;
+  --text-dim: #9ba9bb;
+  --accent: #00b4d8;
+  --accent-glow: #48cae4;
+  --accent-strong: #00e0ff;
+  --success: #06d6a0;
+  --warning: #ffd166;
+  --error: #ef476f;
+  --border: rgba(0, 180, 216, 0.25);
+  --radius: 12px;
+  --transition: 0.3s ease;
+  --shadow-accent: 0 0 15px rgba(0, 180, 216, 0.3);
+}
+
+/* === БАЗОВЫЙ ФОН === */
+body {
+  margin: 0;
+  background: radial-gradient(circle at 20% 20%, #0d1b2a, #1b263b);
+  color: var(--text-main);
+  font-family: 'Inter', system-ui, sans-serif;
+  letter-spacing: 0.2px;
+}
+
+/* === ЛЕВАЯ НАВИГАЦИЯ === */
+.sidebar {
+  background: linear-gradient(180deg, #0d1b2a, #1b263b);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100vh;
+  padding: 25px 20px;
+  border-right: 1px solid var(--border);
+  box-shadow: var(--shadow-accent);
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h2 {
+  font-size: 25x;
+  color: var(--accent-strong);
+  text-shadow: 0 0 10px var(--accent-glow);
+  margin-bottom: 25px;
+}
+
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-main);
+  text-decoration: none;
+  padding: 10px 14px;
+  margin-bottom: 6px;
+  border-radius: var(--radius);
+  transition: var(--transition);
+  font-weight: 500;
+}
+
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background: rgba(0, 180, 216, 0.2);
+  color: var(--accent-strong);
+  box-shadow: 0 0 12px var(--accent-glow);
+}
+
+.sidebar nav a::before {
+  color: var(--accent);
+  font-size: 16px;
+}
+
+/* === КНОПКИ === */
+button {
+    align-self: flex-start;
+    background: rgba(0, 224, 255, 0.08);
+    color: #00e0ff;
+    border: 1px solid rgba(0, 224, 255, 0.4);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 180, 216, 0.5);
+}
+
+button:active {
+  transform: scale(0.98);
+  box-shadow: 0 0 8px rgba(0, 180, 216, 0.2);
+}
+
+button.delete-folder-btn,
+.agents-list button {
+  box-shadow: 0 0 8px rgba(239, 71, 111, 0.3);
+}
+button.delete-folder-btn:hover {
+  box-shadow: 0 0 16px rgba(239, 71, 111, 0.6);
+}
+
+/* === TASK BOX === */
+.task-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 15px;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 0 10px rgba(0, 180, 216, 0.05);
+}
+
+.task-box.open {
+  animation: fadeSlideIn 0.4s ease;
+}
+
+@keyframes fadeSlideIn {
+  0% { opacity: 0; transform: translateY(-8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* === INPUTS / TEXTAREAS === */
+input, textarea, select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent-glow);
+  box-shadow: 0 0 10px rgba(0,180,216,0.3);
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* === PLACEHOLDER === */
+::placeholder {
+  color: var(--text-dim);
+  opacity: 0.7;
+}
+
+/* === ИКОНКИ ДЛЯ КНОПОК === */
+/* .assign-btn::before {
+  content: "🚀 ";
+}
+.delete-folder-btn::before {
+  content: "🗑️ ";
+}
+.folder-title::before {
+  content: "📁 ";
+}
+.agent-card h2::before {
+  content: "🤖 ";
+}
+.theme-toggle button:nth-child(1)::before {
+  content: "🌌 ";
+}
+.theme-toggle button:nth-child(2)::before {
+  content: "🌞 ";
+} */
+
+/* === ТЕКСТ / МЕЛОЧИ === */
+.subtitle {
+  color: var(--text-dim);
+  margin-top: 4px;
+  font-size: 14px;
+}
+
+/* === AGENT CARD === */
+.agent-card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 18px;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-accent);
+  transition: 0.3s ease;
+}
+
+.agent-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(0, 180, 216, 0.4);
+}
+
+/* === STATUS BADGES === */
+.status {
+  display: inline-block;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.status.running {
+  background: rgba(255, 209, 102, 0.15);
+  color: var(--warning);
+  animation: glowPulse 2s infinite;
+}
+.status.done {
+  background: rgba(6, 214, 160, 0.15);
+  color: var(--success);
+}
+.status.error {
+  background: rgba(239, 71, 111, 0.15);
+  color: var(--error);
+}
+
+@keyframes glowPulse {
+  0%,100% { box-shadow: 0 0 8px var(--accent); }
+  50% { box-shadow: 0 0 18px var(--accent-glow); }
+}
+
+/* === SCROLLBAR === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent), var(--accent-glow));
+  border-radius: 6px;
+}
+
+/* === GLOW TEXT === */
+.glow-text {
+  color: var(--accent-strong);
+  text-shadow: 0 0 10px var(--accent-glow);
+}
+
+/* === PANEL === */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-accent);
+}
+
+.graph-wrap {
+  position: relative;
+}
+
+#sp-brainstorm-output {
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 200px;
+    overflow: auto;
+}
+
+/* === Glow-эффекты и улучшения для checklist, agent и office === */
+
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 180, 216, 0.15);
+  backdrop-filter: blur(8px);
+}
+
+.main-office-panel {
+    display: grid;
+    grid-template-columns: 75% calc(25% - 16px);
+}
+
+.panel h3::before {
+  content: "💠 ";
+  color: var(--accent-glow);
+  text-shadow: 0 0 6px var(--accent-glow);
+}
+
+.progress-bar {
+  height: 8px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-glow));
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 6px var(--accent-glow);
+}
+
+textarea, input {
+  margin-top: 6px;
+}
+
+pre {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  padding: 10px;
+  border-radius: 8px;
+  color: var(--text-main);
+  overflow-x: auto;
+}
+
+/* Светящиеся заголовки */
+h1, h2, h3 {
+  text-shadow: 0 0 8px rgba(72, 202, 228, 0.5);
+}
+
+.agent-link {
+      color: var(--text-main);
+}
+
+#office-graph {
+  background: radial-gradient(ellipse at center, rgba(0,180,216,0.08), transparent 60%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 0 15px rgba(0,180,216,0.12);
+  min-height: 540px;
+}
+
+#office-sidepanel {
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow-accent);
+}
+
+#office-sidepanel .status {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-left: 6px;
+}
+#office-sidepanel .status.running { color: var(--warning); background: rgba(255,209,102,0.12); }
+#office-sidepanel .status.done    { color: var(--success); background: rgba(6,214,160,0.12); }
+#office-sidepanel .status.error   { color: var(--error);   background: rgba(239,71,111,0.12); }
+
+#sp-last-result {
+  margin-top: 8px;
+  background: rgba(255,255,255,0.03);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 10px;
+  color: var(--text-dim);
+  animation: fadeInResult 0.4s ease;
+  max-height: 240px;
+  overflow-y: auto;
+}
+@keyframes fadeInResult {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Подсветка выбранного агента === */
+.node-selected {
+  box-shadow: 0 0 12px 4px rgba(0, 180, 255, 0.6);
+}
+
+/* === Анимация мигания при выполнении задачи === */
+@keyframes nodePulse {
+  0%   { box-shadow: 0 0 10px 2px rgba(255, 209, 102, 0.5); }
+  50%  { box-shadow: 0 0 25px 8px rgba(255, 209, 102, 0.9); }
+  100% { box-shadow: 0 0 10px 2px rgba(255, 209, 102, 0.5); }
+}
+
+.node-running {
+  animation: nodePulse 1.5s ease-in-out infinite;
+}
+
+#sp-folder-results {
+  margin-top: 10px;
+  padding: 10px;
+  border-left: 3px solid var(--accent);
+  background: rgba(255,255,255,0.03);
+  border-radius: 6px;
+  animation: fadeIn 0.5s ease;
+  max-height: 270px;
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#sp-brainstorm {
+  flex-direction: column;
+  gap: 8px;
+}
+
+#sp-brainstorm textarea {
+  resize: vertical;
+  min-height: 35px;
+  padding-right: 45px;
+}
+
+#brainstorm-discussion p {
+    margin: 8px 0;
+    line-height: 2;
+    font-size: 20px;
+}
+
+#agent-results-content, #brainstorm-discussion {
+    background: #fff;
+    color: #000;
+    padding: 20px;
+    line-height: 2;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+#add-agent-panel {
+  margin-top: 30px;
+}
+
+#add-agent-panel h2 {
+  color: var(--accent, #00e0ff);
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+#add-agent-panel form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-row label {
+  font-size: 13px;
+  color: #9bb0c8;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 224, 255, 0.15);
+  border-radius: 6px;
+  padding: 6px 8px;
+  color: #eaeaea;
+  font-family: inherit;
+}
+
+.form-row textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+#open-agent-modal {
+  align-self: flex-start;
+  background: rgba(0, 224, 255, 0.08);
+  color: #00e0ff;
+  border: 1px solid rgba(0, 224, 255, 0.4);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#open-agent-modal:hover {
+  background: rgba(0, 224, 255, 0.2);
+  box-shadow: 0 0 8px rgba(0, 224, 255, 0.25);
+}
+
+/* === 💾 Выпадающий список в модальном окне === */
+#folder-select {
+  appearance: none; /* скрываем стандартную стрелку */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 224, 255, 0.25);
+  border-radius: 6px;
+  color: #eaeaea;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 8px 10px;
+  width: 100%;
+  outline: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+/* при фокусе */
+#folder-select:focus {
+  border-color: rgba(0, 224, 255, 0.8);
+  box-shadow: 0 0 10px rgba(0, 224, 255, 0.2);
+}
+
+/* добавляем стрелку вручную */
+#folder-select::after {
+  content: "▾";
+  position: absolute;
+  right: 10px;
+  color: #00e0ff;
+}
+
+/* для Firefox */
+select:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #eaeaea;
+}
+
+/* === Пункты выпадающего списка === */
+#folder-select option {
+  background-color: #111827; /* тёмный фон */
+  color: #e0e0e0;
+  font-size: 14px;
+  padding: 6px 10px;
+  border: none;
+}
+
+/* при наведении */
+#folder-select option:hover,
+#folder-select option:focus {
+  background-color: rgba(0, 224, 255, 0.15);
+  color: #00e0ff;
+}
+
+/* === Ошибки валидации в модальном окне === */
+.form-error {
+  font-size: 12px;
+  color: #ff6b6b;
+  margin-top: 3px;
+  min-height: 16px;
+  transition: opacity 0.2s ease;
+}
+
+input.input-error {
+  border-color: #ff6b6b !important;
+  box-shadow: 0 0 6px rgba(255, 0, 0, 0.3);
+}
+
+input.input-error:focus {
+  outline: none;
+  border-color: #ff8585;
+}
+
+/* === Сообщение в модальном окне === */
+.form-message {
+  margin-top: 10px;
+  font-size: 13px;
+  text-align: center;
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: none;
+  transition: all 0.3s ease;
+}
+
+.form-message.success {
+  display: block;
+  background: rgba(0, 224, 100, 0.1);
+  border: 1px solid rgba(0, 224, 100, 0.5);
+  color: #00ff99;
+  box-shadow: 0 0 8px rgba(0, 255, 150, 0.15);
+}
+
+.form-message.error {
+  display: block;
+  background: rgba(255, 100, 100, 0.1);
+  border: 1px solid rgba(255, 120, 120, 0.4);
+  color: #ff8080;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.15);
+}
+
+.delete-agent-btn i {
+  width: 14px;       /* ← размер по ширине */
+  height: 14px;      /* ← размер по высоте */
+  color: #f87171;    /* цвет иконки */
+  vertical-align: middle;
+}
+
+.aside-panel-header {
+    align-items: center;
+    display: flex;
+    gap: 25px;
+}
+
+#sp-meta{
+    display: flex;
+    gap: 25px;
+}
+#sp-brainstorm h4 {
+  margin: 10px;
+}
+
+#folder-discussion{
+    background: #fff;
+    color: #000;
+    line-height: 2;
+    font-size: 20px;
+}
+
+.neon-button{
+    align-self: flex-start;
+    background: rgba(0, 224, 255, 0.08);
+    color: #00e0ff;
+    border: 1px solid rgba(0, 224, 255, 0.4);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s 
+ease;
+}
+
+.agent-block {
+  border-left: 3px solid #00b4ff;
+  padding-left: 10px;
+  margin-bottom: 20px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.typed-output {
+  line-height: 1.5;
+  font-family: system-ui, sans-serif;
+  color: #ddd;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#voice-btn {
+  transition: all 0.3s ease;
+}
+
+#voice-btn.listening {
+  background: #007bff;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
+}
+
+#voice-btn:hover {
+  transform: scale(1.05);
+}
+
+#voice-btn.listening {
+  background: #007bff;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 5px rgba(0,123,255,0.6); }
+  50%  { box-shadow: 0 0 15px rgba(0,123,255,0.8); }
+  100% { box-shadow: 0 0 5px rgba(0,123,255,0.6); }
+}
+
+#sp-brainstorm-topic {
+  margin: 0;
+}
+
+.input-and-voice-button {
+  display:flex;
+  gap:6px; 
+  align-items:center;
+  margin: 6px 0 0 0;
+}
+#voice-btn {
+    align-self: end;
+    right: 25px;
+    position: absolute;
+    top: 58px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #111;
+    color: #ccc;
+    cursor: pointer;
+    height: 45px;
+}
+
+#context-section {
+  background: radial-gradient(ellipse at center, rgba(0, 180, 216, 0.08), transparent 60%);
+  margin: 20px 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 0 15px rgba(0, 180, 216, 0.12);
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.agent-name {
+  color: #fff;
+}
+.sp-context-block {
+  margin-top: 15px;
+  font-family: system-ui, sans-serif;
+  line-height: 2;
+  color: #000;
+}
+.context-entry {
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+.context-markdown {
+  background: #f9f9f9;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+.context-markdown h3 {
+  margin-top: 10px;
+  color: #2a4d9f;
+}
+
+
+
+
+
+

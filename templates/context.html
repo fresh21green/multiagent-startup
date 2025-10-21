@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="context-section">
+  <h1>🧠 Контекст агентов</h1>
+  <div id="context-content" class="sp-context-block">
+    <p>Загрузка контекста...</p>
+  </div>
+</section>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const container = document.getElementById("context-content");
+
+  // утилита: превращаем HTML из last_result.html в чистый текст (Markdown-подобный)
+  const htmlToMarkdown = (html) => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.innerText
+      .replace(/\n{3,}/g, "\n\n")
+      .trim();
+  };
+
+  try {
+    const res = await fetch("/api/context");
+    if (!res.ok) throw new Error("Ошибка загрузки контекста: " + res.status);
+    const data = await res.json();
+
+    let html = "";
+    for (const [agent, ctx] of Object.entries(data)) {
+      const task = ctx.last_task || "—";
+      const htmlResult = ctx.last_result?.html || "";
+      const textResult = htmlResult ? htmlToMarkdown(htmlResult) : "*(нет данных)*";
+      const count = ctx.interaction_count ?? 0;
+      const updated = ctx._updated ? new Date(ctx._updated).toLocaleString() : "—";
+
+      const md = `
+### Последняя задача
+${task}
+
+### Результат
+${textResult}
+
+---
+
+**Взаимодействий:** ${count}  
+**Обновлено:** ${updated}
+      `;
+
+      html += `
+      <section class="context-entry">
+        <h3 class="agent-name">🤖 ${agent}</h3>
+        <div class="context-markdown">
+          ${marked.parse(md)}
+        </div>
+      </section>`;
+    }
+
+    container.innerHTML = html;
+  } catch (err) {
+    container.innerHTML = `<p style="color:#c00;">⚠️ ${err.message}</p>`;
+  }
+});
+</script>
+
+{% endblock %}

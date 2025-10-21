@@ -1,36 +1,26 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Настройки агента — {{ agent.name }}</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-<h1>⚙️ Настройки агента "{{ agent.name }}"</h1>
+{% extends "base.html" %}
+{% block title %}🤖 Агент{% endblock %}
+{% block content %}
 
-<form action="/update_agent/{{ agent.slug }}" method="post">
-    <label>Имя агента:</label><br>
-    <input type="text" name="name" value="{{ agent.name }}" required><br><br>
+<header class="page-header">
+  <h1>{{ agent.name }}</h1>
+  <p class="subtitle">Профиль агента, история задач и результаты.</p>
+</header>
 
-    <label>Telegram токен:</label><br>
-    <input type="text" name="telegram_token" placeholder="Оставь пустым, если не нужно"><br><br>
+<div class="agent-card">
+  <h2>{{ agent.name }}</h2>
+  <div class="status {{ agent.status|default('done') }}">Статус: {{ agent.status_text }}</div>
 
-    <label>Prompt (подсказка агента):</label><br>
-    <textarea name="prompt" rows="8" cols="60">{{ prompt }}</textarea><br><br>
+  <div class="last-task">
+    <h4>Последняя задача</h4>
+    <!-- <div class="task-content">{{ agent.last_task.result.html|safe  or '—' }}</div> -->
+    <div class="result markdown-body">{{ agent.last_task.result.html|safe }}</div>
+  </div>
 
-    <label>Deploy URL (если агент развернут удалённо):</label><br>
-    <input type="url" name="deploy_url" value="{{ agent.deploy_url }}" placeholder="https://example.com"><br><br>
+  <div class="task-box">
+    <textarea id="agent-task" placeholder="Введите новую задачу..."></textarea>
+    <button onclick="AIManager.assignTask('{{ agent.slug }}')">Отправить</button>
+  </div>
+</div>
 
-    <label>Каталог:</label>
-    <select name="folder" class="folder-select">
-        {% for f in folders %}
-            <option value="{{ f }}" {% if agent.folder == f %}selected{% endif %}>📁 {{ f }}</option>
-        {% endfor %}
-    </select>
-
-    <button type="submit">💾 Сохранить изменения</button>
-    <a href="/">⬅ Назад</a>
-</form>
-
-</body>
-</html>
+{% endblock %}

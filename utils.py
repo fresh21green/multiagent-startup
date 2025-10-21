@@ -1,46 +1,75 @@
-import importlib
-import logging
+import os
 import json
+import asyncio
+import logging
+import importlib.util
 from pathlib import Path
+from datetime import datetime
+import requests
+from typing import Any, Dict
+from filelock import FileLock
 
 logger = logging.getLogger("manager")
 
-BASE = Path(__file__).parent
-AGENTS_DIR = BASE / "agents"
-AGENTS_DIR.mkdir(exist_ok=True)
-META_FILE = AGENTS_DIR / "agents.json"
-logger.info("AGENTS_DIR", AGENTS_DIR)
-logger.info("META_FILE", META_FILE)
+# === Метаданные (agents.json) ===
+META_PATH = Path(__file__).resolve().parent / "agents" / "agents.json"
 
-if not META_FILE.exists():
-    META_FILE.write_text("[]", encoding="utf-8")
-
-
-# === ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ===
-
-async def call_agent_local(path: Path, task: str):
-    """Вызывает локального агента (запуск его функции handle_task)."""
+def load_meta() -> list[dict]:
+    """Безопасно загружает agents.json (если поврежден — восстанавливает)."""
     try:
-        spec = importlib.util.spec_from_file_location(f"agent_{path.name}", str(path / "bot.py"))
+        if not META_PATH.exists():
+            META_PATH.write_text("[]", encoding="utf-8")
+        return json.loads(META_PATH.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        logger.warning("⚠️ Поврежден agents.json — восстановлен.")
+        META_PATH.write_text("[]", encoding="utf-8")
+        return []
+
+def save_meta(meta: list[dict]):
+    """Безопасно сохраняет agents.json (с атомарной записью и блокировкой)."""
+    tmp_path = META_PATH.with_suffix(".tmp")
+    lock_path = str(META_PATH) + ".lock"
+    lock = FileLock(lock_path)
+
+    with lock:
+        try:
+            # Записываем во временный файл
+            with open(tmp_path, "w", encoding="utf-8") as f:
+                json.dump(meta, f, ensure_ascii=False, indent=2)
+
+            # Атомарно заменяем старый файл
+            os.replace(tmp_path, META_PATH)
+            logger.debug("✅ Метаданные сохранены безопасно.")
+        except Exception as e:
+            logger.exception(f"Ошибка при сохранении meta: {e}")
+            raise
+
+
+# === Вызов агентов ===
+async def call_agent_local(path: Path, task: str) -> Dict[str, Any]:
+    """Вызывает локального агента через его bot.py."""
+    try:
+        bot_file = path / "bot.py"
+        if not bot_file.exists():
+            raise FileNotFoundError(f"bot.py не найден в {path}")
+
+        spec = importlib.util.spec_from_file_location(f"agent_{path.name}", str(bot_file))
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
 
-        if hasattr(mod, "handle_task"):
-            logger.info("Вызов локального агента %s", path.name)
-            res = mod.handle_task(task)
-            return {"ok": True, "source": "local", "result": res}
-        else:
-            logger.warning("У модуля %s нет функции handle_task", path)
-            return {"ok": False, "error": "no_handle_task"}
+        if not hasattr(mod, "handle_task"):
+            raise AttributeError(f"Функция handle_task не найдена в {path.name}")
+
+        logger.info(f"🧠 Вызов локального агента: {path.name}")
+        res = mod.handle_task(task)
+        return {"ok": True, "source": "local", "result": res}
 
     except Exception as e:
-        logger.exception("Ошибка вызова локального агента: %s", e)
+        logger.exception(f"Ошибка вызова локального агента: {e}")
         return {"ok": False, "error": str(e)}
 
-
-async def call_agent_remote(url: str, task: str):
-    """Отправляет задачу агенту, развернутому удаленно (через /webhook)."""
-    import requests
+async def call_agent_remote(url: str, task: str) -> Dict[str, Any]:
+    """Отправляет задачу агенту, развернутому удаленно (через webhook)."""
     try:
         payload = {
             "message": {
@@ -52,45 +81,35 @@ async def call_agent_remote(url: str, task: str):
             }
         }
         r = requests.post(url.rstrip("/") + "/webhook", json=payload, timeout=20)
-        logger.info("Удалённый агент %s ответил со статусом %s", url, r.status_code)
-        return {"ok": True, "source": "remote", "status": r.status_code, "text": r.text}
+        r.raise_for_status()
+        return {"ok": True, "source": "remote", "status": r.status_code, "result": r.text}
     except Exception as e:
-        logger.exception("Ошибка при вызове удалённого агента: %s", e)
+        logger.exception(f"Ошибка вызова удалённого агента: {e}")
         return {"ok": False, "error": str(e)}
 
+# === Память агента ===
+def save_memory(agent_path: Path, record: dict[str, Any]):
+    """Сохраняет запись в memory.json агента (с file-lock, безопасно и атомарно)."""
+    mem_file = agent_path / "memory.json"
+    tmp_file = mem_file.with_suffix(".tmp")
+    lock = FileLock(str(mem_file) + ".lock")
 
-def load_meta():
-    """Загружает JSON-файл метаданных агентов."""
-    try:
-        return json.loads(META_FILE.read_text(encoding="utf-8"))
-    except Exception as e:
-        logger.exception("Не удалось загрузить метаданные: %s", e)
-        return []
+    with lock:
+        try:
+            memory = []
+            if mem_file.exists():
+                try:
+                    memory = json.loads(mem_file.read_text(encoding="utf-8"))
+                except json.JSONDecodeError:
+                    logger.warning(f"⚠️ Поврежден memory.json у {agent_path.name}, восстановлен.")
+                    memory = []
 
+            record["date"] = record.get("date") or datetime.utcnow().isoformat() + "Z"
+            memory.append(record)
 
-def save_meta(meta):
-    """Сохраняет JSON-файл метаданных агентов."""
-    try:
-        META_FILE.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
-    except Exception as e:
-        logger.exception("Не удалось сохранить метаданные: %s", e)
+            with open(tmp_file, "w", encoding="utf-8") as f:
+                json.dump(memory, f, ensure_ascii=False, indent=2)
+            os.replace(tmp_file, mem_file)
+        except Exception as e:
+            logger.warning(f"Ошибка записи памяти агента {agent_path.name}: {e}")
 
-
-import json
-from pathlib import Path
-import logging
-logger = logging.getLogger("manager")
-def save_memory(agent_path: Path, record: dict):
-    try:
-        mem_file = Path(agent_path) / "memory.json"
-        if mem_file.exists():
-            try:
-                data = json.loads(mem_file.read_text(encoding="utf-8"))
-            except Exception:
-                data = []
-        else:
-            data = []
-        data.append(record)
-        mem_file.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-    except Exception as e:
-        logger.warning("save_memory error: %s", e)

@@ -1,28 +1,64 @@
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8">
-  <title>Виртуальный офис</title>
-  <link rel="stylesheet" href="/static/style.css">
-  <script src="https://unpkg.com/force-graph"></script>
-  <style>#graph{width:100%;height:600px;background:#fff;border-radius:8px}</style>
-</head>
-<body>
+{% extends "base.html" %}
+{% block title %}Виртуальный офис — граф сотрудников{% endblock %}
+{% block content %}
+
+<header class="page-header">
   <h1>Виртуальный офис</h1>
-  <p><a href="/">← Назад</a></p>
-  <div id="graph"></div>
-  <script>
-    const agents = {{ agents | tojson }};
-    const nodes = agents.filter(a => !a.is_folder).map(a => ({ id: a.slug, name: a.name, group: a.folder || "root" }));
-    const have  = new Set(nodes.map(n => n.id));
-    const links = agents.filter(a => !a.is_folder).flatMap(a =>
-      (a.connections || []).filter(c => have.has(c)).map(c => ({ source: a.slug, target: c }))
-    );
-    ForceGraph()(document.getElementById('graph'))
-      .graphData({ nodes, links })
-      .nodeLabel(n => n.name + " (" + n.group + ")")
-      .nodeAutoColorBy('group')
-      .onNodeClick(n => window.location.href = `/agent/${n.id}`);
-  </script>
-</body>
-</html>
+  <p class="subtitle">Интерактивная карта сотрудников и каталогов.</p>
+</header>
+
+<section class="main-office-panel" style="gap:16px;;">
+  <!-- === Граф офиса === -->
+  <div class="column graph-wrap">
+      <div id="office-graph" style="flex:1; min-height:740px;"></div>
+      <!-- Новые блоки -->
+      <div id="sp-folder-results" class="markdown-body panel" style="display:none; margin-top:20px;"></div>
+      <div id="sp-brainstorm-output" class="markdown-body panel" style="display:none;"></div>
+  </div>
+  <div class="column">
+  <!-- === Правая боковая панель === -->
+    <aside id="office-sidepanel">
+      <div class="aside-panel-header" style="display: flex;">
+        <h3 id="sp-title">Выберите узел</h3>
+      </div>
+
+      <div id="sp-meta" class="text-dim"></div>
+      
+
+      <!-- 🧩 Последняя задача -->
+      <div id="sp-last" class="last-task" style="display:none; margin-top:10px;">
+        <div class="task-content markdown-body" id="sp-last-task"></div>
+        <div class="result markdown-body" id="sp-last-result"></div>
+        <a id="sp-show-result" href="#" class="show-result-link" style="display:none;">📊 Показать результат</a>
+      </div>
+
+      <!-- 🧠 Задача для одного агента -->
+      <div id="sp-actions" class="task-box" style="display:none; margin-top:12px;">
+        <textarea id="sp-task" placeholder="Задача для выбранного сотрудника..."></textarea>
+        <button id="sp-send">Отправить</button>
+      </div>
+
+      <!-- 🗂️ Задача для каталога -->
+      <div id="sp-folder-actions" class="task-box" style="display:none; margin-top:12px;">
+        <textarea id="sp-folder-task" placeholder="Задача для всех сотрудников каталога..."></textarea>
+        <button id="sp-folder-send">Отправить всем</button>
+      </div>
+
+      <!-- 🧠 Мозговой штурм -->
+      <div id="sp-brainstorm" class="task-box" style="display:none; flex-direction:column; gap:6px; margin-top:10px;">
+        <label for="sp-brainstorm-topic">🧠 Тема мозгового штурма</label>
+        <div class="input-and-voice-button">
+          <textarea id="sp-brainstorm-topic" type="text" placeholder="Введите тему или скажите голосом..." style="flex:1;"></textarea>
+          <button id="voice-btn" title="Голосовой ввод">
+            🎤
+          </button>
+        </div>
+        <button id="sp-brainstorm-send" style="margin-top:6px;">🚀 Запустить штурм</button>
+        <div id="sp-brainstorm-progress" style="height:6px; background:#07aac6; width:0%; transition:width 0.3s;"></div>
+        <pre id="sp-brainstorm-output" class="brainstorm-output" style="display:none; margin-top:8px; font-family:monospace; white-space:pre-wrap;"></pre> 
+      </div>
+    </aside>
+  </div>
+</section>
+
+{% endblock %}

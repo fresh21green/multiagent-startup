@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Multiagent System{% endblock %}</title>
+  <link id="themeStylesheet" rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/markdown.css">
+  <link id="themeStylesheet" rel="stylesheet" href="/static/themes/command_center.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://unpkg.com/d3@7/dist/d3.min.js"></script>
+  <script src="https://unpkg.com/force-graph"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+  <aside class="sidebar">
+    <h2>AI Command Center</h2>
+    <nav>
+        <a href="/" {% if active == 'index' %}class="active"{% endif %}>
+            <i data-lucide="folder"></i> Каталоги
+        </a>
+        <a href="/checklist" {% if active == 'checklist' %}class="active"{% endif %}>
+            <i data-lucide="check-square"></i> Чеклист
+        </a>
+        <a href="/office" {% if active == 'office' %}class="active"{% endif %}>
+            <i data-lucide="briefcase"></i> Офис
+        </a>
+        <a href="/context" {% if active == 'memory' %}class="active"{% endif %}>
+            <i data-lucide="cpu"></i> Память
+        </a>
+    </nav>
+
+    <div class="theme-toggle">
+      <button onclick="setTheme('command_center')">Dark</button>
+      <button onclick="setTheme('light')">Light</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+     <!-- === 🧠 Верхний системный статус === -->
+    <div class="status-bar-wrap">
+        <div id="system-status-bar" class="system-status">
+            <!-- <span id="system-status-icon">🧠</span> -->
+            <span id="system-status-text">🧠 Все агенты активны</span>
+        </div>
+    </div>
+    {% block content %}{% endblock %}
+  </main>
+
+  <script src="/static/js/core.js"></script>
+  <script src="/static/js/office.js"></script>
+  <script src="/static/js/brainstorm.js"></script>
+</body>
+</html>

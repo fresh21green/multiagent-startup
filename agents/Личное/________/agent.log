@@ -1,0 +1,937 @@
+2025-10-19 00:37:19,680 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 00:37:19,681 - agent - WARNING - ⚠️ Контекст слишком длинный (30504 символов) — обрезаем до 4000.
+2025-10-19 00:38:30,953 - agent - INFO - Запрос к LLM: Ты стратег. Думай системно, предлагай решения высокого уровня.
+
+Пользователь: 🧩 Тема мозгового штурма: test2
+
+Вот что уж...
+2025-10-19 00:38:40,279 - agent - INFO - Запрос к LLM: Ты копирайтер. Пиши ярко, кратко и креативно.
+
+Пользователь: 🧩 Тема мозгового штурма: test2
+
+Вот что уже предложили друг...
+2025-10-19 00:38:50,316 - agent - INFO - Запрос к LLM: Ты дизайнер. Предлагай визуальные концепции и композиционные идеи.
+
+Пользователь: 🧩 Тема мозгового штурма: test2
+
+Вот чт...
+2025-10-19 00:40:05,251 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 00:40:05,251 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 00:40:05,252 - agent - WARNING - ⚠️ Контекст слишком длинный (30398 символов) — обрезаем до 4000.
+2025-10-19 00:40:05,252 - agent - WARNING - ⚠️ Контекст слишком длинный (30398 символов) — обрезаем до 4000.
+2025-10-19 00:44:42,763 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 00:44:42,763 - agent - WARNING - ⚠️ Контекст слишком длинный (30448 символов) — обрезаем до 4000.
+2025-10-19 00:45:17,380 - agent - INFO - Запрос к LLM: Ты стратег. Думай системно, предлагай решения высокого уровня.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать мульт...
+2025-10-19 00:45:45,299 - agent - INFO - Запрос к LLM: Ты копирайтер. Пиши ярко, кратко и креативно.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать мультиагентную систему...
+2025-10-19 00:45:54,991 - agent - INFO - Запрос к LLM: Ты дизайнер. Предлагай визуальные концепции и композиционные идеи.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать м...
+2025-10-19 00:46:25,797 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 00:46:25,797 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 00:46:25,797 - agent - WARNING - ⚠️ Контекст слишком длинный (30490 символов) — обрезаем до 4000.
+2025-10-19 00:46:25,797 - agent - WARNING - ⚠️ Контекст слишком длинный (30490 символов) — обрезаем до 4000.
+2025-10-19 00:47:20,845 - agent - INFO - Запрос к LLM: Ты стратег. Думай системно, предлагай решения высокого уровня.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать мульт...
+2025-10-19 00:47:20,845 - agent - INFO - Запрос к LLM: Ты стратег. Думай системно, предлагай решения высокого уровня.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать мульт...
+2025-10-19 00:47:37,173 - agent - INFO - Запрос к LLM: Ты копирайтер. Пиши ярко, кратко и креативно.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать мультиагентную систему...
+2025-10-19 00:47:37,173 - agent - INFO - Запрос к LLM: Ты копирайтер. Пиши ярко, кратко и креативно.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать мультиагентную систему...
+2025-10-19 00:47:46,495 - agent - INFO - Запрос к LLM: Ты дизайнер. Предлагай визуальные концепции и композиционные идеи.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать м...
+2025-10-19 00:47:46,495 - agent - INFO - Запрос к LLM: Ты дизайнер. Предлагай визуальные концепции и композиционные идеи.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать м...
+2025-10-19 00:48:07,181 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 00:48:07,181 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 00:48:07,181 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 00:48:07,182 - agent - WARNING - ⚠️ Контекст слишком длинный (30333 символов) — обрезаем до 4000.
+2025-10-19 00:48:07,182 - agent - WARNING - ⚠️ Контекст слишком длинный (30333 символов) — обрезаем до 4000.
+2025-10-19 00:48:07,182 - agent - WARNING - ⚠️ Контекст слишком длинный (30333 символов) — обрезаем до 4000.
+2025-10-19 00:48:39,916 - agent - INFO - Запрос к LLM: Ты стратег. Думай системно, предлагай решения высокого уровня.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать мульт...
+2025-10-19 00:48:39,916 - agent - INFO - Запрос к LLM: Ты стратег. Думай системно, предлагай решения высокого уровня.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать мульт...
+2025-10-19 00:48:39,916 - agent - INFO - Запрос к LLM: Ты стратег. Думай системно, предлагай решения высокого уровня.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать мульт...
+2025-10-19 00:49:39,937 - agent - ERROR - Ошибка LLM: Таймаут запроса к Amvera API
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 66, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 228, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout: _ssl.c:1015: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 372, in _generate
+    response = self._sync_client.post(endpoint, json=payload)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 1132, in post
+    return self.request(
+           ~~~~~~~~~~~~^
+        "POST",
+        ^^^^^^^
+    ...<11 lines>...
+        extensions=extensions,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 814, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 901, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 929, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 966, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 1002, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 227, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 83, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout: _ssl.c:1015: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\demo\strategist\bot.py", line 108, in handle_task
+    resp = llm.invoke(query)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 395, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1025, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 842, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1091, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 384, in _generate
+    raise ValueError("Таймаут запроса к Amvera API") from e
+ValueError: Таймаут запроса к Amvera API
+2025-10-19 00:49:39,937 - agent - ERROR - Ошибка LLM: Таймаут запроса к Amvera API
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 66, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 228, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout: _ssl.c:1015: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 372, in _generate
+    response = self._sync_client.post(endpoint, json=payload)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 1132, in post
+    return self.request(
+           ~~~~~~~~~~~~^
+        "POST",
+        ^^^^^^^
+    ...<11 lines>...
+        extensions=extensions,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 814, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 901, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 929, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 966, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 1002, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 227, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 83, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout: _ssl.c:1015: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\demo\strategist\bot.py", line 108, in handle_task
+    resp = llm.invoke(query)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 395, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1025, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 842, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1091, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 384, in _generate
+    raise ValueError("Таймаут запроса к Amvera API") from e
+ValueError: Таймаут запроса к Amvera API
+2025-10-19 00:49:39,937 - agent - ERROR - Ошибка LLM: Таймаут запроса к Amvera API
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 66, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 228, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout: _ssl.c:1015: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 372, in _generate
+    response = self._sync_client.post(endpoint, json=payload)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 1132, in post
+    return self.request(
+           ~~~~~~~~~~~~^
+        "POST",
+        ^^^^^^^
+    ...<11 lines>...
+        extensions=extensions,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 814, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 901, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 929, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 966, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 1002, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 227, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 83, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout: _ssl.c:1015: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\demo\strategist\bot.py", line 108, in handle_task
+    resp = llm.invoke(query)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 395, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1025, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 842, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1091, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 384, in _generate
+    raise ValueError("Таймаут запроса к Amvera API") from e
+ValueError: Таймаут запроса к Amvera API
+2025-10-19 00:49:40,269 - agent - INFO - Запрос к LLM: Ты копирайтер. Пиши ярко, кратко и креативно.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать мультиагентную систему...
+2025-10-19 00:49:40,269 - agent - INFO - Запрос к LLM: Ты копирайтер. Пиши ярко, кратко и креативно.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать мультиагентную систему...
+2025-10-19 00:49:40,269 - agent - INFO - Запрос к LLM: Ты копирайтер. Пиши ярко, кратко и креативно.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать мультиагентную систему...
+2025-10-19 00:49:43,937 - agent - INFO - Запрос к LLM: Ты дизайнер. Предлагай визуальные концепции и композиционные идеи.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать м...
+2025-10-19 00:49:43,937 - agent - INFO - Запрос к LLM: Ты дизайнер. Предлагай визуальные концепции и композиционные идеи.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать м...
+2025-10-19 00:49:43,937 - agent - INFO - Запрос к LLM: Ты дизайнер. Предлагай визуальные концепции и композиционные идеи.
+
+Пользователь: 🧩 Тема мозгового штурма: Разработать м...
+2025-10-19 00:50:09,967 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 00:50:09,967 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 00:50:09,967 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 00:50:09,967 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 00:50:09,967 - agent - WARNING - ⚠️ Контекст слишком длинный (30572 символов) — обрезаем до 4000.
+2025-10-19 00:50:09,967 - agent - WARNING - ⚠️ Контекст слишком длинный (30572 символов) — обрезаем до 4000.
+2025-10-19 00:50:09,967 - agent - WARNING - ⚠️ Контекст слишком длинный (30572 символов) — обрезаем до 4000.
+2025-10-19 00:50:09,967 - agent - WARNING - ⚠️ Контекст слишком длинный (30572 символов) — обрезаем до 4000.
+2025-10-19 00:51:09,987 - agent - ERROR - Ошибка LLM: Таймаут запроса к Amvera API
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 66, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 228, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout: _ssl.c:1015: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 372, in _generate
+    response = self._sync_client.post(endpoint, json=payload)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 1132, in post
+    return self.request(
+           ~~~~~~~~~~~~^
+        "POST",
+        ^^^^^^^
+    ...<11 lines>...
+        extensions=extensions,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 814, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 901, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 929, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 966, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 1002, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 227, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 83, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout: _ssl.c:1015: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\Личное\________\bot.py", line 904, in handle_task
+    resp = llm.invoke(query)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 395, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1025, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 842, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1091, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 384, in _generate
+    raise ValueError("Таймаут запроса к Amvera API") from e
+ValueError: Таймаут запроса к Amvera API
+2025-10-19 00:51:09,987 - agent - ERROR - Ошибка LLM: Таймаут запроса к Amvera API
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 66, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 228, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout: _ssl.c:1015: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 372, in _generate
+    response = self._sync_client.post(endpoint, json=payload)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 1132, in post
+    return self.request(
+           ~~~~~~~~~~~~^
+        "POST",
+        ^^^^^^^
+    ...<11 lines>...
+        extensions=extensions,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 814, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 901, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 929, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 966, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 1002, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 227, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 83, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout: _ssl.c:1015: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\Личное\________\bot.py", line 904, in handle_task
+    resp = llm.invoke(query)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 395, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1025, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 842, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1091, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 384, in _generate
+    raise ValueError("Таймаут запроса к Amvera API") from e
+ValueError: Таймаут запроса к Amvera API
+2025-10-19 00:51:09,987 - agent - ERROR - Ошибка LLM: Таймаут запроса к Amvera API
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 66, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 228, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout: _ssl.c:1015: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 372, in _generate
+    response = self._sync_client.post(endpoint, json=payload)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 1132, in post
+    return self.request(
+           ~~~~~~~~~~~~^
+        "POST",
+        ^^^^^^^
+    ...<11 lines>...
+        extensions=extensions,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 814, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 901, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 929, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 966, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 1002, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 227, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 83, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout: _ssl.c:1015: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\Личное\________\bot.py", line 904, in handle_task
+    resp = llm.invoke(query)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 395, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1025, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 842, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1091, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 384, in _generate
+    raise ValueError("Таймаут запроса к Amvera API") from e
+ValueError: Таймаут запроса к Amvera API
+2025-10-19 00:51:09,987 - agent - ERROR - Ошибка LLM: Таймаут запроса к Amvera API
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 66, in map_httpcore_exceptions
+    yield
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 228, in handle_request
+    resp = self._pool.handle_request(req)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+        pool_request.request
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 101, in handle_request
+    raise exc
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 78, in handle_request
+    stream = self._connect(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 156, in _connect
+    stream = stream.start_tls(**kwargs)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 154, in start_tls
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpcore\_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectTimeout: _ssl.c:1015: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 372, in _generate
+    response = self._sync_client.post(endpoint, json=payload)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 1132, in post
+    return self.request(
+           ~~~~~~~~~~~~^
+        "POST",
+        ^^^^^^^
+    ...<11 lines>...
+        extensions=extensions,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 814, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 901, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 929, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 966, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_client.py", line 1002, in _send_single_request
+    response = transport.handle_request(request)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 227, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Енот\AppData\Local\Programs\Python\Python313\Lib\contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\httpx\_transports\default.py", line 83, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectTimeout: _ssl.c:1015: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Work\MyAiAgents\multiagent-startup\agents\Личное\________\bot.py", line 904, in handle_task
+    resp = llm.invoke(query)
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 395, in invoke
+    self.generate_prompt(
+    ~~~~~~~~~~~~~~~~~~~~^
+        [self._convert_input(input)],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<6 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    ).generations[0][0],
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1025, in generate_prompt
+    return self.generate(prompt_messages, stop=stop, callbacks=callbacks, **kwargs)
+           ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 842, in generate
+    self._generate_with_cache(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        m,
+        ^^
+    ...<2 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_core\language_models\chat_models.py", line 1091, in _generate_with_cache
+    result = self._generate(
+        messages, stop=stop, run_manager=run_manager, **kwargs
+    )
+  File "C:\Users\Work\MyAiAgents\.venv\Lib\site-packages\langchain_amvera\amvera.py", line 384, in _generate
+    raise ValueError("Таймаут запроса к Amvera API") from e
+ValueError: Таймаут запроса к Amvera API
+2025-10-19 00:54:03,869 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 00:54:03,870 - agent - WARNING - ⚠️ Контекст слишком длинный (29916 символов) — обрезаем до 4000.
+2025-10-19 15:05:26,537 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 15:05:26,537 - agent - WARNING - ⚠️ Контекст слишком длинный (28985 символов) — обрезаем до 4000.
+2025-10-19 15:16:35,405 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 15:16:35,405 - agent - WARNING - ⚠️ Контекст слишком длинный (30418 символов) — обрезаем до 4000.
+2025-10-19 15:33:09,895 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 15:33:09,896 - agent - WARNING - ⚠️ Контекст слишком длинный (30670 символов) — обрезаем до 4000.
+2025-10-19 15:43:16,892 - agent - INFO - Запрос к LLM: Ты стратег. Думай системно, предлагай решения высокого уровня.
+
+Пользователь: 🧩 Тема мозгового штурма: Какие есть самы у...
+2025-10-19 15:43:40,876 - agent - INFO - Запрос к LLM: Ты копирайтер. Пиши ярко, кратко и креативно.
+
+Пользователь: 🧩 Тема мозгового штурма: Какие есть самы универсальные и ну...
+2025-10-19 15:43:57,418 - agent - INFO - Запрос к LLM: Ты дизайнер. Предлагай визуальные концепции и композиционные идеи.
+
+Пользователь: 🧩 Тема мозгового штурма: Какие есть са...
+2025-10-19 15:44:34,228 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 15:44:34,228 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 15:44:34,228 - agent - WARNING - ⚠️ Контекст слишком длинный (30536 символов) — обрезаем до 4000.
+2025-10-19 15:44:34,228 - agent - WARNING - ⚠️ Контекст слишком длинный (30536 символов) — обрезаем до 4000.
+2025-10-19 16:12:02,278 - agent - INFO - Запрос к LLM: Ты стратег. Думай системно, предлагай решения высокого уровня.
+
+Пользователь: 🧩 Тема мозгового штурма: Можно ли разработ...
+2025-10-19 16:12:02,278 - agent - INFO - Запрос к LLM: Ты стратег. Думай системно, предлагай решения высокого уровня.
+
+Пользователь: 🧩 Тема мозгового штурма: Можно ли разработ...
+2025-10-19 16:12:20,236 - agent - INFO - Запрос к LLM: Ты копирайтер. Пиши ярко, кратко и креативно.
+
+Пользователь: 🧩 Тема мозгового штурма: Можно ли разработать it сервис в о...
+2025-10-19 16:12:20,236 - agent - INFO - Запрос к LLM: Ты копирайтер. Пиши ярко, кратко и креативно.
+
+Пользователь: 🧩 Тема мозгового штурма: Можно ли разработать it сервис в о...
+2025-10-19 16:12:30,259 - agent - INFO - Запрос к LLM: Ты дизайнер. Предлагай визуальные концепции и композиционные идеи.
+
+Пользователь: 🧩 Тема мозгового штурма: Можно ли разр...
+2025-10-19 16:12:30,259 - agent - INFO - Запрос к LLM: Ты дизайнер. Предлагай визуальные концепции и композиционные идеи.
+
+Пользователь: 🧩 Тема мозгового штурма: Можно ли разр...
+2025-10-19 16:13:08,975 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 16:13:08,975 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 16:13:08,975 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 16:13:08,975 - agent - WARNING - ⚠️ Контекст слишком длинный (30570 символов) — обрезаем до 4000.
+2025-10-19 16:13:08,975 - agent - WARNING - ⚠️ Контекст слишком длинный (30570 символов) — обрезаем до 4000.
+2025-10-19 16:13:08,975 - agent - WARNING - ⚠️ Контекст слишком длинный (30570 символов) — обрезаем до 4000.
+2025-10-19 16:20:30,859 - agent - INFO - Запрос к LLM: **Цель**:
+
+Создать высокоинтеллектуальный, рабочий в режиме /GOD MODE, который объединяет неограниченные возможности для...
+2025-10-19 16:20:30,860 - agent - WARNING - ⚠️ Контекст слишком длинный (30553 символов) — обрезаем до 4000.
