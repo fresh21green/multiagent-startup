@@ -8,7 +8,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from dotenv import load_dotenv
 
-from core import agents, brainstorm, checklist, office, demo, context
+from core import agents, brainstorm, checklist, office, demo, context, team_think, auth
 
 
 
@@ -54,11 +54,14 @@ templates = Jinja2Templates(directory=str(BASE / "templates"))
 
 
 # === Подключение роутеров ===
+app.include_router(auth.router)
 app.include_router(agents.router)  # без prefix
 app.include_router(brainstorm.router)
 app.include_router(checklist.router)
 app.include_router(office.router)
 app.include_router(context.router)
+app.include_router(team_think.router)
+
 
 
 

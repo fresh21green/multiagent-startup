@@ -54,6 +54,7 @@ async function runBrainstormFromOffice(folder, topic) {
 
     // 2️⃣ Передаём контекст агентам последовательно
     for (let i = 0; i < agents.length; i++) {
+      
       const currentAgent = agents[i];
       const nextAgent = agents[i + 1];
       const percent = Math.round(((i + 1) / total) * 100);
@@ -61,7 +62,7 @@ async function runBrainstormFromOffice(folder, topic) {
 
       const res = await fetch("/assign_task", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        headers: { ...authHeaders(), Accept: "application/json" },
         body: new URLSearchParams({
           slug: currentAgent.id,
           task: `Продолжи мозговой штурм по теме "${topic}". Контекст предыдущего участника:\n\n${context}`
@@ -86,7 +87,10 @@ async function runBrainstormFromOffice(folder, topic) {
 
       if (nextAgent) {
         // 🔄 Анимация передачи контекста
-        animateLinkTransfer(currentAgent.id, nextAgent.id);
+        animateLinkTransfer(currentAgent.id, nextAgent.id,currentAgent.label,nextAgent.label);
+      }
+      else {
+        setSystemStatus("busy", `🧠 ${currentAgent.label} завершает обсуждение...`);
       }
 
       currentAgent.status = "done";
@@ -101,7 +105,7 @@ async function runBrainstormFromOffice(folder, topic) {
     const summaryAgent = agents[0];
     const res = await fetch("/assign_task", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      headers: { ...authHeaders(), Accept: "application/json" },
       body: new URLSearchParams({
         slug: summaryAgent.id,
         task: `Сделай общий вывод по теме "${topic}" на основе контекста:\n\n${context}`
@@ -191,7 +195,7 @@ function typeMarkdown(container, html, speed = 15) {
 
 
 // === Анимация передачи контекста ===
-function animateLinkTransfer(sourceId, targetId) {
+function animateLinkTransfer(sourceId, targetId,currentAgentLabel,nextAgentLabel) {
   const Graph = window.__OfficeGraph__?.Graph;
   if (!Graph) return;
   const data = Graph.graphData();
@@ -204,8 +208,11 @@ function animateLinkTransfer(sourceId, targetId) {
   const step = () => {
     link.transferProgress = Math.min((Date.now() - start) / 700, 1);
     Graph.graphData(data);
+    // === обновляем статус в статус-баре ===
+    setSystemStatus("busy", `🧠 Идёт мозговой штурм: ${currentAgentLabel} передал задачу ${nextAgentLabel}...`);
     if (link.transferProgress < 1) requestAnimationFrame(step);
     else setTimeout(() => {
+      setSystemStatus("busy", `🧠 ${nextAgentLabel} решает задачу...`);
       data.links = data.links.filter(l => l !== link);
       Graph.graphData(data);
     }, 300);

@@ -20,14 +20,14 @@
         <a href="/" {% if active == 'index' %}class="active"{% endif %}>
             <i data-lucide="folder"></i> Каталоги
         </a>
-        <a href="/checklist" {% if active == 'checklist' %}class="active"{% endif %}>
-            <i data-lucide="check-square"></i> Чеклист
-        </a>
         <a href="/office" {% if active == 'office' %}class="active"{% endif %}>
             <i data-lucide="briefcase"></i> Офис
         </a>
         <a href="/context" {% if active == 'memory' %}class="active"{% endif %}>
             <i data-lucide="cpu"></i> Память
+        </a>
+        <a href="/checklist" {% if active == 'checklist' %}class="active"{% endif %}>
+            <i data-lucide="check-square"></i> Чеклист
         </a>
     </nav>
 
@@ -44,12 +44,84 @@
             <!-- <span id="system-status-icon">🧠</span> -->
             <span id="system-status-text">🧠 Все агенты активны</span>
         </div>
+
+        <div class="auth-block">
+          <div id="user-info"></div>
+          <button id="logoutBtn" class="sp-btn">🚪 Выйти</button>
+        </div>
     </div>
     {% block content %}{% endblock %}
   </main>
 
+  <div id="results-modal" class="modal">
+    <div class="modal-content">
+      <span id="close-results-modal" class="close">&times;</span>
+      <h3>🧾 Результаты выполнения задачи</h3>
+      <div id="results-content"></div>
+    </div>
+  </div>
+  <script src="/static/js/auth.js"></script>
   <script src="/static/js/core.js"></script>
   <script src="/static/js/office.js"></script>
   <script src="/static/js/brainstorm.js"></script>
+  {% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const slug = window.location.pathname.split("/").pop();
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    console.warn("Нет токена — перенаправление на /login");
+    window.location.href = "/login";
+    return;
+  }
+
+  const nameEl = document.querySelector("#agent-name");
+  const folderEl = document.querySelector("#agent-folder");
+  const promptEl = document.querySelector("#agent-prompt");
+  const statusEl = document.querySelector("#agent-status-text");
+
+  try {
+    const res = await fetch(`/api/agent/${slug}`, {
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Accept": "application/json"
+      }
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(`Ошибка загрузки (${res.status}): ${errText}`);
+    }
+
+    const data = await res.json();
+    console.log("✅ Агент:", data);
+
+    nameEl.textContent = data.name || "Без имени";
+    folderEl.textContent = `📁 Каталог: ${data.folder || "root"}`;
+    promptEl.textContent = data.prompt || "(Промпт не задан)";
+    statusEl.textContent = `Статус: ${data.status || "ready"}`;
+  } catch (err) {
+    console.error(err);
+    nameEl.textContent = "❌ Ошибка загрузки агента";
+    promptEl.textContent = "(данные не получены)";
+    statusEl.textContent = "Ошибка загрузки";
+  }
+});
+
+
+
+
+  const saveBtn = document.getElementById("save-agent-btn");
+  const promptField = document.getElementById("agent-prompt");
+  const teamSlider = document.getElementById("team-bias");
+  const status = document.getElementById("save-status");
+
+  const slug = window.location.pathname.split("/").pop();
+
+
+</script>
+{% endblock %}
+
 </body>
 </html>

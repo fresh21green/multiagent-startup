@@ -9,6 +9,7 @@
   </p>
 
   <div class="top-actions">
+    <button id="open-folder-modal" class="neon-button">📁 Создать каталог</button>
     <button id="open-agent-modal" class="neon-button">➕ Добавить сотрудника</button>
   </div>
 
@@ -18,24 +19,29 @@
 <div id="folderMessage" class="message"></div>
 <!-- === Каталоги === -->
 <section id="folders-container">
+  {% set folders = folders or {} %}
   {% for folder, agents in folders.items() %}
   <section id="folder-{{ folder }}" class="folder" data-folder="{{ folder }}">
     <div class="folder-header">
-      <h2 class="folder-title" onclick="AIManager.toggleFolder('{{ folder }}')">{{ folder }}</h2>
-      <div class="folder-actions">
-        <button class="assign-btn" onclick="toggleTaskBox('{{ folder }}')">
-          <i data-lucide="rocket"></i> Задать задачу
-        </button>
-        <button class="delete-folder-btn" onclick="AIManager.deleteFolder('{{ folder }}')">
-          <i data-lucide="trash-2"></i> Удалить
-        </button>
+      <div class="left-side">
+        <i data-lucide="folder"></i>
+        <h2 class="folder-title" onclick="AIManager.toggleFolder('{{ folder }}')">{{ folder }}</h2>
       </div>
+      <div class="right-side">
+        <div class="folder-actions">
+          <button class="delete-folder-btn" onclick="AIManager.deleteFolder('{{ folder }}')">
+            <i data-lucide="trash-2"></i>
+            <span>Удалить</span>
+          </button>
+        </div>
+      </div>
+
     </div>
 
     <!-- Ввод задачи -->
     <div class="task-box hidden" id="task-box-{{ folder }}">
       <textarea id="task-input-{{ folder }}" placeholder="Введите задачу для каталога '{{ folder }}'..."></textarea>
-      <button onclick="assignTaskToFolder('{{ folder }}')">Отправить</button>
+      <button onclick="AIManager.assignTaskToFolder('{{ folder }}')">Отправить</button>
     </div>
 
     <!-- Список агентов -->
@@ -61,20 +67,28 @@
 </section>
 
 <div id="agent-modal" class="modal-overlay" style="display:none;">
-  <div class="modal-content">
+  <div class="modal-content" id="create-agent-modal">
     <h2>👤 Новый сотрудник</h2>
     <form id="create-agent-form">
       <label>Имя сотрудника:</label>
       <input type="text" name="name" id="agent-name" placeholder="например: Аналитик" required>
       <div id="agent-name-error" class="form-error"></div>
 
-      <label>Описание:</label>
-      <textarea name="description" id="agent-desc" placeholder="Кратко опиши роль сотрудника..."></textarea>
+      <label>Описание (роль сотрудника):</label>
+      <textarea name="prompt" id="agent-prompt" placeholder="Опиши роль и особенности сотрудника..."></textarea>
+      
 
       <label>Каталог:</label>
       <select name="folder" id="folder-select" required>
         <option value="root">root</option>
       </select>
+
+      <label>🧭 Стиль мышления:</label>
+      <input type="range" id="team-bias" name="team_bias" min="0" max="1" step="0.1" value="0.5">
+      <div class="range-labels">
+        <span>Индивидуалист</span>
+        <span>Командный игрок</span>
+      </div>
 
       <label>Telegram Token (опционально):</label>
       <input type="text" name="telegram_token" id="telegram-token" placeholder="1234567890:ABC-XYZ...">

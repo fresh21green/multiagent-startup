@@ -7,6 +7,7 @@ from fastapi import FastAPI, Request
 from telegram import Update
 from langchain_amvera import AmveraLLM
 from dotenv import load_dotenv
+from pathlib import Path
 
 # === Загрузка переменных окружения ===
 load_dotenv()
@@ -14,7 +15,10 @@ load_dotenv()
 # --- ЛОГИРОВАНИЕ ---
 logger = logging.getLogger("agent")
 logger.setLevel(logging.DEBUG)
-fh = logging.FileHandler("agent.log", encoding="utf-8")
+
+log_dir = Path(__file__).parent
+fh = logging.FileHandler(log_dir / "agent.log", encoding="utf-8")
+
 fh.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
 logger.addHandler(fh)
 
@@ -30,11 +34,11 @@ if not AMVERA_MODEL:
 
 
 # Здесь менеджер подставит реальные данные
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}"
+TELEGRAM_TOKEN = globals().get("TELEGRAM_TOKEN", None)
+TELEGRAM_API_URL = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}" if TELEGRAM_TOKEN else None
 
 # Подсказка (промпт) агента
-PROMPT = """Ты дизайнер. Предлагай визуальные концепции и композиционные идеи."""
+PROMPT = """Ты дизайнер. Предлагай визуальные решения, композиционные идеи и стиль."""
 
 # --- ИНИЦИАЛИЗАЦИЯ ---
 app = FastAPI()
@@ -45,7 +49,10 @@ llm = AmveraLLM(model=AMVERA_MODEL, api_token=AMVERA_API_KEY)
 # === ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ===
 
 def send_message(chat_id: int, text: str, parse_mode="Markdown"):
-    """Отправляет текстовое сообщение в Telegram (если используется)."""
+    if not TELEGRAM_API_URL:
+        # Логируем, но не падаем
+        logger.debug(f"[NoTelegram] -> {chat_id}: {text[:120]}")
+        return
     try:
         payload = {"chat_id": chat_id, "text": text, "parse_mode": parse_mode}
         requests.post(f"{TELEGRAM_API_URL}/sendMessage", json=payload, timeout=10)
@@ -94,6 +101,9 @@ def handle_task(task: str):
     Выполняет задачу агента через LLM Amvera.
     Возвращает чистый текст результата.
     """
+    if isinstance(task, str) and len(task) > 4000:
+        task = task[-4000:]
+
     try:
         if not AMVERA_API_KEY:
             return "⚠️ Ошибка: отсутствует AMVERA_API_KEY. Укажите его в .env"
@@ -105,6 +115,9 @@ def handle_task(task: str):
         logger.info(f"Запрос к LLM: {query[:120]}...")
 
         # Основной вызов LLM
+        if len(query) > 4000:
+            logger.warning(f"⚠️ Контекст слишком длинный ({len(query)} символов) — обрезаем до 4000.")
+            query = query[-4000:]
         resp = llm.invoke(query)
         
 

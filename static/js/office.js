@@ -8,6 +8,7 @@
 // - плавную интерполяцию цвета при изменении статуса
 // ========================================================================
 
+
 async function loadOfficeGraph() {
   const el = document.getElementById("office-graph");
   if (!el) return;
@@ -19,25 +20,33 @@ async function loadOfficeGraph() {
 
 
   // Загружаем каталоги и сотрудников
-  const foldersRes = await fetch("/folders");
+  const token = localStorage.getItem("token");
+  if (!token) {
+    window.location.href = "/login";
+    return;
+  }
+
+  // === Загружаем каталоги и сотрудников только текущего пользователя
+  const foldersRes = await fetch("/folders", {
+    headers: { "Authorization": `Bearer ${token}`, "Accept": "application/json" }
+  });
   const folders = foldersRes.ok ? await foldersRes.json() : ["root"];
   const agents = [];
 
   for (const folder of folders) {
-    const res = await fetch(`/folder/${folder}`);
+    const res = await fetch(`/folder/${folder}`, {
+      headers: { "Authorization": `Bearer ${token}`, "Accept": "application/json" }
+    });
     if (res.ok) {
       const list = await res.json();
-      for (const a of list) {
-        a.folder = folder;
-        agents.push(a);
-      }
+      list.forEach(a => { a.folder = folder; agents.push(a); });
     }
   }
 
   const data = buildGraphData(agents);
 
   // Создаём ForceGraph
-  const Graph = ForceGraph()(el)
+  window.Graph = ForceGraph()(el)
     .width(el.clientWidth)
     .height(740)
     .graphData(data)
@@ -426,11 +435,18 @@ async function assignTaskFromOffice(slug, task) {
 
     const res = await fetch("/assign_task", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      headers: { ...authHeaders(), Accept: "application/json" },
       body: new URLSearchParams({ slug, task }),
     });
 
-    const data = await res.json();
+    let data;
+    try {
+      data = await res.json();
+    } catch (err) {
+      console.warn("[office] assignTaskFromOffice: неверный JSON, показываю как текст");
+      const text = await res.text();
+      data = { ok: false, error: text || "Пустой ответ от сервера" };
+    }
     if (!data.ok) throw new Error(data.error || "Ошибка выполнения");
 
     // ✅ Результат получен — обновляем граф и правую панель
@@ -479,6 +495,8 @@ async function assignTaskFromOffice(slug, task) {
 // 🧠 Отображение данных узла в правой панели
 // ========================================================================
 function fillSidepanel(node) {
+  window.currentFolder = node.folder;
+  console.log('window.currentFolder',window.currentFolder)
   currentNode = node; // сохраняем текущий выбранный узел для других операций
   const title = document.getElementById("sp-title");
   const meta  = document.getElementById("sp-meta");
@@ -566,6 +584,152 @@ function fillSidepanel(node) {
   }
 }
 
+// === Командное мышление (Team Think) ===
+const teamThinkBtn = document.getElementById("teamThinkBtn");
+if (teamThinkBtn) {
+  
+
+ 
+  teamThinkBtn.onclick = async () => {
+     // === Текущая папка (по умолчанию root или demo)
+    let currentFolder = window.currentFolder || "root";
+    console.log('currentFolder',currentFolder)
+
+    // Если в разметке есть элемент с активной папкой — определяем автоматически
+    const activeFolderEl = document.querySelector("[data-current-folder]");
+    if (activeFolderEl) {
+      currentFolder = activeFolderEl.dataset.currentFolder || "root";
+    }
+
+    const topicInput = document.getElementById("sp-brainstorm-topic");
+    const topic = topicInput ? topicInput.value.trim() : "";
+    if (!topic) {
+      alert("Введите тему командного мышления!");
+      return;
+    }
+
+    const output = document.getElementById("sp-brainstorm-output");
+    output.innerHTML = `<div>🧠 Командное мышление по теме: <b>${topic}</b></div>`;
+
+    // Этап 1 — мозговой штурм
+    output.innerHTML += `<div>💭 Этап 1: мозговой штурм...</div>`;
+    highlightSequentialAgents();
+
+    try {
+      const formData = new FormData();
+      formData.append("topic", topic);
+      formData.append("folder", currentFolder || "demo");
+
+      const res = await fetch("/team_think", {
+        method: "POST",
+        body: formData
+      });
+      const data = await res.json();
+
+      // === Этап 1: ответы агентов ===
+      if (data.discussion && data.discussion.length) {
+        for (const msg of data.discussion) {
+          await appendWithTyping(output, `<p><b>${msg.agent}:</b> ${msg.response}</p>`);
+          scrollToBottom(output);
+        }
+      }
+
+      // === Этап 2: выполнение ===
+      output.innerHTML += `<hr><div>⚙️ Этап 2: выполнение плана...</div>`;
+      highlightParallelAgents();
+
+      if (data.results && data.results.length) {
+        for (const r of data.results) {
+          await appendWithTyping(output, `<p><b>${r.agent}:</b> ${r.result || r.error}</p>`);
+          scrollToBottom(output);
+        }
+      }
+
+      // === Итог ===
+      if (data.summary) {
+        output.innerHTML += `<div class="summary">🧾 <b>Итог:</b> ${data.summary}</div>`;
+        scrollToBottom(output);
+      }
+
+    } catch (e) {
+      console.error(e);
+      output.innerHTML += `<div style="color:red;">⚠️ Ошибка: ${e}</div>`;
+    } finally {
+      resetAgentHighlights();
+    }
+  };
+}
+
+
+
+
+// === Помощники ===
+
+// постепенное появление текста
+async function appendWithTyping(container, html) {
+  const tmp = document.createElement("div");
+  tmp.innerHTML = html;
+  container.appendChild(tmp);
+  await new Promise(r => setTimeout(r, 200));
+}
+
+// автоскролл вниз
+function scrollToBottom(el) {
+  el.scrollTop = el.scrollHeight;
+}
+
+// === Визуальные эффекты на forceGraph ===
+// === Визуальные эффекты на ForceGraph ===
+function getGraphInstance() {
+  // ищем глобальный объект, где хранится graph
+  if (window.Graph) return window.Graph;
+  if (typeof Graph !== "undefined") return Graph;
+  console.warn("⚠️ Объект графа не найден. Подсветка будет пропущена.");
+  return null;
+}
+
+
+
+function highlightSequentialAgents() {
+  const g = getGraphInstance();
+  if (!g) return;
+  const nodes = g.graphData().nodes;
+  let i = 0;
+  const interval = setInterval(() => {
+    if (i >= nodes.length) return clearInterval(interval);
+    nodes.forEach(n => (n.color = "#ccc"));
+    nodes[i].color = "#ff8800"; // активный
+    refreshGraph(g);
+    i++;
+  }, 1000);
+}
+
+function refreshGraph(g) {
+  if (!g) return;
+  if (typeof g.refresh === "function") g.refresh();
+  else if (g.graphData) g.graphData({ ...g.graphData() });
+}
+
+function highlightParallelAgents() {
+  const g = getGraphInstance();
+  if (!g) return;
+  const nodes = g.graphData().nodes;
+  nodes.forEach((n, idx) => {
+    setTimeout(() => {
+      n.color = "#33cc66"; // зелёный = выполняет задачу
+      refreshGraph(g);
+    }, 300 + idx * 200);
+  });
+}
+
+function resetAgentHighlights() {
+  const g = getGraphInstance();
+  if (!g) return;
+  const nodes = g.graphData().nodes;
+  nodes.forEach(n => (n.color = "#66aaff"));
+  refreshGraph(g);
+}
+
 // === 📋 Отправка задачи из правой панели ===
 // === Выполнение задачи одним агентом ===
 async function assignTaskFromOffice(slug, task) {
@@ -593,9 +757,10 @@ async function assignTaskFromOffice(slug, task) {
     // Отправляем задачу агенту
     const res = await fetch("/assign_task", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      headers: { ...authHeaders(), Accept: "application/json" },
       body: new URLSearchParams({ slug, task }),
     });
+    console.log('res',res)
     const dataRes = await res.json();
     if (!dataRes.ok) throw new Error(dataRes.error || "Ошибка выполнения");
 
@@ -640,6 +805,34 @@ async function assignTaskFromOffice(slug, task) {
   }
 }
 
+async function updateAgent(e) {
+  e.preventDefault();
+  const form = e.target;
+  const slug = form.querySelector("[name=slug]").value;
+  const formData = new FormData(form);
+  const status = document.getElementById("agent-save-status");
+
+  status.textContent = "⏳ Сохраняем...";
+  try {
+    const res = await fetch(`/update_agent/${slug}`, {
+      method: "POST",
+      body: formData
+    });
+    const data = await res.json();
+    if (res.ok && data.ok !== false) {
+      status.textContent = "✅ Изменения сохранены";
+      setSystemStatus("active", `Агент ${slug} обновлён`);
+    } else {
+      status.textContent = "❌ Ошибка: " + (data.error || data.detail || "Неизвестно");
+      setSystemStatus("error", "Ошибка при сохранении");
+    }
+  } catch (err) {
+    console.error(err);
+    status.textContent = "❌ Ошибка сети";
+    setSystemStatus("error", "Ошибка при сохранении");
+  }
+}
+
 
 
 async function assignTaskToFolderFromOffice(folder, task) {
@@ -679,7 +872,7 @@ async function assignTaskToFolderFromOffice(folder, task) {
     // === 🧠 2. Отправка запроса на сервер ===
     const res = await fetch("/assign_task_folder", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      headers: { ...authHeaders(), Accept: "application/json" },
       body: new URLSearchParams({ folder, task }),
     });
     const json = await res.json();
@@ -867,6 +1060,12 @@ function startCameraPin(durationMs = 2000) {
   }
 }
 
+// document.getElementById("logoutBtn").onclick = () => {
+//   localStorage.removeItem("token");
+//   window.location.href = "/login";
+// };
+
+
 // Патчим чувствительные методы: если пин активен — откатываем камеру обратно
 (function patchGraphMethodsOnce(){
   if (window.__CAMERA_PIN__.patched) return;
@@ -904,7 +1103,7 @@ window.fillSidepanel = fillSidepanel;
 document.addEventListener("DOMContentLoaded", () => {
   if (window.lucide) lucide.createIcons();
   AIManager.init();
-  refreshFolderSelect();
+//   refreshFolderSelect();
   loadOfficeGraph();
 });
 

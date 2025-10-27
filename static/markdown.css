@@ -29,8 +29,8 @@
 }
 
 .markdown-body h1 { font-size: 2rem; border-bottom: 1px solid #e6e6e6; padding-bottom: .3rem; }
-.markdown-body h2 { font-size: 1.6rem; }
-.markdown-body h3 { font-size: 1.25rem; }
+/* .markdown-body h2 { font-size: 1.6rem; } */
+.markdown-body h3, .markdown-body h2  { font-size: 1.25rem; }
 .markdown-body h4 { font-size: 1rem; }
 .markdown-body h5 { font-size: .95rem; }
 .markdown-body h6 { font-size: .85rem; color: #555; }

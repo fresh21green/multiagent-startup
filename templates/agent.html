@@ -1,26 +1,32 @@
 {% extends "base.html" %}
 {% block title %}🤖 Агент{% endblock %}
+
 {% block content %}
+<section class="agent-section">
+  <header class="agent-header">
+    <h1 id="agent-name" class="agent-title">Загрузка агента...</h1>
+    <p id="agent-folder" class="agent-folder muted"></p>
+  </header>
 
-<header class="page-header">
-  <h1>{{ agent.name }}</h1>
-  <p class="subtitle">Профиль агента, история задач и результаты.</p>
-</header>
+  <article class="agent-body">
+    <h3>🧩 Промпт:</h3>
+    <pre id="agent-prompt" class="agent-prompt">⏳ Загружается...</pre>
 
-<div class="agent-card">
-  <h2>{{ agent.name }}</h2>
-  <div class="status {{ agent.status|default('done') }}">Статус: {{ agent.status_text }}</div>
+    <div id="agent-status" class="agent-status">
+      <span class="status-dot"></span>
+      <span id="agent-status-text">Идёт загрузка...</span>
+    </div>
+  </article>
 
-  <div class="last-task">
-    <h4>Последняя задача</h4>
-    <!-- <div class="task-content">{{ agent.last_task.result.html|safe  or '—' }}</div> -->
-    <div class="result markdown-body">{{ agent.last_task.result.html|safe }}</div>
-  </div>
+  
 
-  <div class="task-box">
-    <textarea id="agent-task" placeholder="Введите новую задачу..."></textarea>
-    <button onclick="AIManager.assignTask('{{ agent.slug }}')">Отправить</button>
-  </div>
-</div>
+  <footer class="agent-footer">
+    <button id="assign-task-btn" class="neon-button">Отправить задачу</button>
+    <textarea id="task-input" placeholder="Введите задачу для агента..."></textarea>
+    <div id="task-result" class="task-result"></div>
+  </footer>
+</section>
+{% endblock %} 
 
-{% endblock %}
+
+

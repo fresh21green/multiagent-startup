@@ -1,88 +1,65 @@
-import logging
-import asyncio
-from pathlib import Path
-from fastapi import APIRouter, Form, HTTPException
+from fastapi import APIRouter, Form, Depends
 from fastapi.responses import JSONResponse
-from utils import load_meta, call_agent_local, save_memory
+from core.auth import get_current_user
+from utils import call_agent_with_context, save_memory
+from core.mcp import load_context, save_context, merge_contexts
+from utils import load_meta
+from pathlib import Path
+import asyncio, json, logging
 
+logger = logging.getLogger("brainstorm")
 router = APIRouter()
-logger = logging.getLogger("manager")
 
 @router.post("/brainstorm")
-async def brainstorm(topic: str = Form(...)):
+async def brainstorm(
+    folder: str = Form(...),
+    topic: str = Form(...),
+    user: str = Depends(get_current_user)
+):
     """
-    Мозговой штурм между агентами (последовательное обсуждение).
-    Каждый агент видит ответы предыдущих.
+    💡 Режим коллективного генератора идей (Brainstorm)
+    Каждый агент предлагает идеи по теме, учитывая роль и контекст коллег.
     """
     meta = load_meta()
-    agents = [a for a in meta if not a.get("is_folder")]
-    if not agents:
-        raise HTTPException(status_code=404, detail="Нет агентов для мозгового штурма")
+    agents_in_folder = [
+        a for a in meta
+        if a.get("folder") == folder
+        and not a.get("is_folder")
+        and a.get("owner") == user
+    ]
+    if not agents_in_folder:
+        return JSONResponse({"ok": False, "error": f"Нет сотрудников в каталоге '{folder}'"}, status_code=404)
 
-    # Сортировка по ролям для консистентности
-    role_order = ["strategist", "copywriter", "designer", "assistant_default"]
-    ordered = sorted(agents, key=lambda a: role_order.index(a["slug"]) if a["slug"] in role_order else 99)
+    # 🧠 Общий контекст
+    all_contexts = {a["slug"]: load_context(a["slug"]) for a in agents_in_folder}
+    merged_context = merge_contexts(*all_contexts.values())
+    context_text = json.dumps(merged_context, ensure_ascii=False, indent=2)
 
-    discussion = []
-    summary = ""
+    results = []
 
-    for agent in ordered:
+    async def handle(agent):
+        slug = agent["slug"]
         try:
-            path = Path(agent["path"])
-            if not (path / "bot.py").exists():
-                logger.warning(f"⚠️ У агента {agent['slug']} нет bot.py, пропуск.")
-                continue
-
-            # Контекст мозгового штурма
-            full_context = "\n\n".join(f"{d['agent']}: {d['response']}" for d in discussion)
-            truncated = full_context[-1500:]
-            if ". " in truncated:
-                context_sent = truncated.split(". ", 1)[-1]
-            else:
-                context_sent = truncated
-
-            message = (
-                f"🧩 Тема мозгового штурма: {topic}\n\n"
-                f"Вот что уже предложили другие участники:\n{context_sent}\n\n"
-                f"Теперь твой ответ, {agent['name']}:"
+            prompt = (
+                f"💡 Мозговой штурм по теме:\n{topic}\n\n"
+                f"📘 Контексты коллег:\n{context_text}\n\n"
+                f"Ты — {slug}. Сгенерируй креативные идеи, "
+                f"основанные на знаниях команды и своей специализации."
             )
+            res = await call_agent_with_context(agent, prompt)
+            result_text = res.get("result") if isinstance(res, dict) else str(res)
 
-            res = await call_agent_local(path, message)
-            answer = res.get("result") if isinstance(res, dict) else str(res)
-            discussion.append({"agent": agent["name"], "response": answer})
+            save_memory(Path(agent["path"]), {"task": f"Brainstorm: {topic}", "result": result_text})
+            ctx = load_context(slug)
+            ctx["brainstorm_topic"] = topic
+            ctx["brainstorm_result"] = result_text
+            ctx["colleague_contexts"] = list(all_contexts.keys())
+            save_context(slug, ctx)
 
-            save_memory(path, {
-                "task": f"Brainstorm: {topic}",
-                "context": full_context,
-                "result": answer
-            })
-
+            results.append({"agent": slug, "result": result_text})
         except Exception as e:
-            logger.exception(f"Ошибка при штурме агента {agent['slug']}: {e}")
-            discussion.append({"agent": agent["name"], "response": f"⚠️ Ошибка: {e}"})
+            logger.exception(f"[brainstorm] Ошибка у агента {slug}: {e}")
+            results.append({"agent": slug, "error": str(e)})
 
-    # Ассистент суммирует общий вывод
-    assistant = next((a for a in agents if a["slug"] == "assistant_default"), None)
-    if assistant:
-        try:
-            summary_text = (
-                "📊 Суммируй идеи и предложи общий вывод:\n\n" +
-                "\n\n".join(f"{d['agent']}: {d['response'][:800]}" for d in discussion)
-            )
-            summary_text = summary_text[-2500:]
-            res = await call_agent_local(Path(assistant["path"]), summary_text)
-            summary = res.get("result") if isinstance(res, dict) else str(res)
-        except Exception as e:
-            summary = f"⚠️ Ошибка при суммировании: {e}"
-
-    return JSONResponse({"ok": True, "topic": topic, "discussion": discussion, "summary": summary})
-
-
-@router.get("/brainstorm/stream")
-async def brainstorm_stream(topic: str):
-    async def gen():
-        for agent in agents_in_order():
-            res = await call_agent_local(... )
-            yield f"data: {json.dumps({'agent': agent, 'text': res})}\n\n"
-        yield f"data: {json.dumps({'summary': '...'} )}\n\n"
-    return StreamingResponse(gen(), media_type="text/event-stream")
+    await asyncio.gather(*[handle(a) for a in agents_in_folder])
+    return JSONResponse({"ok": True, "folder": folder, "topic": topic, "results": results})

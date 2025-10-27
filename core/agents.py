@@ -1,14 +1,17 @@
+from core.auth import get_current_user
+
+
 import sys
-import os, re, shutil, markdown, logging
+import os, re, shutil, markdown, logging, json
 sys.path.append(os.path.dirname(__file__))
 
 import asyncio
 from pathlib import Path
 import importlib.util
-from fastapi import APIRouter, Request, Form, HTTPException, Request
+from fastapi import APIRouter, Request, Form, HTTPException, Request, Depends
 from fastapi.responses import HTMLResponse, RedirectResponse, FileResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
-from utils import load_meta, save_meta, call_agent_local, call_agent_remote, save_memory
+from utils import load_meta, save_meta, call_agent_local, call_agent_remote, save_memory, ensure_user_root, filter_meta_by_owner
 from mcp import load_context, save_context
 
 
@@ -25,74 +28,53 @@ def slugify(name: str):
     return re.sub(r"[^a-zA-Z0-9_-]", "_", name.strip()).lower()
 
 @router.get("/", response_class=HTMLResponse)
-async def index(request: Request): 
+async def index(request: Request):
+    """
+    Главная страница: доступна всем, но frontend перенаправит неавторизованных на /login.
+    """
     meta = load_meta()
-
-    root_folder_path = AGENTS_DIR / "root"
-    root_folder_path.mkdir(exist_ok=True)
-    if not any(a.get("is_folder") and a.get("folder") == "root" for a in meta):
-        meta.append({
-            "folder": "root", "is_folder": True, "name": "root", "slug": "folder_root",
-            "created_at": __import__('datetime').datetime.utcnow().isoformat() + 'Z'
-        })
-        save_meta(meta)
-
-    if not any(a.get("slug") == "assistant_default" for a in meta):
-        default_path = root_folder_path / "assistant_default"
-        default_path.mkdir(parents=True, exist_ok=True)
-        (default_path / "bot.py").write_text(
-            'def handle_task(task: str):\n'
-            '    return f"🤖 Ассистент получил задачу: {task}"\n',
-            encoding="utf-8"
-        )
-        meta.append({
-            "name": "Ассистент", "slug": "assistant_default", "folder": "root", "is_folder": False,
-            "created_at": __import__('datetime').datetime.utcnow().isoformat() + 'Z',
-            "path": str(default_path), "deploy_url": "", "status": "ready"
-        })
-        save_meta(meta)
 
     folders = {}
-    agents_root = []
-    for agent in meta:
-        folder = agent.get("folder") or "root"
-        if agent.get("is_folder"):
+    for a in meta:
+        folder = a.get("folder") or "root"
+        if a.get("is_folder"):
             folders.setdefault(folder, [])
         else:
-            folders.setdefault(folder, []).append(agent)
-            if folder == "root":
-                agents_root.append(agent)
+            folders.setdefault(folder, []).append(a)
 
-    return templates.TemplateResponse("index.html", {"request": request, "folders": folders, "agents": agents_root})
+    return templates.TemplateResponse("index.html", {"request": request})
 
 @router.get("/folder/{folder_name}")
-async def get_folder_agents(folder_name: str):
-    """
-    Возвращает всех агентов, принадлежащих заданному каталогу.
-    """
+async def get_folder_agents(folder_name: str, user: str = Depends(get_current_user)):
     meta = load_meta()
-    folder_name = folder_name.strip().lower()
-
-    agents = []
-    # for a in meta:
-    #     folder_value = (a.get("folder") or "root").strip().lower().rstrip("/")
-    #     if folder_value == folder_name and not a.get("is_folder"):
-    #         agents.append(a)
-     # 🧩 Возвращаем всех агентов, чья folder == нужная
     agents = [
         a for a in meta
         if not a.get("is_folder", False)
-        and a.get("folder", "root") == folder_name
+        and a.get("folder") == folder_name
+        and a.get("owner") == user
     ]
-
     return JSONResponse(agents)
+
 
 @router.get("/agent/{slug}", response_class=HTMLResponse)
 async def view_agent(request: Request, slug: str):
+    """
+    HTML-страница агента.
+    Доступна без токена, чтобы можно было открыть через обычную ссылку.
+    Реальные данные агента подтягиваются фронтом с /api/agent/{slug},
+    где уже стоит проверка Depends(get_current_user).
+    """
+    return templates.TemplateResponse("agent.html", {"request": request, "slug": slug})
+    
+
+@router.get("/api/agent/{slug}")
+async def get_agent_data(slug: str, user: str = Depends(get_current_user)):
+    """Возвращает данные агента (только для владельца)."""
     meta = load_meta()
-    agent = next((a for a in meta if a["slug"] == slug), None)
+    agent = next((a for a in meta if a["slug"] == slug and a.get("owner") == user), None)
     if not agent:
-        raise HTTPException(status_code=404, detail="Agent not found")
+        raise HTTPException(status_code=403, detail="Access denied")
+
     bot_file = Path(agent["path"]) / "bot.py"
     prompt = ""
     if bot_file.exists():
@@ -100,13 +82,15 @@ async def view_agent(request: Request, slug: str):
         m = re.search(r'PROMPT\s*=\s*"""(.*?)"""', text, re.DOTALL)
         if m:
             prompt = m.group(1).strip()
-    # Список всех папок для выпадающего списка
-    folders = [a["folder"] for a in meta if a.get("is_folder")]
 
-    return templates.TemplateResponse(
-        "agent.html",
-        {"request": request, "agent": agent, "prompt": prompt, "folders": folders}
-    )
+    return {
+        "name": agent["name"],
+        "folder": agent.get("folder", "root"),
+        "status": agent.get("status", "ready"),
+        "prompt": prompt,
+        "path": agent["path"],
+    }
+
 
 @router.post('/create_agent')
 async def create_agent(
@@ -114,7 +98,9 @@ async def create_agent(
     name: str = Form(...),
     prompt: str = Form(''),
     telegram_token: str = Form(''),
-    folder: str = Form('root')
+    folder: str = Form('root'),
+    team_bias: float = Form(0.5),
+    user: str = Depends(get_current_user)
 ):
     name = name.strip()
     if not name:
@@ -122,13 +108,17 @@ async def create_agent(
 
     slug = slugify(name)
     folder = folder.strip() or "root"
-    dest = AGENTS_DIR / folder / slug
 
     meta = load_meta()
+    # Фильтрация только по текущему пользователю
+    user_meta = filter_meta_by_owner(meta, user)
 
-    # ✅ Проверка: существует ли агент с таким именем или slug
-    if any(a.get("slug") == slug or a.get("name").lower() == name.lower() for a in meta):
-        return JSONResponse({"ok": False, "error": f"Сотрудник с именем '{name}' уже существует"})
+    if any(a.get("slug") == slug or a.get("name").lower() == name.lower() for a in user_meta):
+        return JSONResponse({"ok": False, "error": f"Сотрудник '{name}' уже существует"})
+
+    # 🔹 создаём личную директорию пользователя
+    user_root = ensure_user_root(user)
+    dest = user_root / folder / slug
 
     try:
         dest.mkdir(parents=True, exist_ok=False)
@@ -150,7 +140,7 @@ async def create_agent(
 
     (dest / 'bot.py').write_text(worker_code, encoding='utf-8')
 
-    # Копируем шаблонные файлы (если есть)
+    # Копируем шаблонные файлы
     for fn in ['requirements.txt', '.env.example', 'README_worker.md']:
         src = BASE / 'agents' / fn
         if src.exists():
@@ -162,6 +152,7 @@ async def create_agent(
         "slug": slug,
         "folder": folder,
         "is_folder": False,
+        "owner": user,  # ✅ теперь есть владелец
         "created_at": __import__('datetime').datetime.utcnow().isoformat() + 'Z',
         "path": str(dest),
         "deploy_url": "",
@@ -200,94 +191,128 @@ async def update_agent(
     prompt: str = Form(''),
     telegram_token: str = Form(''),
     deploy_url: str = Form(''),
-    folder: str = Form('')
+    folder: str = Form(''),
+    team_bias: float = Form(0.5),
+    user: str = Depends(get_current_user)
 ):
     meta = load_meta()
-    agent = next((a for a in meta if a["slug"] == slug), None)
+    agent = next((a for a in meta if a["slug"] == slug and a.get("owner") == user), None)
     if not agent:
-        raise HTTPException(status_code=404, detail="Agent not found")
+        raise HTTPException(status_code=403, detail="Access denied")
 
-    agent["name"] = name.strip()
-    agent["deploy_url"] = deploy_url.strip()
+    agent.update({
+        "name": name.strip(),
+        "deploy_url": deploy_url.strip(),
+        "folder": folder.strip() or agent.get("folder", "root"),
+        "team_bias": team_bias
+    })
 
-    # 🟢 сохраняем старую папку, если новая не указана
-    new_folder = folder.strip() or agent.get("folder", "root")
-    agent["folder"] = new_folder
-
-    # Обновляем bot.py (PROMPT и TELEGRAM_TOKEN)
+    # обновляем PROMPT в bot.py
     bot_file = Path(agent["path"]) / "bot.py"
     if bot_file.exists():
         code = bot_file.read_text(encoding="utf-8")
         code = re.sub(r'PROMPT\s*=\s*""".*?"""', f'PROMPT = """{prompt.strip()}"""', code, flags=re.DOTALL)
-        if telegram_token.strip():
-            code = re.sub(r'TELEGRAM_TOKEN\s*=\s*.*', f'TELEGRAM_TOKEN = "{telegram_token.strip()}"', code)
         bot_file.write_text(code, encoding="utf-8")
 
     save_meta(meta)
-    logger.info("Обновлены данные агента %s", slug)
-    return JSONResponse({"ok": True, "message": f"Обновлены данные агента '{slug}'"})
+    logger.info(f"✅ Обновлены данные агента {slug}")
+    return JSONResponse({"ok": True, "message": f"Изменения агента '{slug}' сохранены"})
+
 
 
 @router.post("/create_folder")
-async def create_folder(name: str = Form(...)):
+async def create_folder(name: str = Form(...), user: str = Depends(get_current_user)):
     folder = name.strip()
     if not folder:
         return JSONResponse({"ok": False, "error": "empty_name"})
-    folder_path = AGENTS_DIR / folder
+
+    # 🔹 создаём личную директорию пользователя
+    user_root = ensure_user_root(user)
+    folder_path = user_root / folder
+
     if folder_path.exists():
         return JSONResponse({"ok": False, "error": "exists"})
+
     folder_path.mkdir(parents=True, exist_ok=True)
+
     meta = load_meta()
-    if not any(a.get("is_folder") and a.get("folder") == folder for a in meta):
-        meta.append({"folder": folder, "is_folder": True, "name": folder,
-                     "slug": f"folder_{folder}",
-                     "created_at": __import__('datetime').datetime.utcnow().isoformat() + 'Z',})
+    if not any(a.get("is_folder") and a.get("folder") == folder and a.get("owner") == user for a in meta):
+        meta.append({
+            "folder": folder,
+            "is_folder": True,
+            "name": folder,
+            "slug": f"folder_{folder}_{user}",
+            "owner": user,  # ✅ владелец
+            "created_at": __import__('datetime').datetime.utcnow().isoformat() + 'Z'
+        })
         save_meta(meta)
+
     return JSONResponse({"ok": True, "folder": folder})
 
-@router.post('/delete_agent')
-async def delete_agent(slug: str = Form(...)):
-    meta = load_meta()
-    entry = next((e for e in meta if e['slug'] == slug), None)
-    if not entry:
-        raise HTTPException(status_code=404, detail='Not found')
-    try:
-        p = Path(entry['path'])
-        if p.exists():
-            shutil.rmtree(p)
-    except Exception as e:
-        logger.exception("Ошибка при удалении агента: %s", e)
-    meta = [e for e in meta if e['slug'] != slug]
-    save_meta(meta)
-    return JSONResponse({"ok": True, "message": f"Агент '{slug}' успешно удалён"})
 
 @router.post('/delete_folder')
-async def delete_folder(name: str = Form(...)):
-    """Удаляет каталог, если он пустой, и запись из agents.json"""
-    folder = name.encode('latin1').decode('utf-8').strip()
-    folder_path = AGENTS_DIR / folder
-    if not folder_path.exists():
-        raise HTTPException(status_code=404, detail="Каталог не найден")
+async def delete_folder(name: str = Form(...), user: str = Depends(get_current_user)):
+    """
+    Удаляет каталог текущего пользователя, если он пуст,
+    и убирает запись из agents.json.
+    """
+    import json
+    folder = name.strip()
+    if not folder:
+        raise HTTPException(status_code=400, detail="Не указано имя каталога")
 
-    # Проверяем, есть ли агенты внутри каталога
+    user_root = ensure_user_root(user)
+    folder_path = user_root / folder
+    print(f"🟢 Удаление каталога '{folder}' пользователя '{user}' → {folder_path}")
+
+    if not folder_path.exists():
+        print(f"⚠️ Папка {folder_path} не найдена")
+        raise HTTPException(status_code=404, detail=f"Каталог '{folder}' не найден")
+
     meta = load_meta()
-    agents_in_folder = [a for a in meta if a.get("folder") == folder and not a.get("is_folder")]
+
+    # Проверяем, есть ли агенты в каталоге пользователя
+    agents_in_folder = [
+        a for a in meta
+        if not a.get("is_folder", False)
+        and a.get("folder") == folder
+        and a.get("owner") == user
+    ]
     if agents_in_folder:
-        return JSONResponse({"ok": False, "error": "not_empty", "count": len(agents_in_folder)})
+        count = len(agents_in_folder)
+        print(f"❌ Каталог '{folder}' пользователя '{user}' не пуст ({count} агентов)")
+        return JSONResponse({"ok": False, "error": "not_empty", "count": count})
 
     try:
-        # Удаляем папку с диска
-        shutil.rmtree(folder_path)
+        # Удаляем сам каталог с диска
+        shutil.rmtree(folder_path, ignore_errors=True)
 
-        # Удаляем записи о каталоге и всех агентах внутри (на всякий случай)
-        new_meta = [a for a in meta if a.get("folder") != folder]
+        # Фильтруем записи meta
+        new_meta = [
+            a for a in meta
+            if not (
+                (a.get("is_folder") and a.get("folder") == folder and a.get("owner") == user)
+                or (a.get("folder") == folder and a.get("owner") == user)
+                or (a.get("slug") == f"folder_{folder}_{user}")
+            )
+        ]
+
+        removed = len(meta) - len(new_meta)
         save_meta(new_meta)
+        print(f"✅ Каталог '{folder}' ({user}) удалён. Убрано {removed} записей из agents.json")
 
-        logger.info(f"✅ Удалён каталог '{folder}' и его запись из agents.json")
-        return JSONResponse({"ok": True, "folder": folder})
+        return JSONResponse({"ok": True, "folder": folder, "removed": removed})
     except Exception as e:
-        logger.exception(f"Ошибка удаления каталога {folder}: {e}")
-        return JSONResponse({"ok": False, "error": str(e)}) 
+        import traceback
+        traceback.print_exc()
+        return JSONResponse({"ok": False, "error": f"{type(e).__name__}: {e}"}, status_code=500)
+
+
+
+
+
+
+
 
 
 @router.get('/download/{name}')
@@ -298,102 +323,136 @@ async def download(name: str):
     raise HTTPException(status_code=404, detail='Not found')
 
 def parse_llm_response(res):
-    content = getattr(res, 'content', str(res))
-    base64_images = re.findall(r"data:image\/[a-zA-Z]+;base64,[A-Za-z0-9+/=]+", content)
-    import markdown2
-    html_text = markdown2.markdown(content, safe_mode="escape")
+    """
+    Преобразует ответ агента (строку) в HTML.
+    Если в тексте есть Markdown — конвертирует его.
+    Если текст уже HTML — вставляет как есть.
+    """
+    import re
+    from markdown2 import markdown
+
+    # если res — dict, достаём текст
+    content = res.get("html") if isinstance(res, dict) else str(res)
+
+    # если выглядит как готовый HTML — не трогаем
+    if content.strip().startswith("<") or "</" in content:
+        html_text = content
+    else:
+        # иначе рендерим Markdown
+        html_text = markdown(content, extras=["fenced-code-blocks", "tables"])
+
+    # извлекаем изображения (если есть base64)
+    base64_images = re.findall(r"data:image/[a-zA-Z]+;base64,[A-Za-z0-9+/=]+", content)
+
     return {"html": html_text, "images": base64_images}
 
+
 @router.post("/assign_task_folder")
-async def assign_task_folder(task: str = Form(...), folder: str = Form(...)):
+async def assign_task_folder(
+    task: str = Form(...),
+    folder: str = Form(...),
+    user: str = Depends(get_current_user)
+):
     """
-    Поручает задачу всем агентам в указанном каталоге.
-    Форматирует ответы через parse_llm_response (единый стиль).
+    🧩 Поручает задачу всем агентам в указанном каталоге.
+    Каждый агент получает свою роль (PROMPT), общий контекст коллег и задачу.
     """
-    logger.info(f"Поручаем задачу '{task}' всем агентам в каталоге '{folder}'")
+    from core.mcp import load_context, save_context, merge_contexts
+    from utils import call_agent_with_context, save_memory
+    import json, asyncio
+    logger.info(f"[assign_task_folder] {user=} folder='{folder}' task='{task}'")
 
     meta = load_meta()
-    if not meta:
-        return JSONResponse({"ok": False, "error": "no_agents"})
-
-    # выбираем агентов только из нужного каталога
-    agents_in_folder = [a for a in meta if a.get("folder") == folder and not a.get("is_folder")]
+    agents_in_folder = [
+        a for a in meta
+        if a.get("folder") == folder
+        and not a.get("is_folder")
+        and a.get("owner") == user
+    ]
     if not agents_in_folder:
-        return JSONResponse({"ok": False, "error": f"no_agents_in_folder_{folder}"})
+        return JSONResponse({"ok": False, "error": f"Нет сотрудников в каталоге '{folder}'"}, status_code=404)
+
+    # 🧠 Групповой контекст
+    all_contexts = {a["slug"]: load_context(a["slug"]) for a in agents_in_folder}
+    merged_context = merge_contexts(*all_contexts.values())
+    context_text = json.dumps(merged_context, ensure_ascii=False, indent=2)
 
     results = []
 
-    async def handle(entry):
-        slug = entry["slug"]
+    async def handle(agent):
+        slug = agent["slug"]
         try:
-            path = Path(entry.get("path") or "")
-            if not (path / "bot.py").exists():
-                raise FileNotFoundError(f"bot.py не найден у агента {slug}")
+            enriched_task = (
+                f"{task}\n\n"
+                f"📘 Контексты коллег:\n{context_text}\n\n"
+                f"Ответь с учётом своей роли и общего контекста команды."
+            )
 
-            # Вызов агента
-            res = await call_agent_local(path, task)
+            res = await call_agent_with_context(agent, enriched_task)
+            result_text = res.get("result") if isinstance(res, dict) else str(res)
 
-            # Форматируем через parse_llm_response (единый стиль)
-            parsed = parse_llm_response(res["result"]) if isinstance(res, dict) and "result" in res else {"html": str(res), "images": []}
-            logger.info(f"parsed result: {parsed}")
-            entry["last_task"] = {"task": task, "result": parsed}
-            lock = asyncio.Lock()
-            async with lock:
-                results.append({"agent": slug, "result": parsed})
-            
-            # Сохраняем память агента
-            try:
-                save_memory(path, {
-                    "date": __import__("datetime").datetime.utcnow().isoformat() + "Z",
-                    "task": task,
-                    "result": res.get("result") if isinstance(res, dict) else str(res)
-                })
-            except Exception as e:
-                logger.warning(f"Ошибка записи памяти агента {slug}: {e}")
+            save_memory(Path(agent["path"]), {"task": f"GroupTask: {task}", "result": result_text})
+            ctx = load_context(slug)
+            ctx.update({
+                "last_group_task": task,
+                "last_group_result": result_text,
+                "colleague_contexts": list(all_contexts.keys())
+            })
+            save_context(slug, ctx)
 
+            results.append({"agent": slug, "result": result_text})
         except Exception as e:
-            logger.exception(f"Ошибка при поручении агенту {slug}: {e}")
-            results.append({"agent": slug, "result": {"html": f"⚠️ Ошибка: {e}", "images": []}})
+            logger.exception(f"Ошибка у агента {slug}: {e}")
+            results.append({"agent": slug, "error": str(e)})
 
-    # Запускаем все параллельно
     await asyncio.gather(*[handle(a) for a in agents_in_folder])
-    save_meta(meta)
-
-    logger.info(f"Все агенты в каталоге '{folder}' завершили выполнение задачи.")
     return JSONResponse({"ok": True, "folder": folder, "results": results})
 
 
+
+
+
 @router.post("/assign_task")
-async def assign_task(slug: str = Form(...), task: str = Form(...)):
-    """Отправляет индивидуальную задачу агенту и всегда возвращает корректный JSON."""
-    import traceback
+async def assign_task(
+    slug: str = Form(...),
+    task: str = Form(...),
+    user: str = Depends(get_current_user)
+):
+    """Отправляет индивидуальную задачу агенту текущего пользователя."""
+    import traceback, json
     logger.info("Назначаем задачу '%s' агенту %s", task, slug)
+
     try:
         meta = load_meta()
-        entry = next((e for e in meta if e["slug"] == slug), None)
+        entry = next((e for e in meta if e["slug"] == slug and e.get("owner") == user), None)
         if not entry:
-            raise HTTPException(status_code=404, detail="Worker not found")
+            raise HTTPException(status_code=403, detail="Access denied")
 
-        # --- вызов агента ---
-        if entry.get("deploy_url"):
-            res = await call_agent_remote(entry["deploy_url"], task)
+        from utils import call_agent_with_context
+        res = await call_agent_with_context(entry, task)
+
+        # 🧠 Нормализуем результат
+        if isinstance(res, dict):
+            raw_text = res.get("result") or str(res)
         else:
-            path = Path(entry.get("path") or "")
-            if not path.exists():
-                raise FileNotFoundError(f"Папка агента {path} не найдена")
-            res = await call_agent_local(path, task)
+            raw_text = str(res or "").strip()
 
-        # --- безопасное парсирование ---
-        parsed = parse_llm_response(res.get("result", str(res)) if isinstance(res, dict) else str(res))
-        # Загружаем старый контекст
-        ctx = load_context(slug)
-        ctx["last_task"] = task
-        ctx["last_result"] = parsed
-        ctx["interaction_count"] = ctx.get("interaction_count", 0) + 1
+        if not raw_text:
+            raw_text = "(пустой ответ от агента)"
 
-        # сохраняем новый контекст
-        save_context(slug, ctx)
-        # return {"ok": True, "result": result, "context": ctx}
+        # 🔧 Безопасная обработка JSON
+        if raw_text.lstrip().startswith(("{", "[")):
+            try:
+                parsed_json = json.loads(raw_text)
+                raw_text = json.dumps(parsed_json, ensure_ascii=False, indent=2)
+            except (json.JSONDecodeError, TypeError, ValueError):
+                logger.warning(f"[assign_task] ответ агента невалидный JSON, обрабатываю как текст")
+
+        # 🧩 Формируем HTML для вывода
+        from markdown2 import markdown
+        rendered_html = markdown(raw_text, extras=["fenced-code-blocks", "tables"])
+
+        parsed = {"html": rendered_html}
         entry["last_task"] = {"task": task, "result": parsed}
         save_meta(meta)
 
@@ -404,6 +463,42 @@ async def assign_task(slug: str = Form(...), task: str = Form(...)):
         logger.exception("Ошибка при назначении задачи агенту %s: %s", slug, error_text)
         traceback.print_exc()
         return JSONResponse({"ok": False, "error": error_text}, status_code=500)
+
+    
+
+
+
+@router.post("/assign_task_to_folder")
+async def assign_task_to_folder(
+    folder: str = Form(...),
+    task: str = Form(...),
+    user: str = Depends(get_current_user)
+):
+    """Назначает задачу всем агентам пользователя в указанном каталоге."""
+    meta = load_meta()
+    agents = [
+        a for a in meta
+        if not a.get("is_folder", False)
+        and a.get("folder") == folder
+        and a.get("owner") == user
+    ]
+
+    if not agents:
+        return JSONResponse({"ok": False, "error": f"Нет сотрудников в каталоге '{folder}'"}, status_code=404)
+
+    results = []
+    for agent in agents:
+        slug = agent.get("slug")
+        try:
+            res = await assign_task(slug=slug, task=task, user=user)
+            if isinstance(res, JSONResponse):
+                body = res.body.decode()
+                res = json.loads(body) if body.strip() else {"ok": False, "error": "empty response"}
+            results.append({"agent": slug, "result": res})
+        except Exception as e:
+            results.append({"agent": slug, "error": str(e)})
+
+    return JSONResponse({"ok": True, "results": results})
 
 
 
@@ -446,27 +541,103 @@ async def proxy_agent_webhook(request: Request, slug: str, folder: str = None):
     
     
 from fastapi.responses import JSONResponse
-from utils import load_meta
 
 @router.get("/folders")
-def get_folders():
-    """Возвращает список всех каталогов (папок)."""
+def get_folders(user: str = Depends(get_current_user)):
+    """
+    Возвращает список всех каталогов (папок) текущего пользователя.
+    Показывает только те, у которых is_folder=True.
+    """
     meta = load_meta()
-    folders = sorted({a.get("folder", "root") for a in meta})
+    user_meta = filter_meta_by_owner(meta, user)
+    folders = sorted({
+        a.get("folder", "root")
+        for a in user_meta
+        if a.get("is_folder", False)
+    })
     return JSONResponse(folders)
 
-@router.get('/agents')
-async def list_agents():
-    """
-    Возвращает список всех сотрудников (агентов) в формате JSON.
-    Используется для проверки уникальности имён и фронтенд-интерфейса.
-    """
+@router.get("/agents")
+async def list_agents(user: str = Depends(get_current_user)):
+    """Возвращает список сотрудников текущего пользователя."""
     try:
         meta = load_meta()
-        agents = [a for a in meta if not a.get("is_folder", False)]
+        agents = [
+            a for a in meta
+            if not a.get("is_folder", False)
+            and a.get("owner") == user
+        ]
         return JSONResponse(agents)
     except Exception as e:
         logger.exception("Ошибка при получении списка агентов: %s", e)
         return JSONResponse({"ok": False, "error": str(e)}, status_code=500)
+    
+
+@router.post("/cleanup_meta")
+async def cleanup_meta(user: str = Depends(get_current_user)):
+    """
+    Очищает agents.json от несуществующих агентов/каталогов
+    и удаляет физические папки без записей.
+    """
+    import json, shutil
+    removed = 0
+    meta = load_meta()
+    user_root = ensure_user_root(user)
+    cleaned = []
+
+    for a in meta:
+        try:
+            if a.get("owner") != user:
+                cleaned.append(a)
+                continue
+
+            if a.get("is_folder"):
+                folder_path = user_root / a.get("folder")
+                if not folder_path.exists():
+                    removed += 1
+                    continue
+            else:
+                path = Path(a.get("path", ""))
+                if not path.exists() or not (path / "bot.py").exists():
+                    removed += 1
+                    continue
+            cleaned.append(a)
+        except Exception as e:
+            print(f"⚠️ Ошибка при проверке {a.get('name')}: {e}")
+
+    # Удаляем папки, которых нет в JSON
+    existing_folders = {a.get("folder") for a in cleaned if a.get("is_folder")}
+    for f in user_root.iterdir():
+        if f.is_dir() and f.name not in existing_folders:
+            try:
+                shutil.rmtree(f)
+                print(f"🧹 Удалена пустая папка без записи: {f}")
+            except Exception as e:
+                print(f"⚠️ Не удалось удалить {f}: {e}")
+
+    save_meta(cleaned)
+    print(f"✅ Очистка завершена: удалено {removed}, осталось {len(cleaned)}")
+    return {"ok": True, "removed": removed, "total": len(cleaned)}
+
+
+@router.post("/delete_agent")
+async def delete_agent(slug: str = Form(...), user: str = Depends(get_current_user)):
+    meta = load_meta()
+    entry = next((e for e in meta if e["slug"] == slug and e.get("owner") == user), None)
+    if not entry:
+        raise HTTPException(status_code=403, detail="Access denied")
+
+    try:
+        p = Path(entry['path'])
+        if p.exists():
+            shutil.rmtree(p)
+        meta = [e for e in meta if not (e['slug'] == slug and e.get("owner") == user)]
+        save_meta(meta)
+        return JSONResponse({"ok": True, "message": f"Агент '{slug}' удалён"})
+    except Exception as e:
+        logger.exception("Ошибка при удалении агента: %s", e)
+        return JSONResponse({"ok": False, "error": str(e)}, status_code=500)
+
+
 
 

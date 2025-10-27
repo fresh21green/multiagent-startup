@@ -55,7 +55,7 @@ def send_message(chat_id: int, text: str, parse_mode="Markdown"):
         return
     try:
         payload = {"chat_id": chat_id, "text": text, "parse_mode": parse_mode}
-        requests.post(f"{TELEGRAM_API_URL}/sendMessage", json=payload, timeout=10)
+        requests.post(f"{TELEGRAM_API_URL}/sendMessage", json=payload, timeout=30)
     except Exception as e:
         logger.warning(f"Ошибка при отправке Telegram-сообщения: {e}")
 
